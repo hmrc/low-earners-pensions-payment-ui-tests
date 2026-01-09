@@ -2,7 +2,7 @@
 
 # low-earners-pensions-payment-ui-tests
 
-<SERVICE_NAME> UI journey tests.
+LEPP UI journey tests.
 
 ## Pre-requisites
 
