@@ -23,9 +23,9 @@ import uk.gov.hmrc.selenium.webdriver.Driver
 import java.time.Duration
 
 trait BasePage extends PageObject {
-  protected val continueButton: By = By.xpath("//button[normalize-space()='Continue']")
-  protected val submitButton: By   = By.id("submit")
-  protected val startNowButton: By = By.xpath("//a[normalize-space()='Start now']")
+  protected val continueButton: By    = By.xpath("//button[normalize-space()='Continue']")
+  protected val submitButton: By      = By.id("submit")
+  protected val startNowButton: By    = By.xpath("//a[normalize-space()='Start now']")
   protected val viewPaymentButton: By = By.xpath("//a[normalize-space()='View Payment']")
 
   def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
