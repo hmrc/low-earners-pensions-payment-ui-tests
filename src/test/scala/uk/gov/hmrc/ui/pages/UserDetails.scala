@@ -22,7 +22,6 @@ import uk.gov.hmrc.configuration.TestEnvironment
 import uk.gov.hmrc.selenium.webdriver.Driver
 
 import scala.language.postfixOps
-import scala.util.Random
 
 object UserDetails extends BasePage {
 
@@ -50,17 +49,14 @@ object UserDetails extends BasePage {
     click(continueButton)
   }
 
-  def enterSortCode(sortCode: String): Unit = {
+  def enterSortCode(sortCode: String): Unit =
     sendKeys(By.id("sort-code"), sortCode)
-  }
 
-  def enterAccountNumber(accountNumber: String): Unit = {
+  def enterAccountNumber(accountNumber: String): Unit =
     sendKeys(By.id("account-number"), accountNumber)
-  }
 
-  def enterBuildingSocietyRollNumber(rollNumber: String): Unit = {
+  def enterBuildingSocietyRollNumber(rollNumber: String): Unit =
     sendKeys(By.id("roll-number"), rollNumber)
-  }
 
   def clickLink(link: String): Unit =
     click(By.id(link))

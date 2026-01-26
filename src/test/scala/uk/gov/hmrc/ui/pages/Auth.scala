@@ -24,9 +24,10 @@ import uk.gov.hmrc.ui.pages.Auth.sendKeys
 
 object Auth extends BasePage {
 
-  private val authUrl: String     = TestEnvironment.url("auth-login-stub") + "/auth-login-stub/gg-sign-in"
+  private val authUrl: String = TestEnvironment.url("auth-login-stub")
+
   private val redirectUrl: String =
-    TestEnvironment.url("low-earners-anomaly-frontend") + "/low-earners-anomaly"
+    TestEnvironment.url("low-earners-pensions-payment-frontend")
 
   def goToAuthorityWizard(): Unit =
     get(authUrl)
@@ -35,21 +36,12 @@ object Auth extends BasePage {
   def checkAuthUrl(): Unit =
     getCurrentUrl should startWith(authUrl)
 
-  def loginUsingAuthorityWizard(enrolmentType: String): Unit = {
-
+  def loginUsingAuthorityWizard(): Unit = {
     getCurrentUrl should startWith(authUrl)
-
-    if (enrolmentType == "") {
-      sendKeys(By.id("redirectionUrl"), redirectUrl)
-      sendKeys(By.id("enrolment[1].name"), "")
-      sendKeys(By.id("input-1-0-name"), "")
-      sendKeys(By.id("input-1-0-value"), "")
-    } else if (enrolmentType == "") {
-      sendKeys(By.id("redirectionUrl"), redirectUrl)
-      sendKeys(By.id("enrolment[1].name"), "")
-      sendKeys(By.id("input-1-0-name"), "")
-      sendKeys(By.id("input-1-0-value"), "")
-    }
+    sendKeys(By.id("redirectionUrl"), redirectUrl)
+    selectByValue(By.id("confidenceLevel"), "250")
+    sendKeys(By.id("nino"), "AA123456D")
     click(By.cssSelector("Input[value='Submit']"))
   }
+
 }

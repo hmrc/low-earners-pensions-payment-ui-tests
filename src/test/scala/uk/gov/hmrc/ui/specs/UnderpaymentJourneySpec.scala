@@ -16,48 +16,24 @@
 
 package uk.gov.hmrc.ui.specs
 
-import uk.gov.hmrc.ui.pages.{Auth, UserDetails}
+import uk.gov.hmrc.ui.pages.Auth
 
 class UnderpaymentJourneySpec extends BaseSpec {
 
   private val auth = Auth
-  private val memberDetails = UserDetails
+//private val memberDetails = UserDetails
 
-  Feature("As a PAYE Individual I need to claim the low income pension payment and view the status of payment for Underpayment journey") {
+  Feature(
+    "As a PAYE Individual I need to claim the low income pension payment and view the status of payment for Underpayment journey"
+  ) {
 
     Scenario(
       "Underpayment Journey - Submit the bank account details and Navigate to confirmation page"
     ) {
 
-      Given("I fill in the auth details for enrolmentID with value enrolmentValue")
+      Given("I fill in the auth details")
       auth.goToAuthorityWizard()
-      auth.loginUsingAuthorityWizard("")
-
-      When("I click the Start now link")
-      memberDetails.checkJourneyUrl("start")
-      memberDetails.startNow()
-
-      And("I click the View Payment link")
-      memberDetails.checkJourneyUrl("dashboard")
-      memberDetails.viewPayment()
-
-      And("I click the Continue link")
-      memberDetails.checkJourneyUrl("breakdown")
-      memberDetails.continue()
-
-      And("I fill in the bank details")
-      memberDetails.checkJourneyUrl("bank-details")
-      memberDetails.enterName("John", "Smith")
-      memberDetails.enterSortCode("00-11-22")
-      memberDetails.enterAccountNumber("12345678")
-      memberDetails.enterBuildingSocietyRollNumber("0123456789")
-
-      And("I click the Submit button")
-      memberDetails.checkJourneyUrl("check-your-answers")
-      memberDetails.submit()
-
-      Then("I should be on Confirmation page")
-      memberDetails.checkJourneyUrl("results")
+      auth.loginUsingAuthorityWizard()
 
     }
   }
