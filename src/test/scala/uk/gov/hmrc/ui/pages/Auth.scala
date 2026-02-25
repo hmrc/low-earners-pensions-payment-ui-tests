@@ -44,4 +44,11 @@ object Auth extends BasePage {
     click(By.cssSelector("Input[value='Submit']"))
   }
 
+  def loginUsingAuthorityWizardWithCL200(): Unit = {
+    getCurrentUrl should startWith(authUrl)
+    sendKeys(By.id("redirectionUrl"), redirectUrl)
+    selectByValue(By.id("confidenceLevel"), "200")
+    sendKeys(By.id("nino"), "AA000003D")
+    click(By.cssSelector("Input[value='Submit']"))
+  }
 }

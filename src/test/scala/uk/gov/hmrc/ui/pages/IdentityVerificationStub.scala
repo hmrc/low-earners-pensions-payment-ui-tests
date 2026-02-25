@@ -14,27 +14,21 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.ui.specs
+package uk.gov.hmrc.ui.pages
 
-import uk.gov.hmrc.ui.pages.Auth
+import uk.gov.hmrc.selenium.webdriver.Driver
+import org.openqa.selenium.By
+import scala.jdk.CollectionConverters._
 
-class UnderpaymentJourneySpec extends BaseSpec {
+object IdentityVerificationStub extends BasePage {
 
-  private val auth = Auth
-//private val memberDetails = UserDetails
+  def clickRadioButton(text: String): Unit             =
+    Driver.instance.findElements(By.tagName("label")).asScala.filter(_.getText.trim == text).head.click()
 
-  Feature(
-    "As a PAYE Individual I need to claim the low income pension payment and view the status of payment for Underpayment journey"
-  ) {
+  def submitContinue(): Unit =
+    click(submitContinueButton)
 
-    Scenario(
-      "Underpayment Journey - Submit the bank account details and Navigate to confirmation page"
-    ) {
-
-      Given("User enters the auth details")
-      auth.goToAuthorityWizard()
-      auth.loginUsingAuthorityWizard()
-
-    }
+  def verifyGOVUKPageTitle(title: String): Unit = {
+    assertTitle(title)
   }
 }

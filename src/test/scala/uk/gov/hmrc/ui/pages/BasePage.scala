@@ -16,19 +16,24 @@
 
 package uk.gov.hmrc.ui.pages
 
-import org.openqa.selenium.{By, WebDriver}
-import org.openqa.selenium.support.ui.{FluentWait, Wait}
 import uk.gov.hmrc.selenium.component.PageObject
 import uk.gov.hmrc.selenium.webdriver.Driver
 import java.time.Duration
+import org.openqa.selenium.support.ui.{ExpectedConditions, FluentWait, Wait}
+import org.openqa.selenium.{By, WebDriver}
 
 trait BasePage extends PageObject {
-  protected val continueButton: By    = By.xpath("//button[normalize-space()='Continue']")
-  protected val submitButton: By      = By.id("submit")
-  protected val startNowButton: By    = By.xpath("//a[normalize-space()='Start now']")
-  protected val viewPaymentButton: By = By.xpath("//a[normalize-space()='View Payment']")
+  protected val continueButton: By       = By.xpath("//button[normalize-space()='Continue']")
+  protected val submitButton: By         = By.id("submit")
+  protected val submitContinueButton: By = By.id("submit-continue")
+  protected val startNowButton: By       = By.xpath("//a[normalize-space()='Start now']")
+  protected val viewPaymentButton: By    = By.xpath("//a[normalize-space()='View Payment']")
 
   def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
     .withTimeout(Duration.ofSeconds(3))
     .pollingEvery(Duration.ofMillis(200))
+
+  def assertTitle(expectedPageTitle: String): Unit =
+    fluentWait.until(ExpectedConditions.titleIs(expectedPageTitle))
+
 }
