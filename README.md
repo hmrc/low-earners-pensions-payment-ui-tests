@@ -17,7 +17,7 @@ docker run --rm -d -p 27017:27017 --name mongo percona/percona-server-mongodb:6.
 Start `<SERVICE_MANAGER_PROFILE>` services as follows:
 
 ```bash
-sm2 --start <SERVICE_MANAGER_PROFILE>
+sm2 --start LEPP_ALL
 ```
 
 ## Tests
@@ -28,7 +28,8 @@ Run tests as follows:
 * Argument `<environment>` must be `local`, `dev`, `qa` or `staging`.
 
 ```bash
-sbt clean -Dbrowser="<browser>" -Denvironment="<environment>" test testReport
+sbt clean -Dbrowser="chrome" -Denvironment="local" -Dbrowser.option.headless=true -Daccessibility.timeout="1000" "testOnly uk.gov.hmrc.ui.specs.*" testReport
+
 ```
 
 ## Scalafmt
