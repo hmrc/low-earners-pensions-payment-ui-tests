@@ -22,13 +22,12 @@ import scala.jdk.CollectionConverters._
 
 object IdentityVerificationStub extends BasePage {
 
-  def clickRadioButton(text: String): Unit             =
+  def clickRadioButton(text: String): Unit =
     Driver.instance.findElements(By.tagName("label")).asScala.filter(_.getText.trim == text).head.click()
 
   def submitContinue(): Unit =
     click(submitContinueButton)
 
-  def verifyGOVUKPageTitle(title: String): Unit = {
+  def verifyGOVUKPageTitle(title: String): Unit =
     assertTitle(title)
-  }
 }

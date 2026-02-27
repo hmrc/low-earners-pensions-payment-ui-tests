@@ -21,14 +21,18 @@ import uk.gov.hmrc.ui.pages.IdentityVerificationStub
 import uk.gov.hmrc.ui.pages.UserDetails
 
 class IVUpliftJourneySpec extends BaseSpec {
-  private val auth = Auth
-  private val ivStub = IdentityVerificationStub
+  private val auth        = Auth
+  private val ivStub      = IdentityVerificationStub
   private val userDetails = UserDetails
 
-  Feature("As a PAYE individual, I must be able to use the IV uplift feature, so that I can access the service successfully\n") {
+  Feature(
+    "As a PAYE individual, I must be able to use the IV uplift feature, so that I can access the service successfully\n"
+  ) {
 
     Scenario("Verify the Positive Uplift Journey") {
-      Given("A PAYE individual logs into the LEPP using Cl200 and valid NINO and Identity Verification check is successful")
+      Given(
+        "A PAYE individual logs into the LEPP using Cl200 and valid NINO and Identity Verification check is successful"
+      )
       auth.goToAuthorityWizard()
       auth.loginUsingAuthorityWizardWithCL200()
 
@@ -37,7 +41,9 @@ class IVUpliftJourneySpec extends BaseSpec {
 
       And("When the User select Success Radio button he is navigated to Start Page")
       ivStub.submitContinue()
-      userDetails.verifyGOVUKPageTitle("Claim your low income pension payment - Low Earners Pensions Payment - site.govuk")
+      userDetails.verifyGOVUKPageTitle(
+        "Claim your low income pension payment - Low Earners Pensions Payment - site.govuk"
+      )
     }
   }
 
