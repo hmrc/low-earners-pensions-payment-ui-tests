@@ -20,13 +20,12 @@ import org.openqa.selenium.By
 import org.openqa.selenium.support.ui.{ExpectedConditions, FluentWait}
 import uk.gov.hmrc.configuration.TestEnvironment
 import uk.gov.hmrc.selenium.webdriver.Driver
-
-import scala.language.postfixOps
+import uk.gov.hmrc.ui.pages.IdentityVerificationStub.assertTitle
 
 object UserDetails extends BasePage {
 
   private val dashboardUrl: String =
-    TestEnvironment.url("low-earners-anomaly-frontend") + "/low-earners-anomaly"
+    TestEnvironment.url("low-earners-pensions-payment-frontend")
 
   def waitForElement(by: By): Unit =
     new FluentWait(Driver.instance).until(ExpectedConditions.presenceOfElementLocated(by))
@@ -42,6 +41,9 @@ object UserDetails extends BasePage {
 
   def submit(): Unit =
     click(submitButton)
+
+  def verifyGOVUKPageTitle(title: String): Unit =
+    assertTitle(title)
 
   def enterName(firstName: String, lastName: String): Unit = {
     sendKeys(By.id("firstName"), firstName)
