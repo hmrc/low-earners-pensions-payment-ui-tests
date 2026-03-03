@@ -42,7 +42,7 @@ class IVUpliftJourneySpec extends BaseSpec {
       And("When the User select Success Radio button he is navigated to Start Page")
       ivStub.submitContinue()
       userDetails.verifyGOVUKPageTitle(
-        "Claim your low income pension payment - Low Earners Pensions Payment - site.govuk"
+        "Accept your low earner's pension payment - Accept your low earner's pension payment - site.govuk"
       )
     }
   }
@@ -58,6 +58,6 @@ class IVUpliftJourneySpec extends BaseSpec {
     And("When the User select Failed IV Radio button he is navigated to Error Page")
     ivStub.clickRadioButton("Precondition Failed")
     ivStub.submitContinue()
-    userDetails.verifyGOVUKPageTitle("There's a problem - Low Earners Pensions Payment - site.govuk")
+    userDetails.verifyGOVUKPageTitle("There's a problem - Accept your low earner's pension payment - site.govuk")
   }
 }
