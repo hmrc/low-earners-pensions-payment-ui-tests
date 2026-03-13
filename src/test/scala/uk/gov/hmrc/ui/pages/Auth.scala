@@ -41,6 +41,7 @@ object Auth extends BasePage {
     sendKeys(By.id("redirectionUrl"), redirectUrl)
     selectByValue(By.id("confidenceLevel"), "250")
     sendKeys(By.id("nino"), "AA123456D")
+    sendKeys(By.id("enrolment[0].name"), "HMRC-PI")
     click(By.cssSelector("Input[value='Submit']"))
   }
 
@@ -49,6 +50,7 @@ object Auth extends BasePage {
     sendKeys(By.id("redirectionUrl"), redirectUrl)
     selectByValue(By.id("confidenceLevel"), "200")
     sendKeys(By.id("nino"), "AA000003D")
+    sendKeys(By.id("enrolment[0].name"), "HMRC-PI")
     click(By.cssSelector("Input[value='Submit']"))
   }
 }
