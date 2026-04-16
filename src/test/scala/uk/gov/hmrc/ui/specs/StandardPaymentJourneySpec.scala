@@ -17,10 +17,12 @@
 package uk.gov.hmrc.ui.specs
 
 import uk.gov.hmrc.ui.pages.Auth
+import uk.gov.hmrc.ui.pages.UserDetails
 
 class StandardPaymentJourneySpec extends BaseSpec {
 
-  private val auth = Auth
+  private val auth        = Auth
+  private val userDetails = UserDetails
 
   Feature(
     "As a PAYE individual I need to claim the low income pension payment and view the status of payment for Standard Payment Journey"
@@ -33,6 +35,26 @@ class StandardPaymentJourneySpec extends BaseSpec {
       Given("User enters the auth details")
       auth.goToAuthorityWizard()
       auth.loginUsingAuthorityWizard()
+
+      When("I click the Continue button")
+      userDetails.checkJourneyUrl("start")
+      userDetails.continue()
+
+      And("I click the Continue link")
+      userDetails.checkJourneyUrl("breakdown")
+      userDetails.continue()
+
+      And("I fill in the bank details")
+      userDetails.checkJourneyUrl("bank-details")
+      userDetails.enterName("Teddy Sherringham")
+      userDetails.enterSortCode("55-00-33")
+      userDetails.enterAccountNumber("12345678")
+      userDetails.enterBuildingSocietyRollNumber("0123456789")
+      userDetails.continue()
+
+      And("I click the Submit button")
+      userDetails.checkJourneyUrl("check-your-answers")
+      userDetails.continue()
     }
   }
 }
