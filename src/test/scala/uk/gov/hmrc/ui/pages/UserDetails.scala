@@ -45,20 +45,19 @@ object UserDetails extends BasePage {
   def verifyGOVUKPageTitle(title: String): Unit =
     assertTitle(title)
 
-  def enterName(firstName: String, lastName: String): Unit = {
-    sendKeys(By.id("firstName"), firstName)
-    sendKeys(By.id("lastName"), lastName)
+  def enterName(name: String): Unit = {
+    sendKeys(By.id("bankDetails_accountName"), name)
     click(continueButton)
   }
 
   def enterSortCode(sortCode: String): Unit =
-    sendKeys(By.id("sort-code"), sortCode)
+    sendKeys(By.id("bankDetails_sortCode"), sortCode)
 
   def enterAccountNumber(accountNumber: String): Unit =
-    sendKeys(By.id("account-number"), accountNumber)
+    sendKeys(By.id("bankDetails_accountNumber"), accountNumber)
 
   def enterBuildingSocietyRollNumber(rollNumber: String): Unit =
-    sendKeys(By.id("roll-number"), rollNumber)
+    sendKeys(By.id("bankDetails_rollNumber"), rollNumber)
 
   def clickLink(link: String): Unit =
     click(By.id(link))
