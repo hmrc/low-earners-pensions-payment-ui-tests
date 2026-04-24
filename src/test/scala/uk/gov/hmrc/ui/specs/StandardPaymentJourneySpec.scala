@@ -46,10 +46,10 @@ class StandardPaymentJourneySpec extends BaseSpec {
 
       And("I fill in the bank details")
       userDetails.checkJourneyUrl("bank-details")
-      userDetails.enterName("Teddy Sherringham")
-      userDetails.enterSortCode("55-00-33")
-      userDetails.enterAccountNumber("12345678")
-      userDetails.enterBuildingSocietyRollNumber("0123456789")
+      userDetails.enterName("Melvin Loper")
+      userDetails.enterSortCode("20-71-06")
+      userDetails.enterAccountNumber("44311677")
+//    userDetails.enterBuildingSocietyRollNumber("0123456789")
       userDetails.continue()
 
       And("I click the Submit button")
