@@ -36,8 +36,12 @@ class StandardPaymentJourneySpec extends BaseSpec {
       auth.goToAuthorityWizard()
       auth.loginUsingAuthorityWizard()
 
-      When("I click the Continue button")
+      When("I click the Continue button on Start Page")
       userDetails.checkJourneyUrl("start")
+      userDetails.continue()
+
+      When("I click the Continue button on Dashboard page")
+      userDetails.checkJourneyUrl("dashboard")
       userDetails.continue()
 
       And("I click the Continue link")
@@ -49,12 +53,15 @@ class StandardPaymentJourneySpec extends BaseSpec {
       userDetails.enterName("Melvin Loper")
       userDetails.enterSortCode("20-71-06")
       userDetails.enterAccountNumber("44311677")
-//    userDetails.enterBuildingSocietyRollNumber("0123456789")
+      userDetails.enterBuildingSocietyRollNumber("0123456789")
       userDetails.continue()
 
       And("I click the Submit button")
       userDetails.checkJourneyUrl("check-your-answers")
-      userDetails.continue()
+      userDetails.submit()
+
+      And("I am navigated to confirmation page")
+      userDetails.checkJourneyUrl("confirmation")
     }
   }
 }
