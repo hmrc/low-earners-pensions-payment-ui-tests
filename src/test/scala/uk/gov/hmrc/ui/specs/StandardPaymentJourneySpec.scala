@@ -42,7 +42,7 @@ class StandardPaymentJourneySpec extends BaseSpec {
 
       When("I click the Continue button on Dashboard page")
       userDetails.checkJourneyUrl("dashboard")
-      userDetails.continue()
+      userDetails.acceptPayments()
 
       And("I click the Continue link")
       userDetails.checkJourneyUrl("breakdown")

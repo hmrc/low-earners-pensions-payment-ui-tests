@@ -23,6 +23,7 @@ import org.openqa.selenium.support.ui.{ExpectedConditions, FluentWait, Wait}
 import org.openqa.selenium.{By, WebDriver}
 
 trait BasePage extends PageObject {
+  protected val acceptPaymentsButton: By = By.xpath("//*[normalize-space()='Accept payments']")
   protected val continueButton: By       = By.xpath("//*[normalize-space()='Continue']")
   protected val submitButton: By         = By.id("submit")
   protected val submitContinueButton: By = By.id("submit-continue")
