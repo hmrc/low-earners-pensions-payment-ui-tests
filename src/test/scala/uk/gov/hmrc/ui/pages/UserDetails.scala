@@ -36,6 +36,9 @@ object UserDetails extends BasePage {
   def viewPayment(): Unit =
     click(viewPaymentButton)
 
+  def acceptPayments(): Unit =
+    click(acceptPaymentsButton)
+
   def continue(): Unit =
     click(continueButton)
 
