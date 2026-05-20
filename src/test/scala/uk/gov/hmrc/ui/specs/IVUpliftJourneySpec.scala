@@ -16,14 +16,13 @@
 
 package uk.gov.hmrc.ui.specs
 
-import uk.gov.hmrc.ui.pages.Auth
-import uk.gov.hmrc.ui.pages.IdentityVerificationStub
-import uk.gov.hmrc.ui.pages.UserDetails
+import uk.gov.hmrc.ui.pages.{Auth, ErrorPage, IdentityVerificationStub, StartPage}
 
 class IVUpliftJourneySpec extends BaseSpec {
-  private val auth        = Auth
-  private val ivStub      = IdentityVerificationStub
-  private val userDetails = UserDetails
+  private val auth      = Auth
+  private val ivStub    = IdentityVerificationStub
+  private val startPage = StartPage
+  private val errorPage = ErrorPage
 
   Feature(
     "As a PAYE individual, I must be able to use the IV uplift feature, so that I can access the service successfully\n"
@@ -37,11 +36,11 @@ class IVUpliftJourneySpec extends BaseSpec {
       auth.loginUsingAuthorityWizardWithCL200()
 
       Then("The user should be on Identity Verification Stub Page")
-      ivStub.verifyGOVUKPageTitle("Identity Verification - Stubbed Journey configuration")
+      ivStub.assertTitle("Identity Verification - Stubbed Journey configuration")
 
       And("When the User select Success Radio button he is navigated to Start Page")
       ivStub.submitContinue()
-      userDetails.verifyGOVUKPageTitle(
+      startPage.assertTitle(
         "Accept your low earner's pension payment - Accept your low earner's pension payment - site.govuk"
       )
     }
@@ -53,11 +52,11 @@ class IVUpliftJourneySpec extends BaseSpec {
     auth.loginUsingAuthorityWizardWithCL200()
 
     Then("The user should be on Identity Verification Stub Page")
-    ivStub.verifyGOVUKPageTitle("Identity Verification - Stubbed Journey configuration")
+    ivStub.assertTitle("Identity Verification - Stubbed Journey configuration")
 
     And("When the User select Failed IV Radio button he is navigated to Error Page")
     ivStub.clickRadioButton("Precondition Failed")
     ivStub.submitContinue()
-    userDetails.verifyGOVUKPageTitle("There's a problem - Accept your low earner's pension payment - site.govuk")
+    errorPage.assertTitle("There's a problem - Accept your low earner's pension payment - site.govuk")
   }
 }

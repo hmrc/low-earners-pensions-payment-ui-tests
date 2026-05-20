@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2026 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,17 +16,15 @@
 
 package uk.gov.hmrc.ui.pages
 
-import uk.gov.hmrc.selenium.webdriver.Driver
 import org.openqa.selenium.By
-import scala.jdk.CollectionConverters._
 
-object IdentityVerificationStub extends BasePage {
+object CheckYourAnswersPage extends BasePage {
 
-  private val submitContinueButton: By = By.id("submit-continue")
+  private val submitButton: By = By.id("submit")
 
-  def clickRadioButton(text: String): Unit =
-    Driver.instance.findElements(By.tagName("label")).asScala.filter(_.getText.trim == text).head.click()
+  def submit(): Unit =
+    click(submitButton)
 
-  def submitContinue(): Unit =
-    click(submitContinueButton)
+  override def checkJourneyUrl(url: String = "check-your-answers"): Unit =
+    super.checkJourneyUrl(url)
 }

@@ -16,13 +16,17 @@
 
 package uk.gov.hmrc.ui.specs
 
-import uk.gov.hmrc.ui.pages.Auth
-import uk.gov.hmrc.ui.pages.UserDetails
+import uk.gov.hmrc.ui.pages.{Auth, BankDetailsPage, BreakdownPage, CheckYourAnswersPage, ConfirmationPage, DashboardPage, StartPage}
 
 class StandardPaymentJourneySpec extends BaseSpec {
 
-  private val auth        = Auth
-  private val userDetails = UserDetails
+  private val auth                 = Auth
+  private val startPage            = StartPage
+  private val dashboardPage        = DashboardPage
+  private val breakdownPage        = BreakdownPage
+  private val bankDetailsPage      = BankDetailsPage
+  private val checkYourAnswersPage = CheckYourAnswersPage
+  private val confirmationPage     = ConfirmationPage
 
   Feature(
     "As a PAYE individual I need to claim the low income pension payment and view the status of payment for Standard Payment Journey"
@@ -37,31 +41,31 @@ class StandardPaymentJourneySpec extends BaseSpec {
       auth.loginUsingAuthorityWizard()
 
       When("I click the Continue button on Start Page")
-      userDetails.checkJourneyUrl("start")
-      userDetails.continue()
+      startPage.checkJourneyUrl()
+      startPage.continue()
 
       When("I click the Continue button on Dashboard page")
-      userDetails.checkJourneyUrl("dashboard")
-      userDetails.acceptPayments()
+      dashboardPage.checkJourneyUrl()
+      dashboardPage.acceptPayments()
 
       And("I click the Continue link")
-      userDetails.checkJourneyUrl("breakdown")
-      userDetails.continue()
+      breakdownPage.checkJourneyUrl()
+      breakdownPage.continue()
 
       And("I fill in the bank details")
-      userDetails.checkJourneyUrl("bank-details")
-      userDetails.enterName("Melvin Loper")
-      userDetails.enterSortCode("20-71-06")
-      userDetails.enterAccountNumber("44311677")
-      userDetails.enterBuildingSocietyRollNumber("0123456789")
-      userDetails.continue()
+      bankDetailsPage.checkJourneyUrl()
+      bankDetailsPage.enterName("Melvin Loper")
+      bankDetailsPage.enterSortCode("20-71-06")
+      bankDetailsPage.enterAccountNumber("44311677")
+      bankDetailsPage.enterBuildingSocietyRollNumber("0123456789")
+      bankDetailsPage.continue()
 
       And("I click the Submit button")
-      userDetails.checkJourneyUrl("check-your-answers")
-      userDetails.submit()
+      checkYourAnswersPage.checkJourneyUrl()
+      checkYourAnswersPage.submit()
 
       And("I am navigated to confirmation page")
-      userDetails.checkJourneyUrl("confirmation")
+      confirmationPage.checkJourneyUrl()
     }
   }
 }
