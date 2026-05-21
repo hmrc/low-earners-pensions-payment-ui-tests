@@ -20,21 +20,27 @@ import uk.gov.hmrc.selenium.component.PageObject
 import uk.gov.hmrc.selenium.webdriver.Driver
 import java.time.Duration
 import org.openqa.selenium.support.ui.{ExpectedConditions, FluentWait, Wait}
-import org.openqa.selenium.{By, WebDriver}
+import uk.gov.hmrc.configuration.TestEnvironment
+import org.openqa.selenium.By
+import org.openqa.selenium.WebDriver
 
 trait BasePage extends PageObject {
-  protected val acceptPaymentsButton: By = By.xpath("//*[normalize-space()='Accept payments']")
-  protected val continueButton: By       = By.xpath("//*[normalize-space()='Continue']")
-  protected val submitButton: By         = By.id("submit")
-  protected val submitContinueButton: By = By.id("submit-continue")
-  protected val startNowButton: By       = By.xpath("//a[normalize-space()='Start now']")
-  protected val viewPaymentButton: By    = By.xpath("//a[normalize-space()='View Payment']")
+
+  private val dashboardUrl: String =
+    TestEnvironment.url("low-earners-pensions-payment-frontend")
 
   def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
     .withTimeout(Duration.ofSeconds(3))
     .pollingEvery(Duration.ofMillis(200))
 
+  def waitForElement(by: By): Unit =
+    new FluentWait(Driver.instance).until(ExpectedConditions.presenceOfElementLocated(by))
+
   def assertTitle(expectedPageTitle: String): Unit =
     fluentWait.until(ExpectedConditions.titleIs(expectedPageTitle))
 
+  def checkJourneyUrl(page: String): Unit =
+    val url = s"$dashboardUrl/$page"
+    fluentWait.until(ExpectedConditions.urlContains(url))
+    getCurrentUrl.startsWith(url)
 }
