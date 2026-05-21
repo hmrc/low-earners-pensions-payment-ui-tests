@@ -32,9 +32,6 @@ object StartPage extends BasePage {
   def viewPayment(): Unit =
     click(viewPaymentButton)
 
-  def verifyGOVUKPageTitle(title: String): Unit =
-    assertTitle(title)
-
   def clickLink(link: String): Unit =
     click(By.id(link))
 
