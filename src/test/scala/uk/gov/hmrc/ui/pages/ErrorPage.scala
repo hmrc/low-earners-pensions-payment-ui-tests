@@ -16,6 +16,4 @@
 
 package uk.gov.hmrc.ui.pages
 
-object ErrorPage extends BasePage {
-
-}
+object ErrorPage extends BasePage {}
