@@ -20,27 +20,37 @@ import org.openqa.selenium.By
 
 object BankDetailsPage extends BasePage {
 
-  private val path               = "bank-details"
-  private val continueButton: By = By.xpath("//*[normalize-space()='Continue']")
+  private val path                     = "bank-details"
+  private val pageHeadingLocator: By   = By.cssSelector("h1.govuk-heading-l")
+  private val continueButton: By       = By.cssSelector("button[type='submit']")
+  private val accountNameLocater: By   = By.id("bankDetails_accountName")
+  private val sortCodeLocater: By      = By.id("bankDetails_sortCode")
+  private val accountNumberLocater: By = By.id("bankDetails_accountNumber")
+  private val rollNumberLocater: By    = By.id("bankDetails_rollNumber")
 
-  def enterName(name: String): Unit = {
-    sendKeys(By.id("bankDetails_accountName"), name)
-    click(continueButton)
-  }
+  def enterName(name: String): Unit =
+    sendKeys(accountNameLocater, name)
 
   def enterSortCode(sortCode: String): Unit =
-    sendKeys(By.id("bankDetails_sortCode"), sortCode)
+    sendKeys(sortCodeLocater, sortCode)
 
   def enterAccountNumber(accountNumber: String): Unit =
-    sendKeys(By.id("bankDetails_accountNumber"), accountNumber)
+    sendKeys(accountNumberLocater, accountNumber)
 
   def enterBuildingSocietyRollNumber(rollNumber: String): Unit =
-    sendKeys(By.id("bankDetails_rollNumber"), rollNumber)
+    sendKeys(rollNumberLocater, rollNumber)
 
   def continue(): Unit =
     click(continueButton)
 
   def checkJourneyUrl(): Unit =
     super.checkJourneyUrl(path)
+
+  def pageHeading: String = getText(pageHeadingLocator)
+
+  def currentUrl: String = driver.getCurrentUrl
+
+  def clearBuildingSocietyRollNumber: Unit =
+    clearField(rollNumberLocater)
 
 }
