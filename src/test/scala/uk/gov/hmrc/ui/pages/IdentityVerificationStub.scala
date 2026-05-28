@@ -16,16 +16,16 @@
 
 package uk.gov.hmrc.ui.pages
 
-import uk.gov.hmrc.selenium.webdriver.Driver
 import org.openqa.selenium.By
 import scala.jdk.CollectionConverters._
 
 object IdentityVerificationStub extends BasePage {
 
-  private val submitContinueButton: By = By.id("submit-continue")
+  private val submitContinueButton: By     = By.id("submit-continue")
+  private val journeyResultRadioButton: By = By.tagName("label")
 
   def clickRadioButton(text: String): Unit =
-    Driver.instance.findElements(By.tagName("label")).asScala.filter(_.getText.trim == text).head.click()
+    driver.findElements(journeyResultRadioButton).asScala.filter(_.getText.trim == text).head.click()
 
   def submitContinue(): Unit =
     click(submitContinueButton)

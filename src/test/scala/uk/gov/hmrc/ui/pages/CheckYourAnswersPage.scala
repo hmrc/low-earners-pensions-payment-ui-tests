@@ -17,8 +17,38 @@
 package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.By
+import org.openqa.selenium.NoSuchElementException
 
 object CheckYourAnswersPage extends BasePage {
+
+  private val pageHeadingLocator: By    = By.cssSelector("h1.govuk-heading-l")
+  private val sectionHeadingLocator: By = By.cssSelector("h2.govuk-heading-m")
+
+  // Keys
+  private val accountNameKeyLocator: By   =
+    By.cssSelector("div.govuk-summary-list__row:nth-child(1) dt.govuk-summary-list__key")
+  private val sortCodeKeyLocator: By      =
+    By.cssSelector("div.govuk-summary-list__row:nth-child(2) dt.govuk-summary-list__key")
+  private val accountNumberKeyLocator: By =
+    By.cssSelector("div.govuk-summary-list__row:nth-child(3) dt.govuk-summary-list__key")
+  private val rollNumberKeyLocator: By    =
+    By.cssSelector("div.govuk-summary-list__row:nth-child(4) dt.govuk-summary-list__key")
+
+  // Values
+  private val accountNameValueLocator: By   =
+    By.cssSelector("div.govuk-summary-list__row:nth-child(1) dd.govuk-summary-list__value")
+  private val sortCodeValueLocator: By      =
+    By.cssSelector("div.govuk-summary-list__row:nth-child(2) dd.govuk-summary-list__value")
+  private val accountNumberValueLocator: By =
+    By.cssSelector("div.govuk-summary-list__row:nth-child(3) dd.govuk-summary-list__value")
+  private val rollNumberValueLocator: By    =
+    By.cssSelector("div.govuk-summary-list__row:nth-child(4) dd.govuk-summary-list__value")
+
+  // Change links
+  private val changeAccountNameLocator: By   = By.id("change-account-name")
+  private val changeSortCodeLocator: By      = By.id("change-sort-code")
+  private val changeAccountNumberLocator: By = By.id("change-account-number")
+  private val changeRollNumberLocator: By    = By.id("change-roll-number")
 
   private val submitButton: By = By.id("submit")
 
@@ -27,4 +57,35 @@ object CheckYourAnswersPage extends BasePage {
 
   override def checkJourneyUrl(url: String = "check-your-answers"): Unit =
     super.checkJourneyUrl(url)
+
+  // Key getters
+  def accountNameKey: String   = getText(accountNameKeyLocator)
+  def sortCodeKey: String      = getText(sortCodeKeyLocator)
+  def accountNumberKey: String = getText(accountNumberKeyLocator)
+  def rollNumberKey: String    = getText(rollNumberKeyLocator)
+
+  // Value getters
+  def accountNameValue: String   = getText(accountNameValueLocator)
+  def sortCodeValue: String      = getText(sortCodeValueLocator)
+  def accountNumberValue: String = getText(accountNumberValueLocator)
+//  def rollNumberValue: String    = getText(rollNumberValueLocator)
+
+  def rollNumberValue: Option[String] =
+    try Some(getText(rollNumberValueLocator))
+    catch case _: NoSuchElementException => None
+
+  // Change link clicks
+  def clickChangeAccountName(): Unit =
+    click(changeAccountNameLocator)
+
+  def clickChangeSortCode(): Unit =
+    click(changeSortCodeLocator)
+
+  def clickChangeAccountNumber(): Unit =
+    click(changeAccountNumberLocator)
+
+  def clickChangeRollNumber(): Unit =
+    click(changeRollNumberLocator)
+
+  def currentUrl: String = driver.getCurrentUrl
 }

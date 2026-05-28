@@ -20,8 +20,27 @@ import org.openqa.selenium.By
 
 object BreakdownPage extends BasePage {
 
-  private val path               = "breakdown"
-  private val continueButton: By = By.xpath("//*[normalize-space()='Continue']")
+  private val path                   = "breakdown"
+  // Page heading
+  private val pageHeadingLocator: By =
+    By.cssSelector("h1.govuk-heading-l")
+
+  // Inset text heading (tax year)
+  private val taxYearHeadingLocator: By =
+    By.cssSelector("div.govuk-inset-text h2.govuk-heading-m")
+
+  // Body paragraphs
+  private val eligibilityBodyTextLocator: By =
+    By.cssSelector("p.govuk-body:nth-of-type(1)")
+
+  private val bankDetailsTextLocator: By =
+    By.cssSelector("p.govuk-body:nth-of-type(3)")
+
+  // Inset text values
+  private val insetTextLocator: By =
+    By.cssSelector("div.govuk-inset-text")
+
+  private val continueButton: By = By.linkText("Continue")
 
   def continue(): Unit =
     click(continueButton)
@@ -29,4 +48,13 @@ object BreakdownPage extends BasePage {
   def checkJourneyUrl(): Unit =
     super.checkJourneyUrl(path)
 
+  def pageHeading: String = getText(pageHeadingLocator)
+
+  def taxYearHeading: String = getText(taxYearHeadingLocator)
+
+  def insetText: String = getText(insetTextLocator)
+
+  def eligibilityBodyText: String = getText(eligibilityBodyTextLocator)
+
+  def bankDetailsText: String = getText(bankDetailsTextLocator)
 }

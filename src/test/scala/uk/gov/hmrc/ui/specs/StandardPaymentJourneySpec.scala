@@ -36,35 +36,152 @@ class StandardPaymentJourneySpec extends BaseSpec {
       "Standard Payment Journey - Submit the bank account details and Navigate to confirmation page"
     ) {
 
-      Given("User enters the auth details")
+      Given("The user enters the auth details")
       auth.goToAuthorityWizard()
       auth.loginUsingAuthorityWizard()
 
-      When("I click the Continue button on Start Page")
+      When("The user click the Continue button on Start Page")
       startPage.checkJourneyUrl()
       startPage.continue()
 
-      When("I click the Continue button on Dashboard page")
+      When("The user click the Continue button on Dashboard page")
       dashboardPage.checkJourneyUrl()
+
+      Then("The Page Heading Text should be correct")
+      dashboardPage.pageHeadingText shouldBe "Your low earner's pension payments"
+
+      And("The Available Payments Inset Text should be correct")
+      dashboardPage.availablePaymentsInsetText shouldBe "Your payments are suspended. For more information, contact us (opens in new tab)"
+
+      And("The Available Payments table caption should be correct")
+      dashboardPage.availablePaymentsTableCaptionText shouldBe "Available payments"
+
+      And("The correct number of rows should be displayed for Available payments")
+      dashboardPage.availablePaymentsTableRowCount shouldBe 2
+
+      And("The correct number of columns should be displayed for Available payments")
+      dashboardPage.availablePaymentsTableColumnCount shouldBe 4
+
+      And("The Available Payments able headers should be displayed")
+      dashboardPage.availablePaymentsTaxYearHeaderText        shouldBe "Tax year"
+      dashboardPage.availablePaymentsAmountHeaderText         shouldBe "Amount"
+      dashboardPage.availablePaymentsAvailableUntilHeaderText shouldBe "Available until"
+      dashboardPage.availablePaymentsStatusHeaderText         shouldBe "Status"
+
+      And("The Available Payments first row should display correct values")
+      dashboardPage.availablePaymentsTaxYear(0)        shouldBe "6 April 2025 to 5 April 2026"
+      dashboardPage.availablePaymentsAmount(0)         shouldBe "£200"
+      dashboardPage.availablePaymentsAvailableUntil(0) shouldBe "5 April 2030"
+      dashboardPage.availablePaymentsStatus(0)         shouldBe "Available"
+      dashboardPage.availablePaymentsIsAvailable(0)    shouldBe true
+
+      And("The Available Payments second row should display correct values")
+      dashboardPage.availablePaymentsTaxYear(1)        shouldBe "6 April 2025 to 5 April 2026"
+      dashboardPage.availablePaymentsAmount(1)         shouldBe "£200"
+      dashboardPage.availablePaymentsAvailableUntil(1) shouldBe "5 April 2030"
+      dashboardPage.availablePaymentsStatus(1)         shouldBe "Suspended"
+      dashboardPage.availablePaymentsIsSuspended(1)    shouldBe true
+
+      And("The Available Payments total payments text should be correct")
+      dashboardPage.availablePaymentsTotalPaymentsText shouldBe "You have a total of £200 in payments available to accept."
+
+      And("The Available Payments amount should be £200")
+      dashboardPage.availablePaymentsTotalPaymentsAmountText shouldBe "£200"
+
+      And("The bank details message should be correct")
+      dashboardPage.availablePaymentsBankDetailsMessage shouldBe "To accept these payments, you need to provide us with your bank details."
+
+      Then("The Payment History table Inset should be correct")
+      dashboardPage.paymentHistoryInsetText shouldBe "We cancelled 1 of your payments. For more information, contact us (opens in new tab)"
+
+      And("The Payment History Cancelled Count Text should be correct")
+      dashboardPage.cancelledCountText shouldBe "1"
+
+      And("The Payment history table caption should be correct")
+      dashboardPage.paymentHistoryTableCaptionText shouldBe "Payment history"
+
+      And("The correct number of rows should be displayed for Payment history")
+      dashboardPage.paymentHistoryTableRowCount shouldBe 2
+
+      And("The correct number of columns should be displayed for Payment history")
+      dashboardPage.paymentHistoryTableColumnCount shouldBe 5
+
+      And("The Payment history table headers should be displayed")
+      dashboardPage.paymentHistoryTaxYearHeaderText      shouldBe "Tax year"
+      dashboardPage.paymentHistoryAmountHeaderText       shouldBe "Amount"
+      dashboardPage.paymentHistoryDateAcceptedHeaderText shouldBe "Date accepted"
+      dashboardPage.paymentHistoryStatusHeaderText       shouldBe "Status"
+      dashboardPage.paymentHistoryActionHeaderText       shouldBe "Action"
+
+      And("The Payment history first row should display correct values")
+      dashboardPage.paymentHistoryTaxYear(0)      shouldBe "6 April 2025 to 5 April 2026"
+      dashboardPage.paymentHistoryAmount(0)       shouldBe "£200"
+      dashboardPage.paymentHistoryDateAccepted(0) shouldBe "N/A"
+      dashboardPage.paymentHistoryStatus(0)       shouldBe "Cancelled"
+      dashboardPage.paymentHistoryAction(0)       shouldBe "Check calculation"
+
+      And("The Payment history second row should display correct values")
+      dashboardPage.paymentHistoryTaxYear(1)      shouldBe "6 April 2025 to 5 April 2026"
+      dashboardPage.paymentHistoryAmount(1)       shouldBe "£200"
+      dashboardPage.paymentHistoryDateAccepted(1) shouldBe "1 January 2025"
+      dashboardPage.paymentHistoryStatus(1)       shouldBe "Paid"
+      dashboardPage.paymentHistoryAction(1)       shouldBe "Check calculation"
+
+      And("The user click Accept Payments button")
       dashboardPage.acceptPayments()
 
-      And("I click the Continue link")
+      And("The user lands on the breakdown page")
       breakdownPage.checkJourneyUrl()
+
+      Then("The page heading should show correct amount")
+      breakdownPage.pageHeading shouldBe "You're eligible for a total of £200"
+
+      And("The body text should be correct")
+      breakdownPage.eligibilityBodyText shouldBe "These payments are due to you because you did not get tax relief on some or all of your net pay pension contributions."
+
+      And("The inset text should show correct tax year and values")
+      breakdownPage.taxYearHeading shouldBe "For the tax year 6 April 2025 to 5 April 2026"
+
+      And("The inset text should contain correct contribution details")
+      breakdownPage.insetText should include("Your net pay pension contributions: £1,000")
+      breakdownPage.insetText should include("Your relevant basic tax rate: 20%")
+      breakdownPage.insetText should include("Your payment: £200")
+
+      And("The bank details text should be correct")
+      breakdownPage.bankDetailsText shouldBe "To accept these payments, you need to provide us with your bank details."
+
+      And("The user click the Continue link")
       breakdownPage.continue()
 
-      And("I fill in the bank details")
+      And("The user fill in the bank details")
       bankDetailsPage.checkJourneyUrl()
       bankDetailsPage.enterName("Melvin Loper")
       bankDetailsPage.enterSortCode("20-71-06")
       bankDetailsPage.enterAccountNumber("44311677")
       bankDetailsPage.enterBuildingSocietyRollNumber("0123456789")
+
+      And("The user click the Continue link")
       bankDetailsPage.continue()
 
-      And("I click the Submit button")
+      And("The user navigates to the Check Your Answers Page")
       checkYourAnswersPage.checkJourneyUrl()
+
+      Then("The summary list keys should be correct")
+      checkYourAnswersPage.accountNameKey   shouldBe "Name on the account"
+      checkYourAnswersPage.sortCodeKey      shouldBe "Sort code"
+      checkYourAnswersPage.accountNumberKey shouldBe "Account number"
+      checkYourAnswersPage.rollNumberKey    shouldBe "Building society roll number (if you have one)"
+
+      And("The summary list values should be correct")
+      checkYourAnswersPage.accountNameValue   shouldBe "Melvin Loper"
+      checkYourAnswersPage.sortCodeValue      shouldBe "20-71-06"
+      checkYourAnswersPage.accountNumberValue shouldBe "44311677"
+      checkYourAnswersPage.rollNumberValue    shouldBe Some("0123456789")
+
+      And("The user click the Submit button")
       checkYourAnswersPage.submit()
 
-      And("I am navigated to confirmation page")
+      And("The user navigate to confirmation page")
       confirmationPage.checkJourneyUrl()
     }
   }
