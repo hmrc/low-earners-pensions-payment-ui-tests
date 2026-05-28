@@ -16,11 +16,11 @@
 
 package uk.gov.hmrc.ui.specs
 
-import uk.gov.hmrc.ui.pages.{Auth, DashboardPage, StartPage, BreakdownPage}
+import uk.gov.hmrc.ui.pages.{Auth, BreakdownPage, DashboardPage, StartPage}
 
 class CalculationLinkJourneySpec extends BaseSpec {
-  private val auth = Auth
-  private val startPage = StartPage
+  private val auth          = Auth
+  private val startPage     = StartPage
   private val dashboardPage = DashboardPage
   private val breakdownPage = BreakdownPage
 

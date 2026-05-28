@@ -19,13 +19,13 @@ package uk.gov.hmrc.ui.specs
 import uk.gov.hmrc.ui.pages.*
 
 class BackButtonJourneySpec extends BaseSpec {
-  private val auth = Auth
-  private val startPage = StartPage
-  private val dashboardPage = DashboardPage
-  private val breakdownPage = BreakdownPage
-  private val bankDetailsPage = BankDetailsPage
+  private val auth                 = Auth
+  private val startPage            = StartPage
+  private val dashboardPage        = DashboardPage
+  private val breakdownPage        = BreakdownPage
+  private val bankDetailsPage      = BankDetailsPage
   private val checkYourAnswersPage = CheckYourAnswersPage
-  private val confirmationPage = ConfirmationPage
+  private val confirmationPage     = ConfirmationPage
 
   override def beforeEach(): Unit =
     super.beforeEach()
@@ -68,7 +68,9 @@ class BackButtonJourneySpec extends BaseSpec {
       startPage.checkJourneyUrl()
 
       And("The new tab should have the correct title")
-      startPage.assertTitle("Accept your low earner's pension payment - Accept your low earner's pension payment - site.govuk")
+      startPage.assertTitle(
+        "Accept your low earner's pension payment - Accept your low earner's pension payment - site.govuk"
+      )
     }
 
     Scenario(
@@ -93,7 +95,9 @@ class BackButtonJourneySpec extends BaseSpec {
       dashboardPage.checkJourneyUrl()
 
       And("The new tab should have the correct title")
-      dashboardPage.assertTitle("Your low earner's pension payments - Accept your low earner's pension payment - site.govuk")
+      dashboardPage.assertTitle(
+        "Your low earner's pension payments - Accept your low earner's pension payment - site.govuk"
+      )
     }
   }
 }

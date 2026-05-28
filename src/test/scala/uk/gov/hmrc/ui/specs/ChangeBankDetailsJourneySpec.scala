@@ -18,15 +18,15 @@ package uk.gov.hmrc.ui.specs
 
 import uk.gov.hmrc.ui.pages.{Auth, BankDetailsPage, BreakdownPage, CheckYourAnswersPage, ConfirmationPage, DashboardPage, StartPage}
 
-class ChangeBankDetailsJourneySpec extends BaseSpec{
+class ChangeBankDetailsJourneySpec extends BaseSpec {
 
-  private val auth = Auth
-  private val startPage = StartPage
-  private val dashboardPage = DashboardPage
-  private val breakdownPage = BreakdownPage
-  private val bankDetailsPage = BankDetailsPage
+  private val auth                 = Auth
+  private val startPage            = StartPage
+  private val dashboardPage        = DashboardPage
+  private val breakdownPage        = BreakdownPage
+  private val bankDetailsPage      = BankDetailsPage
   private val checkYourAnswersPage = CheckYourAnswersPage
-  private val confirmationPage = ConfirmationPage
+  private val confirmationPage     = ConfirmationPage
 
   override def beforeEach(): Unit =
     super.beforeEach()
@@ -77,7 +77,7 @@ class ChangeBankDetailsJourneySpec extends BaseSpec{
     ) {
       When("The user clicks Change on the Name on the account row")
       CheckYourAnswersPage.clickChangeAccountName()
-      
+
       Then("The user should be taken to the bank details page")
       bankDetailsPage.currentUrl should include("change-bank-details")
       bankDetailsPage.currentUrl should include("bankDetails.accountName")
@@ -94,10 +94,10 @@ class ChangeBankDetailsJourneySpec extends BaseSpec{
       checkYourAnswersPage.checkJourneyUrl()
 
       And("The summary list values should be correct")
-      checkYourAnswersPage.accountNameValue shouldBe "Casandra Wilkinson"
-      checkYourAnswersPage.sortCodeValue shouldBe "40-51-25"
+      checkYourAnswersPage.accountNameValue   shouldBe "Casandra Wilkinson"
+      checkYourAnswersPage.sortCodeValue      shouldBe "40-51-25"
       checkYourAnswersPage.accountNumberValue shouldBe "54344677"
-      checkYourAnswersPage.rollNumberValue shouldBe Some("1011121314")
+      checkYourAnswersPage.rollNumberValue    shouldBe Some("1011121314")
 
       And("The user click the Submit button")
       checkYourAnswersPage.submit()
@@ -125,10 +125,10 @@ class ChangeBankDetailsJourneySpec extends BaseSpec{
       checkYourAnswersPage.checkJourneyUrl()
 
       And("The summary list values should be correct")
-      checkYourAnswersPage.accountNameValue shouldBe "Melvin Loper"
-      checkYourAnswersPage.sortCodeValue shouldBe "20-71-06"
+      checkYourAnswersPage.accountNameValue   shouldBe "Melvin Loper"
+      checkYourAnswersPage.sortCodeValue      shouldBe "20-71-06"
       checkYourAnswersPage.accountNumberValue shouldBe "44311677"
-      checkYourAnswersPage.rollNumberValue shouldBe None
+      checkYourAnswersPage.rollNumberValue    shouldBe None
 
       And("The user click the Submit button")
       checkYourAnswersPage.submit()
@@ -153,10 +153,10 @@ class ChangeBankDetailsJourneySpec extends BaseSpec{
       checkYourAnswersPage.checkJourneyUrl()
 
       And("The summary list values should be correct")
-      checkYourAnswersPage.accountNameValue shouldBe "Melvin Loper"
-      checkYourAnswersPage.sortCodeValue shouldBe "20-71-06"
+      checkYourAnswersPage.accountNameValue   shouldBe "Melvin Loper"
+      checkYourAnswersPage.sortCodeValue      shouldBe "20-71-06"
       checkYourAnswersPage.accountNumberValue shouldBe "44311677"
-      checkYourAnswersPage.rollNumberValue shouldBe Some("0123456789")
+      checkYourAnswersPage.rollNumberValue    shouldBe Some("0123456789")
 
       And("The user click the Submit button")
       checkYourAnswersPage.submit()
@@ -181,10 +181,10 @@ class ChangeBankDetailsJourneySpec extends BaseSpec{
       checkYourAnswersPage.checkJourneyUrl()
 
       And("The summary list values should be correct")
-      checkYourAnswersPage.accountNameValue shouldBe "Melvin Loper"
-      checkYourAnswersPage.sortCodeValue shouldBe "20-71-06"
+      checkYourAnswersPage.accountNameValue   shouldBe "Melvin Loper"
+      checkYourAnswersPage.sortCodeValue      shouldBe "20-71-06"
       checkYourAnswersPage.accountNumberValue shouldBe "44311677"
-      checkYourAnswersPage.rollNumberValue shouldBe Some("0123456789")
+      checkYourAnswersPage.rollNumberValue    shouldBe Some("0123456789")
 
       And("The user click the Submit button")
       checkYourAnswersPage.submit()

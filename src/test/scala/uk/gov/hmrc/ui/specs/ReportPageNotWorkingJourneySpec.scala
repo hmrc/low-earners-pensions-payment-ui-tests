@@ -18,13 +18,13 @@ package uk.gov.hmrc.ui.specs
 import uk.gov.hmrc.ui.pages.{Auth, BankDetailsPage, BreakdownPage, CheckYourAnswersPage, ConfirmationPage, DashboardPage, StartPage}
 
 class ReportPageNotWorkingJourneySpec extends BaseSpec {
-  private val auth = Auth
-  private val startPage = StartPage
-  private val dashboardPage = DashboardPage
-  private val breakdownPage = BreakdownPage
-  private val bankDetailsPage = BankDetailsPage
+  private val auth                 = Auth
+  private val startPage            = StartPage
+  private val dashboardPage        = DashboardPage
+  private val breakdownPage        = BreakdownPage
+  private val bankDetailsPage      = BankDetailsPage
   private val checkYourAnswersPage = CheckYourAnswersPage
-  private val confirmationPage = ConfirmationPage
+  private val confirmationPage     = ConfirmationPage
 
   override def beforeEach(): Unit =
     super.beforeEach()
@@ -140,7 +140,7 @@ class ReportPageNotWorkingJourneySpec extends BaseSpec {
     }
 
     Scenario(
-     "Check Your Answers Page - Report page not working properly"
+      "Check Your Answers Page - Report page not working properly"
     ) {
       And("The user click the Continue button on Start Page")
       startPage.continue()
