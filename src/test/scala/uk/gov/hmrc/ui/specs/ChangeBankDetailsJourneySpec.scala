@@ -73,7 +73,7 @@ class ChangeBankDetailsJourneySpec extends BaseSpec {
   ) {
 
     Scenario(
-      "Check Your Your Answers Page - Click Change Bank Account Name and modify bank details"
+      "Check Your Your Answers Page - Click Change Bank Account Name and modify Bank Account Name"
     ) {
       When("The user clicks Change on the Name on the account row")
       CheckYourAnswersPage.clickChangeAccountName()
@@ -82,21 +82,94 @@ class ChangeBankDetailsJourneySpec extends BaseSpec {
       bankDetailsPage.currentUrl should include("change-bank-details")
       bankDetailsPage.currentUrl should include("bankDetails.accountName")
 
+      When("The user enter the new bank account name")
       bankDetailsPage.enterName("Casandra Wilkinson")
+
+      And("The user click the Continue link")
+      bankDetailsPage.continue()
+
+      Then("The user navigates to the Check Your Answers Page")
+      checkYourAnswersPage.checkJourneyUrl()
+
+      And("The summary list values should be correct")
+      checkYourAnswersPage.accountNameValue   shouldBe "Casandra Wilkinson"
+      checkYourAnswersPage.sortCodeValue      shouldBe "20-71-06"
+      checkYourAnswersPage.accountNumberValue shouldBe "44311677"
+      checkYourAnswersPage.rollNumberValue    shouldBe Some("0123456789")
+    }
+    Scenario(
+      "Check Your Your Answers Page - Click Change Bank Sort Code and modify Bank Sort Code"
+    ) {
+      When("The user clicks Change on the Sort code row")
+      CheckYourAnswersPage.clickChangeSortCode()
+
+      Then("The user should be taken to the bank details page")
+      bankDetailsPage.currentUrl should include("change-bank-details")
+      bankDetailsPage.currentUrl should include("bankDetails.sortCode")
+
+      When("The user enter the new bank sort code")
       bankDetailsPage.enterSortCode("40-51-25")
+
+      And("The user click the Continue link")
+      bankDetailsPage.continue()
+
+      Then("The user navigates to the Check Your Answers Page")
+      checkYourAnswersPage.checkJourneyUrl()
+
+      And("The summary list values should be correct")
+      checkYourAnswersPage.accountNameValue   shouldBe "Melvin Loper"
+      checkYourAnswersPage.sortCodeValue      shouldBe "40-51-25"
+      checkYourAnswersPage.accountNumberValue shouldBe "44311677"
+      checkYourAnswersPage.rollNumberValue    shouldBe Some("0123456789")
+    }
+    Scenario(
+      "Check Your Your Answers Page - Click Change Account Number and modify Bank Account Number"
+    ) {
+      When("The user clicks Change on the Account number row")
+      CheckYourAnswersPage.clickChangeAccountNumber()
+
+      Then("The user should be taken to the bank details page")
+      bankDetailsPage.currentUrl should include("change-bank-details")
+      bankDetailsPage.currentUrl should include("bankDetails.accountNumber")
+
+      When("The user enter the new bank bank account number")
       bankDetailsPage.enterAccountNumber("54344677")
+
+      And("The user click the Continue link")
+      bankDetailsPage.continue()
+
+      Then("The user navigates to the Check Your Answers Page")
+      checkYourAnswersPage.checkJourneyUrl()
+
+      And("The summary list values should be correct")
+      checkYourAnswersPage.accountNameValue   shouldBe "Melvin Loper"
+      checkYourAnswersPage.sortCodeValue      shouldBe "20-71-06"
+      checkYourAnswersPage.accountNumberValue shouldBe "54344677"
+      checkYourAnswersPage.rollNumberValue    shouldBe Some("0123456789")
+    }
+    Scenario(
+      "Check Your Your Answers Page - Click Building society roll number and modify Building society roll number"
+    ) {
+      When("The user clicks Change on the Building society roll number (if you have one)")
+      CheckYourAnswersPage.clickChangeRollNumber()
+
+      Then("The user should be taken to the bank details page")
+      bankDetailsPage.currentUrl should include("change-bank-details")
+      bankDetailsPage.currentUrl should include("bankDetails.rollNumber")
+
+      When("The user enter the new Building society roll number")
       bankDetailsPage.enterBuildingSocietyRollNumber("1011121314")
 
       And("The user click the Continue link")
       bankDetailsPage.continue()
 
-      And("The user navigates to the Check Your Answers Page")
+      Then("The user navigates to the Check Your Answers Page")
       checkYourAnswersPage.checkJourneyUrl()
 
       And("The summary list values should be correct")
-      checkYourAnswersPage.accountNameValue   shouldBe "Casandra Wilkinson"
-      checkYourAnswersPage.sortCodeValue      shouldBe "40-51-25"
-      checkYourAnswersPage.accountNumberValue shouldBe "54344677"
+      checkYourAnswersPage.accountNameValue   shouldBe "Melvin Loper"
+      checkYourAnswersPage.sortCodeValue      shouldBe "20-71-06"
+      checkYourAnswersPage.accountNumberValue shouldBe "44311677"
       checkYourAnswersPage.rollNumberValue    shouldBe Some("1011121314")
 
       And("The user click the Submit button")
@@ -106,66 +179,7 @@ class ChangeBankDetailsJourneySpec extends BaseSpec {
       confirmationPage.checkJourneyUrl()
     }
     Scenario(
-      "Check Your Your Answers Page - Click Change Bank Sort Code and do not modify bank details but remove roll number"
-    ) {
-      When("The user clicks Change on the Sort code row")
-      CheckYourAnswersPage.clickChangeSortCode()
-
-      Then("The user should be taken to the bank details page")
-      bankDetailsPage.currentUrl should include("change-bank-details")
-      bankDetailsPage.currentUrl should include("bankDetails.sortCode")
-
-      And("The user removes the roll number")
-      bankDetailsPage.clearBuildingSocietyRollNumber
-
-      And("The user click the Continue link")
-      bankDetailsPage.continue()
-
-      And("The user navigates to the Check Your Answers Page")
-      checkYourAnswersPage.checkJourneyUrl()
-
-      And("The summary list values should be correct")
-      checkYourAnswersPage.accountNameValue   shouldBe "Melvin Loper"
-      checkYourAnswersPage.sortCodeValue      shouldBe "20-71-06"
-      checkYourAnswersPage.accountNumberValue shouldBe "44311677"
-      checkYourAnswersPage.rollNumberValue    shouldBe None
-
-      And("The user click the Submit button")
-      checkYourAnswersPage.submit()
-
-      And("The user navigate to confirmation page")
-      confirmationPage.checkJourneyUrl()
-    }
-    Scenario(
-      "Check Your Your Answers Page - Click Change Account Number and do not modify bank details"
-    ) {
-      When("The user clicks Change on the Account number row")
-      CheckYourAnswersPage.clickChangeAccountNumber()
-
-      Then("The user should be taken to the bank details page")
-      bankDetailsPage.currentUrl should include("change-bank-details")
-      bankDetailsPage.currentUrl should include("bankDetails.accountNumber")
-
-      And("The user click the Continue link")
-      bankDetailsPage.continue()
-
-      And("The user navigates to the Check Your Answers Page")
-      checkYourAnswersPage.checkJourneyUrl()
-
-      And("The summary list values should be correct")
-      checkYourAnswersPage.accountNameValue   shouldBe "Melvin Loper"
-      checkYourAnswersPage.sortCodeValue      shouldBe "20-71-06"
-      checkYourAnswersPage.accountNumberValue shouldBe "44311677"
-      checkYourAnswersPage.rollNumberValue    shouldBe Some("0123456789")
-
-      And("The user click the Submit button")
-      checkYourAnswersPage.submit()
-
-      And("The user navigate to confirmation page")
-      confirmationPage.checkJourneyUrl()
-    }
-    Scenario(
-      "Check Your Your Answers Page - Click Change Roll number and do not modify bank details"
+      "Check Your Your Answers Page - Click Building society roll number and remove Building society roll number"
     ) {
       When("The user clicks Change on the Building society roll number (if you have one)")
       CheckYourAnswersPage.clickChangeRollNumber()
@@ -174,17 +188,20 @@ class ChangeBankDetailsJourneySpec extends BaseSpec {
       bankDetailsPage.currentUrl should include("change-bank-details")
       bankDetailsPage.currentUrl should include("bankDetails.rollNumber")
 
+      When("The user removes the Building society roll number")
+      bankDetailsPage.clearBuildingSocietyRollNumber
+
       And("The user click the Continue link")
       bankDetailsPage.continue()
 
-      And("The user navigates to the Check Your Answers Page")
+      Then("The user navigates to the Check Your Answers Page")
       checkYourAnswersPage.checkJourneyUrl()
 
       And("The summary list values should be correct")
       checkYourAnswersPage.accountNameValue   shouldBe "Melvin Loper"
       checkYourAnswersPage.sortCodeValue      shouldBe "20-71-06"
       checkYourAnswersPage.accountNumberValue shouldBe "44311677"
-      checkYourAnswersPage.rollNumberValue    shouldBe Some("0123456789")
+      checkYourAnswersPage.rollNumberValue    shouldBe None
 
       And("The user click the Submit button")
       checkYourAnswersPage.submit()
