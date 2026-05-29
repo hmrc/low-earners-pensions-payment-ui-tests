@@ -33,7 +33,7 @@ class StandardPaymentJourneySpec extends BaseSpec {
   ) {
 
     Scenario(
-      "Standard Payment Journey - Submit the bank account details and Navigate to confirmation page"
+      "Standard Payment Journey - Submit the bank account details with Building society roll number and Navigate to confirmation page"
     ) {
 
       Given("The user enters the auth details")
@@ -177,6 +177,53 @@ class StandardPaymentJourneySpec extends BaseSpec {
       checkYourAnswersPage.sortCodeValue      shouldBe "20-71-06"
       checkYourAnswersPage.accountNumberValue shouldBe "44311677"
       checkYourAnswersPage.rollNumberValue    shouldBe Some("0123456789")
+
+      And("The user click the Submit button")
+      checkYourAnswersPage.submit()
+
+      And("The user navigate to confirmation page")
+      confirmationPage.checkJourneyUrl()
+    }
+    Scenario(
+      "Standard Payment Journey - Submit the bank account details without Building society roll number and Navigate to confirmation page"
+    ) {
+      Given("The user enters the auth details")
+      auth.goToAuthorityWizard()
+      auth.loginUsingAuthorityWizard()
+
+      When("The user click the Continue button on Start Page")
+      startPage.checkJourneyUrl()
+      startPage.continue()
+
+      When("The user click the Continue button on Dashboard page")
+      dashboardPage.checkJourneyUrl()
+
+      And("The user click Accept Payments button")
+      dashboardPage.acceptPayments()
+
+      And("The user lands on the breakdown page")
+      breakdownPage.checkJourneyUrl()
+
+      And("The user click the Continue link")
+      breakdownPage.continue()
+
+      And("The user fill in the bank details")
+      bankDetailsPage.checkJourneyUrl()
+      bankDetailsPage.enterName("Melvin Loper")
+      bankDetailsPage.enterSortCode("20-71-06")
+      bankDetailsPage.enterAccountNumber("44311677")
+
+      And("The user click the Continue link")
+      bankDetailsPage.continue()
+
+      And("The user navigates to the Check Your Answers Page")
+      checkYourAnswersPage.checkJourneyUrl()
+
+      And("The summary list values should be correct")
+      checkYourAnswersPage.accountNameValue   shouldBe "Melvin Loper"
+      checkYourAnswersPage.sortCodeValue      shouldBe "20-71-06"
+      checkYourAnswersPage.accountNumberValue shouldBe "44311677"
+      checkYourAnswersPage.rollNumberValue    shouldBe None
 
       And("The user click the Submit button")
       checkYourAnswersPage.submit()
