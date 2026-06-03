@@ -34,9 +34,6 @@ class ChangeBankDetailsJourneySpec extends BaseSpec {
     auth.goToAuthorityWizard()
     auth.loginUsingAuthorityWizard()
 
-    And("The user click the Continue button on Start Page")
-    startPage.checkJourneyUrl()
-
     And("The user navigates to the Start Page")
     startPage.checkJourneyUrl()
 

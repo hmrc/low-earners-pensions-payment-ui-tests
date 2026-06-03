@@ -83,7 +83,7 @@ class ReportPageNotWorkingJourneySpec extends BaseSpec {
       And("The user click the Continue button on Start Page")
       startPage.continue()
 
-      And("The user click the Continue button on Dashboard page")
+      And("The user navigates to the Dashboard Page")
       dashboardPage.checkJourneyUrl()
 
       And("The user click Accept Payments button")
@@ -111,7 +111,7 @@ class ReportPageNotWorkingJourneySpec extends BaseSpec {
       And("The user click the Continue button on Start Page")
       startPage.continue()
 
-      And("The user click the Continue button on Dashboard page")
+      And("The user navigates to the Dashboard Page")
       dashboardPage.checkJourneyUrl()
 
       And("The user click Accept Payments button")
@@ -145,7 +145,7 @@ class ReportPageNotWorkingJourneySpec extends BaseSpec {
       And("The user click the Continue button on Start Page")
       startPage.continue()
 
-      And("The user click the Continue button on Dashboard page")
+      And("The user navigates to the Dashboard Page")
       dashboardPage.checkJourneyUrl()
 
       And("The user click Accept Payments button")
@@ -189,7 +189,7 @@ class ReportPageNotWorkingJourneySpec extends BaseSpec {
       And("The user click the Continue button on Start Page")
       startPage.continue()
 
-      And("The user click the Continue button on Dashboard page")
+      And("The user navigates to the Dashboard Page")
       dashboardPage.checkJourneyUrl()
 
       And("The user click Accept Payments button")

@@ -191,11 +191,13 @@ class StandardPaymentJourneySpec extends BaseSpec {
       auth.goToAuthorityWizard()
       auth.loginUsingAuthorityWizard()
 
-      When("The user click the Continue button on Start Page")
+      When("The user navigates to the Start Page")
       startPage.checkJourneyUrl()
+
+      When("The user click the Continue button on Start Page")
       startPage.continue()
 
-      When("The user click the Continue button on Dashboard page")
+      When("The user navigates to the Dashboard page")
       dashboardPage.checkJourneyUrl()
 
       And("The user click Accept Payments button")
