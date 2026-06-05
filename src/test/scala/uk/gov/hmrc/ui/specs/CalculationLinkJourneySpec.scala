@@ -76,7 +76,7 @@ class CalculationLinkJourneySpec extends BaseSpec {
     Scenario(
       "Dashboard Page - Check Calculation for Cancelled Status"
     ) {
-      When("The user clicks the calculation link for the Paid status")
+      When("The user clicks the calculation link for the Cancelled status")
       dashboardPage.clickCancelledCalculationLink()
 
       And("The user lands on the breakdown page")
