@@ -17,13 +17,10 @@
 package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.By
-import org.openqa.selenium.NoSuchElementException
+import org.scalatest.matchers.should.Matchers.shouldBe
+import scala.jdk.CollectionConverters.*
 
 object CheckYourAnswersPage extends BasePage {
-
-  private val pageHeadingLocator: By    = By.cssSelector("h1.govuk-heading-l")
-  private val sectionHeadingLocator: By = By.cssSelector("h2.govuk-heading-m")
-
   // Keys
   private val accountNameKeyLocator: By   =
     By.cssSelector("div.govuk-summary-list__row:nth-child(1) dt.govuk-summary-list__key")
@@ -62,17 +59,23 @@ object CheckYourAnswersPage extends BasePage {
   def accountNameKey: String   = getText(accountNameKeyLocator)
   def sortCodeKey: String      = getText(sortCodeKeyLocator)
   def accountNumberKey: String = getText(accountNumberKeyLocator)
-  def rollNumberKey: String    = getText(rollNumberKeyLocator)
 
   // Value getters
   def accountNameValue: String   = getText(accountNameValueLocator)
   def sortCodeValue: String      = getText(sortCodeValueLocator)
   def accountNumberValue: String = getText(accountNumberValueLocator)
-//  def rollNumberValue: String    = getText(rollNumberValueLocator)
+
+  // Check presence first using findElements
+  def isRollNumberPresent: Boolean =
+    driver.findElements(rollNumberKeyLocator).asScala.nonEmpty
+
+  def rollNumberKey: Option[String] =
+    if isRollNumberPresent then Some(driver.findElement(rollNumberKeyLocator).getText.trim)
+    else None
 
   def rollNumberValue: Option[String] =
-    try Some(getText(rollNumberValueLocator))
-    catch case _: NoSuchElementException => None
+    if isRollNumberPresent then Some(driver.findElement(rollNumberValueLocator).getText.trim)
+    else None
 
   // Change link clicks
   def clickChangeAccountName(): Unit =
@@ -88,4 +91,33 @@ object CheckYourAnswersPage extends BasePage {
     click(changeRollNumberLocator)
 
   def currentUrl: String = driver.getCurrentUrl
+
+  // Inside CheckYourAnswersPage.scala
+  def verifySummaryList(
+    expectedName: String,
+    expectedSortCode: String,
+    expectedAccountNumber: String,
+    expectedRollNumber: Option[String] = None
+  ): Unit = {
+
+    // Core assertions that always run
+    accountNameKey   shouldBe "Name on the account"
+    accountNameValue shouldBe expectedName
+
+    sortCodeKey   shouldBe "Sort code"
+    sortCodeValue shouldBe expectedSortCode
+
+    accountNumberKey   shouldBe "Account number"
+    accountNumberValue shouldBe expectedAccountNumber
+
+    // Dynamic assertion for the optional roll number
+    expectedRollNumber match {
+      case Some(rollNum) =>
+        rollNumberKey   shouldBe Some("Building society roll number (if you have one)")
+        rollNumberValue shouldBe Some(rollNum)
+
+      case None =>
+        isRollNumberPresent shouldBe false
+    }
+  }
 }

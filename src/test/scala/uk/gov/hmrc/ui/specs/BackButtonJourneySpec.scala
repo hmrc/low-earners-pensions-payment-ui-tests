@@ -19,13 +19,10 @@ package uk.gov.hmrc.ui.specs
 import uk.gov.hmrc.ui.pages.*
 
 class BackButtonJourneySpec extends BaseSpec {
-  private val auth                 = Auth
-  private val startPage            = StartPage
-  private val dashboardPage        = DashboardPage
-  private val breakdownPage        = BreakdownPage
-  private val bankDetailsPage      = BankDetailsPage
-  private val checkYourAnswersPage = CheckYourAnswersPage
-  private val confirmationPage     = ConfirmationPage
+  private val auth          = Auth
+  private val startPage     = StartPage
+  private val dashboardPage = DashboardPage
+  private val breakdownPage = BreakdownPage
 
   override def beforeEach(): Unit =
     super.beforeEach()
@@ -80,7 +77,7 @@ class BackButtonJourneySpec extends BaseSpec {
       dashboardPage.checkJourneyUrl()
 
       And("The user click Accept Payments button")
-      dashboardPage.acceptPayments()
+      dashboardPage.clickActionButton()
 
       And("The user lands on the breakdown page")
       breakdownPage.checkJourneyUrl()

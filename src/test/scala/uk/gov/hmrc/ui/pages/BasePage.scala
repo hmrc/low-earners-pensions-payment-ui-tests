@@ -131,4 +131,9 @@ trait BasePage extends PageObject {
       driver.findElement(locator)
       true
     catch case _: NoSuchElementException => false
+
+  def setText(locator: By, textValue: String): Unit = {
+    clearField(locator)
+    sendKeys(locator, textValue)
+  }
 }
