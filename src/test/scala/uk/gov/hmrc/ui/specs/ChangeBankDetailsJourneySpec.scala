@@ -44,7 +44,7 @@ class ChangeBankDetailsJourneySpec extends BaseSpec {
     dashboardPage.checkJourneyUrl()
 
     And("The user click Accept Payments button")
-    dashboardPage.acceptPayments()
+    dashboardPage.clickActionButton()
 
     And("The user lands on the breakdown page")
     breakdownPage.checkJourneyUrl()
@@ -52,15 +52,11 @@ class ChangeBankDetailsJourneySpec extends BaseSpec {
     And("The user click the Continue link")
     breakdownPage.continue()
 
-    And("The user fill in the bank details")
+    And("The user navigates to the Bank details page")
     bankDetailsPage.checkJourneyUrl()
-    bankDetailsPage.enterName("Melvin Loper")
-    bankDetailsPage.enterSortCode("20-71-06")
-    bankDetailsPage.enterAccountNumber("44311677")
-    bankDetailsPage.enterBuildingSocietyRollNumber("0123456789")
 
-    And("The user click the Continue link")
-    bankDetailsPage.continue()
+    And("The user fill in the bank details and click continue")
+    bankDetailsPage.submitBankDetails("Melvin Loper", "20-71-06", "44311677", Some("0123456789"))
 
     And("The user click the Submit button")
     checkYourAnswersPage.checkJourneyUrl()
@@ -88,11 +84,8 @@ class ChangeBankDetailsJourneySpec extends BaseSpec {
       Then("The user navigates to the Check Your Answers Page")
       checkYourAnswersPage.checkJourneyUrl()
 
-      And("The summary list values should be correct")
-      checkYourAnswersPage.accountNameValue   shouldBe "Casandra Wilkinson"
-      checkYourAnswersPage.sortCodeValue      shouldBe "20-71-06"
-      checkYourAnswersPage.accountNumberValue shouldBe "44311677"
-      checkYourAnswersPage.rollNumberValue    shouldBe Some("0123456789")
+      And("The summary list keys & values should be correct")
+      checkYourAnswersPage.verifySummaryList("Casandra Wilkinson", "20-71-06", "44311677", Some("0123456789"))
     }
     Scenario(
       "Check Your Your Answers Page - Click Change Bank Sort Code and modify Bank Sort Code"
@@ -113,11 +106,8 @@ class ChangeBankDetailsJourneySpec extends BaseSpec {
       Then("The user navigates to the Check Your Answers Page")
       checkYourAnswersPage.checkJourneyUrl()
 
-      And("The summary list values should be correct")
-      checkYourAnswersPage.accountNameValue   shouldBe "Melvin Loper"
-      checkYourAnswersPage.sortCodeValue      shouldBe "40-51-25"
-      checkYourAnswersPage.accountNumberValue shouldBe "44311677"
-      checkYourAnswersPage.rollNumberValue    shouldBe Some("0123456789")
+      And("The summary list keys & values should be correct")
+      checkYourAnswersPage.verifySummaryList("Melvin Loper", "40-51-25", "44311677", Some("0123456789"))
     }
     Scenario(
       "Check Your Your Answers Page - Click Change Account Number and modify Bank Account Number"
@@ -138,11 +128,8 @@ class ChangeBankDetailsJourneySpec extends BaseSpec {
       Then("The user navigates to the Check Your Answers Page")
       checkYourAnswersPage.checkJourneyUrl()
 
-      And("The summary list values should be correct")
-      checkYourAnswersPage.accountNameValue   shouldBe "Melvin Loper"
-      checkYourAnswersPage.sortCodeValue      shouldBe "20-71-06"
-      checkYourAnswersPage.accountNumberValue shouldBe "54344677"
-      checkYourAnswersPage.rollNumberValue    shouldBe Some("0123456789")
+      And("The summary list keys & values should be correct")
+      checkYourAnswersPage.verifySummaryList("Melvin Loper", "20-71-06", "54344677", Some("0123456789"))
     }
     Scenario(
       "Check Your Your Answers Page - Click Building society roll number and modify Building society roll number"
@@ -163,11 +150,8 @@ class ChangeBankDetailsJourneySpec extends BaseSpec {
       Then("The user navigates to the Check Your Answers Page")
       checkYourAnswersPage.checkJourneyUrl()
 
-      And("The summary list values should be correct")
-      checkYourAnswersPage.accountNameValue   shouldBe "Melvin Loper"
-      checkYourAnswersPage.sortCodeValue      shouldBe "20-71-06"
-      checkYourAnswersPage.accountNumberValue shouldBe "44311677"
-      checkYourAnswersPage.rollNumberValue    shouldBe Some("1011121314")
+      And("The summary list keys & values should be correct")
+      checkYourAnswersPage.verifySummaryList("Melvin Loper", "20-71-06", "44311677", Some("1011121314"))
 
       And("The user click the Submit button")
       checkYourAnswersPage.submit()
@@ -194,11 +178,8 @@ class ChangeBankDetailsJourneySpec extends BaseSpec {
       Then("The user navigates to the Check Your Answers Page")
       checkYourAnswersPage.checkJourneyUrl()
 
-      And("The summary list values should be correct")
-      checkYourAnswersPage.accountNameValue   shouldBe "Melvin Loper"
-      checkYourAnswersPage.sortCodeValue      shouldBe "20-71-06"
-      checkYourAnswersPage.accountNumberValue shouldBe "44311677"
-      checkYourAnswersPage.rollNumberValue    shouldBe None
+      And("The summary list keys & values should be correct")
+      checkYourAnswersPage.verifySummaryList("Melvin Loper", "20-71-06", "44311677")
 
       And("The user click the Submit button")
       checkYourAnswersPage.submit()

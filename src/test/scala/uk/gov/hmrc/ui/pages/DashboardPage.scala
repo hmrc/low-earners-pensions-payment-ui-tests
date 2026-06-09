@@ -21,15 +21,11 @@ import org.openqa.selenium.By
 object DashboardPage extends BasePage {
 
   private val path                     = "dashboard"
-  private val acceptPaymentsButton: By = By.xpath("//*[normalize-space()='Accept payments']")
-
-  private val pageHeadingLocator: By = By.cssSelector("h1.govuk-heading-l")
+  private val breakdownLinkLocator: By = By.xpath("//a[contains(@href, '/low-earners-pensions-payment/breakdown')]")
+  private val pageHeadingLocator: By   = By.cssSelector("h1.govuk-heading-l")
 
   // Available Payments Table
-  private val availablePaymentsInset: By     = By.cssSelector("div.govuk-inset-text")
-  private val availablePaymentsInsetLink: By =
-    By.cssSelector("govuk-inset-text.govuk-link govuk-link--no-visited-state")
-
+  private val availablePaymentsInset: By                  = By.cssSelector("div.govuk-inset-text")
   private val availablePaymentsTableCaption: By           = By.cssSelector("#dashboard_table_available_payments caption")
   private val availablePaymentsRows: By                   = By.cssSelector("#dashboard_table_available_payments tbody tr")
   private val availablePaymentsTaxYearHeader: By          = By.id("dashboard_table_available_payments_header_taxYear")
@@ -57,13 +53,15 @@ object DashboardPage extends BasePage {
 
   // Check calculation links by href pattern
   private val paidCalculationLinkLocator: By =
-    By.cssSelector("a[href*='/low-earners-pensions-payment/breakdown?id=P-25-1']")
+    By.cssSelector("a[href*='/low-earners-pensions-payment/breakdown?id=P-2022-1']")
 
   private val cancelledCalculationLinkLocator: By =
-    By.cssSelector("a[href*='/low-earners-pensions-payment/breakdown?id=C-25-1']")
+    By.cssSelector("a[href*='/low-earners-pensions-payment/breakdown?id=C-2023-1']")
 
-  def acceptPayments(): Unit =
-    click(acceptPaymentsButton)
+  def actionButtonText: String = getText(breakdownLinkLocator)
+
+  def clickActionButton(): Unit =
+    click(breakdownLinkLocator)
 
   def checkJourneyUrl(): Unit =
     super.checkJourneyUrl(path)
@@ -128,4 +126,20 @@ object DashboardPage extends BasePage {
 
   def clickCancelledCalculationLink(): Unit =
     click(cancelledCalculationLinkLocator)
+
+  // Inside your PaymentsDashboardPage object
+
+//  def verifyAcceptPaymentsState(): Unit = {
+//    withClue("Expected dashboard button to be in 'Accept payments' state:") {
+//      getActionButtonText shouldBe "Accept payments"
+//      getActionButtonHref should include("/low-earners-pensions-payment/breakdown")
+//    }
+//  }
+//
+//  def verifyViewPaymentsState(): Unit = {
+//    withClue("Expected dashboard button to be in 'View payments' state after lockout:") {
+//      getActionButtonText shouldBe "View payments"
+//      getActionButtonHref should include("/low-earners-pensions-payment/breakdown")
+//    }
+//  }
 }

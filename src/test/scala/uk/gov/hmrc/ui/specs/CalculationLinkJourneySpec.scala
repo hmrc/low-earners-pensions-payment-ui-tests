@@ -56,18 +56,14 @@ class CalculationLinkJourneySpec extends BaseSpec {
       breakdownPage.checkJourneyUrl()
 
       Then("The page heading should show correct amount")
-      breakdownPage.pageHeading shouldBe "You're eligible for a total of £200"
+      breakdownPage.pageHeadingText shouldBe "You're eligible for a total of £21.12"
 
       And("The body text should be correct")
       breakdownPage.eligibilityBodyText shouldBe "These payments are due to you because you did not get tax relief on some or all of your net pay pension contributions."
 
-      And("The inset text should show correct tax year and values")
-      breakdownPage.taxYearHeading shouldBe "For the tax year 6 April 2025 to 5 April 2026"
-
       And("The inset text should contain correct contribution details")
-      breakdownPage.insetText should include("Your net pay pension contributions: £1,000")
-      breakdownPage.insetText should include("Your relevant basic tax rate: 20%")
-      breakdownPage.insetText should include("Your payment: £200")
+      breakdownPage.verifyInsetBlock(0, "For the tax year 6 April 2022 to 5 April 2023", "£10.56", "10.56%", "£10.56")
+      breakdownPage.verifyInsetBlock(1, "For the tax year 6 April 2023 to 5 April 2024", "£10.56", "10.56%", "£10.56")
 
       And("The bank details text should be correct")
       breakdownPage.bankDetailsText shouldBe "To accept these payments, you need to provide us with your bank details."
@@ -83,18 +79,14 @@ class CalculationLinkJourneySpec extends BaseSpec {
       breakdownPage.checkJourneyUrl()
 
       Then("The page heading should show correct amount")
-      breakdownPage.pageHeading shouldBe "You're eligible for a total of £200"
+      breakdownPage.pageHeadingText shouldBe "You're eligible for a total of £21.12"
 
       And("The body text should be correct")
       breakdownPage.eligibilityBodyText shouldBe "These payments are due to you because you did not get tax relief on some or all of your net pay pension contributions."
 
-      And("The inset text should show correct tax year and values")
-      breakdownPage.taxYearHeading shouldBe "For the tax year 6 April 2025 to 5 April 2026"
-
       And("The inset text should contain correct contribution details")
-      breakdownPage.insetText should include("Your net pay pension contributions: £1,000")
-      breakdownPage.insetText should include("Your relevant basic tax rate: 20%")
-      breakdownPage.insetText should include("Your payment: £200")
+      breakdownPage.verifyInsetBlock(0, "For the tax year 6 April 2022 to 5 April 2023", "£10.56", "10.56%", "£10.56")
+      breakdownPage.verifyInsetBlock(1, "For the tax year 6 April 2023 to 5 April 2024", "£10.56", "10.56%", "£10.56")
 
       And("The bank details text should be correct")
       breakdownPage.bankDetailsText shouldBe "To accept these payments, you need to provide us with your bank details."

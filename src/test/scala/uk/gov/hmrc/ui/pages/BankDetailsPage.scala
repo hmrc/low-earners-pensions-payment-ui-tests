@@ -28,17 +28,44 @@ object BankDetailsPage extends BasePage {
   private val accountNumberLocater: By = By.id("bankDetails_accountNumber")
   private val rollNumberLocater: By    = By.id("bankDetails_rollNumber")
 
+  /** Submits the bank details form.
+    *
+    * @param name
+    *   Name on the account
+    * @param sortCode
+    *   Sort code
+    * @param accountNumber
+    *   Account number
+    * @param rollNumber
+    *   Optional roll number for building societies (defaults to None)
+    */
+  def submitBankDetails(
+    name: String,
+    sortCode: String,
+    accountNumber: String,
+    rollNumber: Option[String] = None
+  ): Unit = {
+    enterName(name)
+    enterSortCode(sortCode)
+    enterAccountNumber(accountNumber)
+
+    // If rollNumber is Some("value"), it executes the block. If None, it does nothing.
+    rollNumber.foreach(value => enterBuildingSocietyRollNumber(value))
+
+    continue()
+  }
+
   def enterName(name: String): Unit =
-    sendKeys(accountNameLocater, name)
+    setText(accountNameLocater, name)
 
   def enterSortCode(sortCode: String): Unit =
-    sendKeys(sortCodeLocater, sortCode)
+    setText(sortCodeLocater, sortCode)
 
   def enterAccountNumber(accountNumber: String): Unit =
-    sendKeys(accountNumberLocater, accountNumber)
+    setText(accountNumberLocater, accountNumber)
 
   def enterBuildingSocietyRollNumber(rollNumber: String): Unit =
-    sendKeys(rollNumberLocater, rollNumber)
+    setText(rollNumberLocater, rollNumber)
 
   def continue(): Unit =
     click(continueButton)

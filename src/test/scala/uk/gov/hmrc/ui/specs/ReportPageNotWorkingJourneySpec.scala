@@ -87,7 +87,7 @@ class ReportPageNotWorkingJourneySpec extends BaseSpec {
       dashboardPage.checkJourneyUrl()
 
       And("The user click Accept Payments button")
-      dashboardPage.acceptPayments()
+      dashboardPage.clickActionButton()
 
       And("The user navigates to the Breakdown Page")
       breakdownPage.checkJourneyUrl()
@@ -115,7 +115,7 @@ class ReportPageNotWorkingJourneySpec extends BaseSpec {
       dashboardPage.checkJourneyUrl()
 
       And("The user click Accept Payments button")
-      dashboardPage.acceptPayments()
+      dashboardPage.clickActionButton()
 
       And("The user lands on the breakdown page")
       breakdownPage.checkJourneyUrl()
@@ -149,7 +149,7 @@ class ReportPageNotWorkingJourneySpec extends BaseSpec {
       dashboardPage.checkJourneyUrl()
 
       And("The user click Accept Payments button")
-      dashboardPage.acceptPayments()
+      dashboardPage.clickActionButton()
 
       And("The user lands on the breakdown page")
       breakdownPage.checkJourneyUrl()
@@ -193,7 +193,7 @@ class ReportPageNotWorkingJourneySpec extends BaseSpec {
       dashboardPage.checkJourneyUrl()
 
       And("The user click Accept Payments button")
-      dashboardPage.acceptPayments()
+      dashboardPage.clickActionButton()
 
       And("The user lands on the breakdown page")
       breakdownPage.checkJourneyUrl()
