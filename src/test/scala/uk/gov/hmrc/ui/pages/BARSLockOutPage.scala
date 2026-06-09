@@ -47,11 +47,10 @@ object BARSLockOutPage extends BasePage {
 
     // 2. Format it to match the DOM style exactly: "h:mm a 'on' EEEE d MMMM yyyy"
     // Note: '.withLowerCell()' makes 'PM/AM' lowercase to match '1:06pm'
-    val pattern   = "h:mma 'on' EEEE d MMMM yyyy"
+    val pattern   = "HH:mm 'on' EEEE d MMMM yyyy"
     val formatter = DateTimeFormatter.ofPattern(pattern, Locale.UK)
 
     val expectedTimestamp = futureDateTime.format(formatter).toLowerCase()
-    // Result will look like: "1:06pm on tuesday 9 june 2026"
 
     // 3. Get actual UI text and lower-case it to keep comparisons safe
     val actualUiText = lockoutText.toLowerCase()

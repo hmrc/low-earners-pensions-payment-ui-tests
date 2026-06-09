@@ -34,7 +34,7 @@ class BARSLockOutJourneySpec extends BaseSpec {
   ) {
 
     Scenario(
-      "BARS Lock Out Journey - "
+      "BARS Lock Out Journey - NINO Locks Out on submitting 3 invalid bank details"
     ) {
 
       Given("The user enters the auth details")
