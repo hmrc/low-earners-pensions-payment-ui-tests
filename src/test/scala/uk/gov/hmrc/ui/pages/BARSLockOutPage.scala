@@ -16,8 +16,6 @@
 
 package uk.gov.hmrc.ui.pages
 
-
-
 import org.openqa.selenium.By
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
@@ -26,8 +24,8 @@ import org.scalatest.matchers.should.Matchers.shouldBe
 import org.slf4j.LoggerFactory
 
 object BARSLockOutPage extends BasePage {
-  private val pageHeadingLocator: By = By.cssSelector("h1.govuk-heading-l")
-  private val lockoutTextLocator: By = By.id("lockout")
+  private val pageHeadingLocator: By      = By.cssSelector("h1.govuk-heading-l")
+  private val lockoutTextLocator: By      = By.id("lockout")
   private val returnToPaymentsLocator: By = By.id("return-to")
 
   // Initialize your class logger
@@ -37,19 +35,19 @@ object BARSLockOutPage extends BasePage {
     super.checkJourneyUrl(url)
 
   def pageHeadingText: String = getText(pageHeadingLocator).trim
-  def lockoutText: String = getText(lockoutTextLocator).trim
-  def returnToPayments: Unit = click(returnToPaymentsLocator)
+  def lockoutText: String     = getText(lockoutTextLocator).trim
+  def returnToPayments: Unit  = click(returnToPaymentsLocator)
 
   def verifyLockoutTimeIs24HoursInFuture(): Unit = {
     // 1. Capture the current time zone (HMRC services typically run on London time)
     val currentDateTime = ZonedDateTime.now(java.time.ZoneId.of("Europe/London"))
-    val futureDateTime = currentDateTime.plusHours(24)
+    val futureDateTime  = currentDateTime.plusHours(24)
 
     logger.info(s"[BARS LOCKOUT] Test Run Timestamp baseline: $currentDateTime")
 
     // 2. Format it to match the DOM style exactly: "h:mm a 'on' EEEE d MMMM yyyy"
     // Note: '.withLowerCell()' makes 'PM/AM' lowercase to match '1:06pm'
-    val pattern = "h:mma 'on' EEEE d MMMM yyyy"
+    val pattern   = "h:mma 'on' EEEE d MMMM yyyy"
     val formatter = DateTimeFormatter.ofPattern(pattern, Locale.UK)
 
     val expectedTimestamp = futureDateTime.format(formatter).toLowerCase()

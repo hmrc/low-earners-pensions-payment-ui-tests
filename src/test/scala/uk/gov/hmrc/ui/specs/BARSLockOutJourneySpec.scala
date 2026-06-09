@@ -27,7 +27,7 @@ class BARSLockOutJourneySpec extends BaseSpec {
   private val bankDetailsPage      = BankDetailsPage
   private val checkYourAnswersPage = CheckYourAnswersPage
   private val bankDetailsErrorPage = BankDetailsErrorPage
-  private val barsLockOutPage = BARSLockOutPage
+  private val barsLockOutPage      = BARSLockOutPage
 
   Feature(
     "If a user fails to provide correct details on the third attempt a 24 hour BARS service lock out will be implemented"
