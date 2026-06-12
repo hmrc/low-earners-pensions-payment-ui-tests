@@ -33,6 +33,7 @@ trait BasePage extends PageObject {
 
   private val pageNotWorkingLocator: By = By.linkText("Is this page not working properly? (opens in new tab)")
   private val backButtonLocator: By     = By.linkText("Back")
+  private val signOutLocator: By        = By.linkText("Sign out")
 
   def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
     .withTimeout(Duration.ofSeconds(3))
@@ -48,6 +49,10 @@ trait BasePage extends PageObject {
     val url = s"$dashboardUrl/$page"
     fluentWait.until(ExpectedConditions.urlContains(url))
     getCurrentUrl.startsWith(url)
+
+  def goToPage(path: String): Unit =
+    val url = s"$dashboardUrl/$path"
+    get(url)
 
   // All rows from tbody
   def getTableRows(tableLocator: By): List[List[String]] =
@@ -136,4 +141,7 @@ trait BasePage extends PageObject {
     clearField(locator)
     sendKeys(locator, textValue)
   }
+
+  def signOut(): Unit =
+    click(signOutLocator)
 }

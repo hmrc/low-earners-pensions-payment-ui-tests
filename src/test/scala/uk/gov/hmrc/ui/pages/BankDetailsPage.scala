@@ -17,6 +17,7 @@
 package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.By
+import uk.gov.hmrc.configuration.TestEnvironment
 
 object BankDetailsPage extends BasePage {
 
@@ -80,4 +81,6 @@ object BankDetailsPage extends BasePage {
   def clearBuildingSocietyRollNumber: Unit =
     clearField(rollNumberLocater)
 
+  def goToPage(): Unit =
+    super.goToPage(path)
 }

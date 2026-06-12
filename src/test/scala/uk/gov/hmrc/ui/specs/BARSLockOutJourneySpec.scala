@@ -20,14 +20,16 @@ import uk.gov.hmrc.ui.pages.*
 
 class BARSLockOutJourneySpec extends BaseSpec {
 
-  private val auth                 = Auth
-  private val startPage            = StartPage
-  private val dashboardPage        = DashboardPage
-  private val breakdownPage        = BreakdownPage
-  private val bankDetailsPage      = BankDetailsPage
-  private val checkYourAnswersPage = CheckYourAnswersPage
-  private val bankDetailsErrorPage = BankDetailsErrorPage
-  private val barsLockOutPage      = BARSLockOutPage
+  private val auth                  = Auth
+  private val startPage             = StartPage
+  private val dashboardPage         = DashboardPage
+  private val breakdownPage         = BreakdownPage
+  private val bankDetailsPage       = BankDetailsPage
+  private val checkYourAnswersPage  = CheckYourAnswersPage
+  private val bankDetailsErrorPage  = BankDetailsErrorPage
+  private val barsLockOutPage       = BARSLockOutPage
+  private val feedbackPage          = FeedbackPage
+  private val generatedNino: String = auth.randomNino
 
   Feature(
     "If a user fails to provide correct details on the third attempt a 24 hour BARS service lock out will be implemented"
@@ -39,7 +41,7 @@ class BARSLockOutJourneySpec extends BaseSpec {
 
       Given("The user enters the auth details")
       auth.goToAuthorityWizard()
-      auth.loginUsingAuthorityWizardWithRandomNino()
+      auth.loginUsingAuthorityWizardWithNino(generatedNino)
 
       When("The user click the Continue button on Start Page")
       startPage.checkJourneyUrl()
@@ -147,6 +149,9 @@ class BARSLockOutJourneySpec extends BaseSpec {
       And("The user clicks the return to payments")
       barsLockOutPage.returnToPayments
 
+      And("The user sees the IMPORTANT message banner in the Dashboard Page")
+      dashboardPage.verifyLockoutBannerAnd24HourTime()
+
       And("The action button should show Accept payments")
       dashboardPage.actionButtonText shouldBe "View payments"
 
@@ -155,6 +160,53 @@ class BARSLockOutJourneySpec extends BaseSpec {
 
       And("The user lands on the breakdown page")
       breakdownPage.checkJourneyUrl()
+
+      When("The user navigates to the bank details page via bookmark when locked")
+      bankDetailsPage.goToPage()
+
+      And("The user will be taken to the lockout page")
+      barsLockOutPage.checkJourneyUrl()
+
+      Then("The page heading should indicate a lockout")
+      barsLockOutPage.pageHeadingText shouldBe "You’ve tried to confirm your bank details too many times"
+
+      When("The user clicks the signout button")
+      barsLockOutPage.signOut()
+
+      Then("The user navigates to the feedback page")
+      feedbackPage.assertTitle("Give feedback - GOV.UK")
+
+      Given("The user enters the auth details")
+      auth.goToAuthorityWizard()
+      auth.loginUsingAuthorityWizardWithNino(generatedNino)
+
+      When("The user click the Continue button on Start Page")
+      startPage.checkJourneyUrl()
+      startPage.continue()
+
+      When("The user click the Continue button on Dashboard page")
+      dashboardPage.checkJourneyUrl()
+
+      And("The user sees the IMPORTANT message banner in the Dashboard Page")
+      dashboardPage.verifyLockoutBannerAnd24HourTime()
+
+      And("The action button should show Accept payments")
+      dashboardPage.actionButtonText shouldBe "View payments"
+
+      And("The user click Accept Payments button")
+      dashboardPage.clickActionButton()
+
+      And("The user lands on the breakdown page")
+      breakdownPage.checkJourneyUrl()
+
+      When("The user navigates to the bank details page via bookmark when locked")
+      bankDetailsPage.goToPage()
+
+      And("The user will be taken to the lockout page")
+      barsLockOutPage.checkJourneyUrl()
+
+      Then("The page heading should indicate a lockout")
+      barsLockOutPage.pageHeadingText shouldBe "You’ve tried to confirm your bank details too many times"
     }
   }
 }

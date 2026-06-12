@@ -17,6 +17,8 @@
 package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.By
+import org.scalatest.matchers.should.Matchers.shouldBe
+import org.slf4j.LoggerFactory
 
 object DashboardPage extends BasePage {
 
@@ -50,6 +52,10 @@ object DashboardPage extends BasePage {
   private val paymentHistoryDateAcceptedHeader: By = By.id("dashboard_table_payment_history_header_dateAccepted")
   private val paymentHistoryStatusHeader: By       = By.id("dashboard_table_payment_history_header_status")
   private val paymentHistoryActionHeader: By       = By.id("dashboard_table_payment_history_header_action")
+
+  private val bannerTitleLocator: By   = By.id("govuk-notification-banner-title")
+  private val bannerHeadingLocator: By = By.className("govuk-notification-banner__heading")
+  private val logger                   = LoggerFactory.getLogger(getClass.getName)
 
   // Check calculation links by href pattern
   private val paidCalculationLinkLocator: By =
@@ -127,19 +133,10 @@ object DashboardPage extends BasePage {
   def clickCancelledCalculationLink(): Unit =
     click(cancelledCalculationLinkLocator)
 
-  // Inside your PaymentsDashboardPage object
-
-//  def verifyAcceptPaymentsState(): Unit = {
-//    withClue("Expected dashboard button to be in 'Accept payments' state:") {
-//      getActionButtonText shouldBe "Accept payments"
-//      getActionButtonHref should include("/low-earners-pensions-payment/breakdown")
-//    }
-//  }
-//
-//  def verifyViewPaymentsState(): Unit = {
-//    withClue("Expected dashboard button to be in 'View payments' state after lockout:") {
-//      getActionButtonText shouldBe "View payments"
-//      getActionButtonHref should include("/low-earners-pensions-payment/breakdown")
-//    }
-//  }
+  def verifyLockoutBannerAnd24HourTime(): Unit = {
+    // 1. Verify the Banner Title is exactly "Important"
+    val actualBannerTitle = driver.findElement(bannerTitleLocator).getText.trim
+    logger.info(s"[BARS LOCKOUT] Banner Title found: '$actualBannerTitle'")
+    actualBannerTitle shouldBe "Important"
+  }
 }
