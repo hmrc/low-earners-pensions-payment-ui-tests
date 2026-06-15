@@ -133,7 +133,7 @@ object DashboardPage extends BasePage {
   def clickCancelledCalculationLink(): Unit =
     click(cancelledCalculationLinkLocator)
 
-  def verifyLockoutBannerAnd24HourTime(): Unit = {
+  def verifyLockoutBanner(): Unit = {
     // 1. Verify the Banner Title is exactly "Important"
     val actualBannerTitle = driver.findElement(bannerTitleLocator).getText.trim
     logger.info(s"[BARS LOCKOUT] Banner Title found: '$actualBannerTitle'")
