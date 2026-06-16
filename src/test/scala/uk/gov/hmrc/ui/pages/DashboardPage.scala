@@ -53,9 +53,8 @@ object DashboardPage extends BasePage {
   private val paymentHistoryStatusHeader: By       = By.id("dashboard_table_payment_history_header_status")
   private val paymentHistoryActionHeader: By       = By.id("dashboard_table_payment_history_header_action")
 
-  private val bannerTitleLocator: By   = By.id("govuk-notification-banner-title")
-  private val bannerHeadingLocator: By = By.className("govuk-notification-banner__heading")
-  private val logger                   = LoggerFactory.getLogger(getClass.getName)
+  private val bannerTitleLocator: By = By.id("govuk-notification-banner-title")
+  private val logger                 = LoggerFactory.getLogger(getClass.getName)
 
   // Check calculation links by href pattern
   private val paidCalculationLinkLocator: By =
