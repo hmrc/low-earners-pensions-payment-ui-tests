@@ -30,7 +30,6 @@ class BARSLockOutJourneySpec extends BaseSpec {
   private val barsLockOutPage      = BARSLockOutPage
   private val confirmationPage     = ConfirmationPage
   private val feedbackPage         = FeedbackPage
-//  private val generatedNino: String = auth.randomNino
 
   Feature(
     "If a user fails to provide correct details on the third attempt a 24 hour BARS service lock out will be implemented"
