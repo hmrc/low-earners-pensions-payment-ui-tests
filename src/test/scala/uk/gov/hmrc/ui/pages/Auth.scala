@@ -26,9 +26,15 @@ import uk.gov.hmrc.ui.pages.BARSLockOutPage.getClass
 
 object Auth extends BasePage {
 
-  private val authUrl: String = TestEnvironment.url("auth-login-stub")
+  private val authUrl: String                  = TestEnvironment.url("auth-login-stub")
+  private val submitLocator: By                = By.cssSelector("Input[value='Submit']")
+  private val redirectUrlFieldLocator: By      = By.id("redirectionUrl")
+  private val confidenceLevelFieldLocator: By  = By.id("confidenceLevel")
+  private val ninoFieldLocator: By             = By.id("nino")
+  private val enrolmentKeyZeroFieldLocator: By = By.id("enrolment[0].name")
+
   // Initialize your class logger
-  private val logger          = LoggerFactory.getLogger(getClass.getName)
+  private val logger = LoggerFactory.getLogger(getClass.getName)
 
   private val redirectUrl: String =
     TestEnvironment.url("low-earners-pensions-payment-frontend")
@@ -47,31 +53,29 @@ object Auth extends BasePage {
   def checkAuthUrl(): Unit =
     getCurrentUrl should startWith(authUrl)
 
-  def loginUsingAuthorityWizard(): Unit = {
-    getCurrentUrl should startWith(authUrl)
-    sendKeys(By.id("redirectionUrl"), redirectUrl)
-    selectByValue(By.id("confidenceLevel"), "250")
-    sendKeys(By.id("nino"), "AA123456D")
-    sendKeys(By.id("enrolment[0].name"), "HMRC-PI")
-    click(By.cssSelector("Input[value='Submit']"))
-  }
+  def loginUsingAuthorityWizard(): Unit =
+    submitLoginDetails("250", "AA123456D")
 
-  def loginUsingAuthorityWizardWithCL200(): Unit = {
-    getCurrentUrl should startWith(authUrl)
-    sendKeys(By.id("redirectionUrl"), redirectUrl)
-    selectByValue(By.id("confidenceLevel"), "200")
-    sendKeys(By.id("nino"), "AA000003D")
-    sendKeys(By.id("enrolment[0].name"), "HMRC-PI")
-    click(By.cssSelector("Input[value='Submit']"))
-  }
+  def loginUsingAuthorityWizardWithCL200(): Unit =
+    submitLoginDetails("200", "AA000003D")
 
   def loginUsingAuthorityWizardWithRandomNino(): Unit = {
     logger.info(s"Random NINO: $randomNino")
+    submitLoginDetails("250", randomNino)
+  }
+
+  def loginUsingAuthorityWizardWithNino(nino: String): Unit =
+    logger.info(s"Random NINO: $nino")
+    submitLoginDetails("250", nino)
+
+  def getRandomNino(): String = randomNino
+
+  def submitLoginDetails(confidenceLevelValue: String, ninoValue: String): Unit = {
     getCurrentUrl should startWith(authUrl)
-    sendKeys(By.id("redirectionUrl"), redirectUrl)
-    selectByValue(By.id("confidenceLevel"), "250")
-    sendKeys(By.id("nino"), randomNino)
-    sendKeys(By.id("enrolment[0].name"), "HMRC-PI")
-    click(By.cssSelector("Input[value='Submit']"))
+    sendKeys(redirectUrlFieldLocator, redirectUrl)
+    selectByValue(confidenceLevelFieldLocator, confidenceLevelValue)
+    sendKeys(ninoFieldLocator, ninoValue)
+    sendKeys(enrolmentKeyZeroFieldLocator, "HMRC-PI")
+    click(submitLocator)
   }
 }

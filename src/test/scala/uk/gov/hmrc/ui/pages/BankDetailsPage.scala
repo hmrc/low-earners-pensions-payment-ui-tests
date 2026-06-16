@@ -80,4 +80,6 @@ object BankDetailsPage extends BasePage {
   def clearBuildingSocietyRollNumber: Unit =
     clearField(rollNumberLocater)
 
+  def goToPage(): Unit =
+    super.goToPage(path)
 }
