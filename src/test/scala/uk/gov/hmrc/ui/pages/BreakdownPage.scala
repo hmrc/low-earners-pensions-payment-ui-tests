@@ -18,6 +18,7 @@ package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.By
 import scala.jdk.CollectionConverters.*
+import org.scalatest.matchers.should.Matchers._
 
 object BreakdownPage extends BasePage {
 
@@ -34,10 +35,10 @@ object BreakdownPage extends BasePage {
     By.cssSelector("p.govuk-body:nth-of-type(3)")
 
   private val insetTextBlocksLocator: By =
-    By.cssSelector("div.govuk-inset-text")
+    By.cssSelector("dl.govuk-summary-list")
 
   private val insetTextHeadingsLocator: By =
-    By.cssSelector("div.govuk-inset-text h2.govuk-heading-m")
+    By.cssSelector("div.govuk-summary-card h2.govuk-summary-card__title")
 
   private val continueButton: By = By.linkText("Continue")
 
@@ -73,15 +74,31 @@ object BreakdownPage extends BasePage {
       .map(_.getText.trim)
       .toList
 
-  def verifyInsetBlock(
+  def verifyStandardPaymentInsetBlock(
     index: Int,
     taxYear: String,
     contributions: String,
     taxRate: String,
     payment: String
   ): Unit =
-    assert(taxYearHeadings(index) == taxYear)
-    assert(insetTextBlock(index).contains(s"Your net pay pension contributions: $contributions"))
-    assert(insetTextBlock(index).contains(s"Your relevant basic tax rate: $taxRate"))
-    assert(insetTextBlock(index).contains(s"Your payment: $payment"))
+    taxYearHeadings(index) should include(s"For the tax year $taxYear")
+    insetTextBlock(index)  should include(s"Your net pay pension contributions $contributions")
+    insetTextBlock(index)  should include(s"Your relevant basic tax rate $taxRate")
+    insetTextBlock(index)  should include(s"Your payment $payment")
+
+  def verifyUnderPaymentInsetBlock(
+    index: Int,
+    taxYear: String,
+    contributions: String,
+    taxRate: String,
+    newTotal: String,
+    topUp: String,
+    additionalAmount: String
+  ): Unit =
+    taxYearHeadings(index) should include(s"For the tax year $taxYear")
+    insetTextBlock(index)  should include(s"Your net pay pension contributions $contributions")
+    insetTextBlock(index)  should include(s"Your relevant basic tax rate $taxRate")
+    insetTextBlock(index)  should include(s"Your new total top-up for the tax year $taxYear $newTotal")
+    insetTextBlock(index)  should include(s"Top-up already received $topUp")
+    insetTextBlock(index)  should include(s"Additional amount due $additionalAmount")
 }

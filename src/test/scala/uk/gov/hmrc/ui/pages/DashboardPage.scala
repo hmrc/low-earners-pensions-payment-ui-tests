@@ -58,10 +58,10 @@ object DashboardPage extends BasePage {
 
   // Check calculation links by href pattern
   private val paidCalculationLinkLocator: By =
-    By.cssSelector("a[href*='/low-earners-pensions-payment/breakdown?id=P-2022-1']")
+    By.cssSelector("a[href*='/low-earners-pensions-payment/breakdown?id=P-2024-1']")
 
   private val cancelledCalculationLinkLocator: By =
-    By.cssSelector("a[href*='/low-earners-pensions-payment/breakdown?id=C-2023-1']")
+    By.cssSelector("a[href*='/low-earners-pensions-payment/breakdown?id=C-2025-1']")
 
   def actionButtonText: String = getText(breakdownLinkLocator)
 

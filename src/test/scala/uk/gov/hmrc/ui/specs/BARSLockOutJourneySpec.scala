@@ -138,7 +138,7 @@ class BARSLockOutJourneySpec extends BaseSpec {
       barsLockOutPage.checkJourneyUrl()
 
       Then("The page heading should indicate a lockout")
-      barsLockOutPage.pageHeadingText shouldBe "You’ve tried to confirm your bank details too many times"
+      barsLockOutPage.pageHeadingText shouldBe "Youve tried to enter your bank account details too many times"
 
       And("The lockout message should show a time exactly 24 hours in the future")
       barsLockOutPage.verifyLockoutTimeIs24HoursInFuture()
@@ -165,7 +165,7 @@ class BARSLockOutJourneySpec extends BaseSpec {
       barsLockOutPage.checkJourneyUrl()
 
       Then("The page heading should indicate a lockout")
-      barsLockOutPage.pageHeadingText shouldBe "You’ve tried to confirm your bank details too many times"
+      barsLockOutPage.pageHeadingText shouldBe "Youve tried to enter your bank account details too many times"
 
       When("The user clicks the signout button")
       barsLockOutPage.signOut()
@@ -205,7 +205,7 @@ class BARSLockOutJourneySpec extends BaseSpec {
       barsLockOutPage.checkJourneyUrl()
 
       Then("The page heading should indicate a lockout")
-      barsLockOutPage.pageHeadingText shouldBe "You’ve tried to confirm your bank details too many times"
+      barsLockOutPage.pageHeadingText shouldBe "Youve tried to enter your bank account details too many times"
     }
 
     Scenario(

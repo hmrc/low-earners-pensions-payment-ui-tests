@@ -57,7 +57,7 @@ class StandardPaymentJourneySpec extends BaseSpec {
       dashboardPage.availablePaymentsTableCaptionText shouldBe "Available payments"
 
       And("The correct number of rows should be displayed for Available payments")
-      dashboardPage.availablePaymentsTableRowCount shouldBe 4
+      dashboardPage.availablePaymentsTableRowCount shouldBe 2
 
       And("The correct number of columns should be displayed for Available payments")
       dashboardPage.availablePaymentsTableColumnCount shouldBe 4
@@ -79,43 +79,29 @@ class StandardPaymentJourneySpec extends BaseSpec {
       dashboardPage.availablePaymentsTaxYear(1)        shouldBe "6 April 2023 to 5 April 2024"
       dashboardPage.availablePaymentsAmount(1)         shouldBe "£10.56"
       dashboardPage.availablePaymentsAvailableUntil(1) shouldBe "5 April 2028"
-      dashboardPage.availablePaymentsStatus(1)         shouldBe "Available"
-      dashboardPage.availablePaymentsIsAvailable(1)    shouldBe true
-
-      And("The Available Payments second row should display correct values")
-      dashboardPage.availablePaymentsTaxYear(2)        shouldBe "6 April 2024 to 5 April 2025"
-      dashboardPage.availablePaymentsAmount(2)         shouldBe "£10.56"
-      dashboardPage.availablePaymentsAvailableUntil(2) shouldBe "5 April 2029"
-      dashboardPage.availablePaymentsStatus(2)         shouldBe "Suspended"
-      dashboardPage.availablePaymentsIsSuspended(2)    shouldBe true
-
-      And("The Available Payments second row should display correct values")
-      dashboardPage.availablePaymentsTaxYear(3)        shouldBe "6 April 2025 to 5 April 2026"
-      dashboardPage.availablePaymentsAmount(3)         shouldBe "£10.56"
-      dashboardPage.availablePaymentsAvailableUntil(3) shouldBe "5 April 2030"
-      dashboardPage.availablePaymentsStatus(3)         shouldBe "Suspended"
-      dashboardPage.availablePaymentsIsSuspended(3)    shouldBe true
+      dashboardPage.availablePaymentsStatus(1)         shouldBe "Suspended"
+      dashboardPage.availablePaymentsIsSuspended(1)    shouldBe true
 
       And("The Available Payments total payments text should be correct")
-      dashboardPage.availablePaymentsTotalPaymentsText shouldBe "You have a total of £21.12 in payments available to accept."
+      dashboardPage.availablePaymentsTotalPaymentsText shouldBe "You have a total of £10.56 in payments available to accept."
 
       And("The Available Payments amount should be £21.12")
-      dashboardPage.availablePaymentsTotalPaymentsAmountText shouldBe "£21.12"
+      dashboardPage.availablePaymentsTotalPaymentsAmountText shouldBe "£10.56"
 
       And("The bank details message should be correct")
       dashboardPage.availablePaymentsBankDetailsMessage shouldBe "To accept these payments, you need to provide us with your bank details."
 
       Then("The Payment History table Inset should be correct")
-      dashboardPage.paymentHistoryInsetText shouldBe "We cancelled 3 of your payments. For more information, contact us (opens in new tab)"
+      dashboardPage.paymentHistoryInsetText shouldBe "We cancelled 1 of your payments. For more information, contact us (opens in new tab)"
 
       And("The Payment History Cancelled Count Text should be correct")
-      dashboardPage.cancelledCountText shouldBe "3"
+      dashboardPage.cancelledCountText shouldBe "1"
 
       And("The Payment history table caption should be correct")
       dashboardPage.paymentHistoryTableCaptionText shouldBe "Payment history"
 
       And("The correct number of rows should be displayed for Payment history")
-      dashboardPage.paymentHistoryTableRowCount shouldBe 4
+      dashboardPage.paymentHistoryTableRowCount shouldBe 2
 
       And("The correct number of columns should be displayed for Payment history")
       dashboardPage.paymentHistoryTableColumnCount shouldBe 5
@@ -128,7 +114,7 @@ class StandardPaymentJourneySpec extends BaseSpec {
       dashboardPage.paymentHistoryActionHeaderText       shouldBe "Action"
 
       And("The Payment history first row should display correct values")
-      dashboardPage.paymentHistoryTaxYear(0)      shouldBe "6 April 2023 to 5 April 2024"
+      dashboardPage.paymentHistoryTaxYear(0)      shouldBe "6 April 2025 to 5 April 2026"
       dashboardPage.paymentHistoryAmount(0)       shouldBe "£10.56"
       dashboardPage.paymentHistoryDateAccepted(0) shouldBe "N/A"
       dashboardPage.paymentHistoryStatus(0)       shouldBe "Cancelled"
@@ -137,23 +123,9 @@ class StandardPaymentJourneySpec extends BaseSpec {
       And("The Payment history second row should display correct values")
       dashboardPage.paymentHistoryTaxYear(1)      shouldBe "6 April 2024 to 5 April 2025"
       dashboardPage.paymentHistoryAmount(1)       shouldBe "£10.56"
-      dashboardPage.paymentHistoryDateAccepted(1) shouldBe "N/A"
-      dashboardPage.paymentHistoryStatus(1)       shouldBe "Cancelled"
+      dashboardPage.paymentHistoryDateAccepted(1) shouldBe "27 June 2024"
+      dashboardPage.paymentHistoryStatus(1)       shouldBe "Paid"
       dashboardPage.paymentHistoryAction(1)       shouldBe "Check calculation"
-
-      And("The Payment history first row should display correct values")
-      dashboardPage.paymentHistoryTaxYear(2)      shouldBe "6 April 2025 to 5 April 2026"
-      dashboardPage.paymentHistoryAmount(2)       shouldBe "£10.56"
-      dashboardPage.paymentHistoryDateAccepted(2) shouldBe "N/A"
-      dashboardPage.paymentHistoryStatus(2)       shouldBe "Cancelled"
-      dashboardPage.paymentHistoryAction(2)       shouldBe "Check calculation"
-
-      And("The Payment history second row should display correct values")
-      dashboardPage.paymentHistoryTaxYear(3)      shouldBe "6 April 2022 to 5 April 2023"
-      dashboardPage.paymentHistoryAmount(3)       shouldBe "£10.56"
-      dashboardPage.paymentHistoryDateAccepted(3) shouldBe "27 June 2022"
-      dashboardPage.paymentHistoryStatus(3)       shouldBe "Paid"
-      dashboardPage.paymentHistoryAction(3)       shouldBe "Check calculation"
 
       And("The action button should show Accept payments")
       dashboardPage.actionButtonText shouldBe "Accept payments"
@@ -165,14 +137,19 @@ class StandardPaymentJourneySpec extends BaseSpec {
       breakdownPage.checkJourneyUrl()
 
       Then("The page heading should show correct amount")
-      breakdownPage.pageHeadingText shouldBe "You're eligible for a total of £21.12"
+      breakdownPage.pageHeadingText shouldBe "You're eligible for a total of £10.56"
 
       And("The body text should be correct")
       breakdownPage.eligibilityBodyText shouldBe "These payments are due to you because you did not get tax relief on some or all of your net pay pension contributions."
 
       And("The inset text should contain correct contribution details")
-      breakdownPage.verifyInsetBlock(0, "For the tax year 6 April 2022 to 5 April 2023", "£10.56", "10.56%", "£10.56")
-      breakdownPage.verifyInsetBlock(1, "For the tax year 6 April 2023 to 5 April 2024", "£10.56", "10.56%", "£10.56")
+      breakdownPage.verifyStandardPaymentInsetBlock(
+        0,
+        "6 April 2022 to 5 April 2023",
+        "£10.56",
+        "10.56%",
+        "£10.56"
+      )
 
       And("The bank details text should be correct")
       breakdownPage.bankDetailsText shouldBe "To accept these payments, you need to provide us with your bank details."
