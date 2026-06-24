@@ -69,24 +69,24 @@ class StandardPaymentJourneySpec extends BaseSpec {
       dashboardPage.availablePaymentsStatusHeaderText         shouldBe "Status"
 
       And("The Available Payments first row should display correct values")
-      dashboardPage.availablePaymentsTaxYear(0)        shouldBe "6 April 2022 to 5 April 2023"
-      dashboardPage.availablePaymentsAmount(0)         shouldBe "£10.56"
-      dashboardPage.availablePaymentsAvailableUntil(0) shouldBe "5 April 2027"
+      dashboardPage.availablePaymentsTaxYear(0)        shouldBe "6 April 2025 to 5 April 2026"
+      dashboardPage.availablePaymentsAmount(0)         shouldBe "£200"
+      dashboardPage.availablePaymentsAvailableUntil(0) shouldBe "5 April 2030"
       dashboardPage.availablePaymentsStatus(0)         shouldBe "Available"
       dashboardPage.availablePaymentsIsAvailable(0)    shouldBe true
 
       And("The Available Payments second row should display correct values")
       dashboardPage.availablePaymentsTaxYear(1)        shouldBe "6 April 2023 to 5 April 2024"
-      dashboardPage.availablePaymentsAmount(1)         shouldBe "£10.56"
+      dashboardPage.availablePaymentsAmount(1)         shouldBe "£200"
       dashboardPage.availablePaymentsAvailableUntil(1) shouldBe "5 April 2028"
       dashboardPage.availablePaymentsStatus(1)         shouldBe "Suspended"
       dashboardPage.availablePaymentsIsSuspended(1)    shouldBe true
 
       And("The Available Payments total payments text should be correct")
-      dashboardPage.availablePaymentsTotalPaymentsText shouldBe "You have a total of £10.56 in payments available to accept."
+      dashboardPage.availablePaymentsTotalPaymentsText shouldBe "You have a total of £200 in payments available to accept."
 
-      And("The Available Payments amount should be £21.12")
-      dashboardPage.availablePaymentsTotalPaymentsAmountText shouldBe "£10.56"
+      And("The Available Payments amount should be £200")
+      dashboardPage.availablePaymentsTotalPaymentsAmountText shouldBe "£200"
 
       And("The bank details message should be correct")
       dashboardPage.availablePaymentsBankDetailsMessage shouldBe "To accept these payments, you need to provide us with your bank details."
@@ -114,16 +114,16 @@ class StandardPaymentJourneySpec extends BaseSpec {
       dashboardPage.paymentHistoryActionHeaderText       shouldBe "Action"
 
       And("The Payment history first row should display correct values")
-      dashboardPage.paymentHistoryTaxYear(0)      shouldBe "6 April 2025 to 5 April 2026"
-      dashboardPage.paymentHistoryAmount(0)       shouldBe "£10.56"
+      dashboardPage.paymentHistoryTaxYear(0)      shouldBe "6 April 2024 to 5 April 2025"
+      dashboardPage.paymentHistoryAmount(0)       shouldBe "£100"
       dashboardPage.paymentHistoryDateAccepted(0) shouldBe "N/A"
       dashboardPage.paymentHistoryStatus(0)       shouldBe "Cancelled"
       dashboardPage.paymentHistoryAction(0)       shouldBe "Check calculation"
 
       And("The Payment history second row should display correct values")
-      dashboardPage.paymentHistoryTaxYear(1)      shouldBe "6 April 2024 to 5 April 2025"
-      dashboardPage.paymentHistoryAmount(1)       shouldBe "£10.56"
-      dashboardPage.paymentHistoryDateAccepted(1) shouldBe "27 June 2024"
+      dashboardPage.paymentHistoryTaxYear(1)      shouldBe "6 April 2022 to 5 April 2023"
+      dashboardPage.paymentHistoryAmount(1)       shouldBe "£100"
+      dashboardPage.paymentHistoryDateAccepted(1) shouldBe "27 June 2022"
       dashboardPage.paymentHistoryStatus(1)       shouldBe "Paid"
       dashboardPage.paymentHistoryAction(1)       shouldBe "Check calculation"
 
@@ -137,7 +137,7 @@ class StandardPaymentJourneySpec extends BaseSpec {
       breakdownPage.checkJourneyUrl()
 
       Then("The page heading should show correct amount")
-      breakdownPage.pageHeadingText shouldBe "You're eligible for a total of £10.56"
+      breakdownPage.pageHeadingText shouldBe "You're eligible for a total of £200"
 
       And("The body text should be correct")
       breakdownPage.eligibilityBodyText shouldBe "These payments are due to you because you did not get tax relief on some or all of your net pay pension contributions."
@@ -145,10 +145,10 @@ class StandardPaymentJourneySpec extends BaseSpec {
       And("The inset text should contain correct contribution details")
       breakdownPage.verifyStandardPaymentInsetBlock(
         0,
-        "6 April 2022 to 5 April 2023",
-        "£10.56",
-        "10.56%",
-        "£10.56"
+        "6 April 2025 to 5 April 2026",
+        "£1000",
+        "20%",
+        "£200"
       )
 
       And("The bank details text should be correct")

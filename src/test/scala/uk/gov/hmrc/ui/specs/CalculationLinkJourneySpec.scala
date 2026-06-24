@@ -56,7 +56,7 @@ class CalculationLinkJourneySpec extends BaseSpec {
       breakdownPage.checkJourneyUrl()
 
       Then("The page heading should show correct amount")
-      breakdownPage.pageHeadingText shouldBe "You're eligible for a total of £10.56"
+      breakdownPage.pageHeadingText shouldBe "You're eligible for a total of £200"
 
       And("The body text should be correct")
       breakdownPage.eligibilityBodyText shouldBe "These payments are due to you because you did not get tax relief on some or all of your net pay pension contributions."
@@ -64,10 +64,10 @@ class CalculationLinkJourneySpec extends BaseSpec {
       And("The inset text should contain correct contribution details")
       breakdownPage.verifyStandardPaymentInsetBlock(
         0,
-        "6 April 2024 to 5 April 2025",
-        "£10.56",
-        "10.56%",
-        "£10.56"
+        "6 April 2022 to 5 April 2023",
+        "£500",
+        "20%",
+        "£100"
       )
 
       And("The bank details text should be correct")
@@ -84,7 +84,7 @@ class CalculationLinkJourneySpec extends BaseSpec {
       breakdownPage.checkJourneyUrl()
 
       Then("The page heading should show correct amount")
-      breakdownPage.pageHeadingText shouldBe "You're eligible for a total of £10.56"
+      breakdownPage.pageHeadingText shouldBe "You're eligible for a total of £200"
 
       And("The body text should be correct")
       breakdownPage.eligibilityBodyText shouldBe "These payments are due to you because you did not get tax relief on some or all of your net pay pension contributions."
@@ -92,10 +92,10 @@ class CalculationLinkJourneySpec extends BaseSpec {
       And("The inset text should contain correct contribution details")
       breakdownPage.verifyStandardPaymentInsetBlock(
         0,
-        "6 April 2025 to 5 April 2026",
-        "£10.56",
-        "10.56%",
-        "£10.56"
+        "6 April 2024 to 5 April 2025",
+        "£500",
+        "20%",
+        "£100"
       )
 
       And("The bank details text should be correct")
