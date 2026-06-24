@@ -18,6 +18,6 @@ package uk.gov.hmrc.ui.pages
 
 object ConfirmationPage extends BasePage {
 
-  override def checkJourneyUrl(url: String = "confirmation"): Unit =
+  override def checkJourneyUrl(url: String = "bank-details-received"): Unit =
     super.checkJourneyUrl(url)
 }
