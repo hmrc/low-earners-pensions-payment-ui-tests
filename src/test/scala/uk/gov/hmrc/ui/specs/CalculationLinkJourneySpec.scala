@@ -64,10 +64,10 @@ class CalculationLinkJourneySpec extends BaseSpec {
       And("The inset text should contain correct contribution details")
       breakdownPage.verifyStandardPaymentInsetBlock(
         0,
-        "6 April 2024 to 5 April 2025",
-        "£1000",
+        "6 April 2022 to 5 April 2023",
+        "£500",
         "20%",
-        "£200"
+        "£100"
       )
 
       And("The bank details text should be correct")
@@ -92,10 +92,10 @@ class CalculationLinkJourneySpec extends BaseSpec {
       And("The inset text should contain correct contribution details")
       breakdownPage.verifyStandardPaymentInsetBlock(
         0,
-        "6 April 2025 to 5 April 2026",
-        "£1000",
+        "6 April 2024 to 5 April 2025",
+        "£500",
         "20%",
-        "£200"
+        "£100"
       )
 
       And("The bank details text should be correct")

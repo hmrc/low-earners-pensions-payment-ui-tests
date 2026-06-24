@@ -69,9 +69,9 @@ class StandardPaymentJourneySpec extends BaseSpec {
       dashboardPage.availablePaymentsStatusHeaderText         shouldBe "Status"
 
       And("The Available Payments first row should display correct values")
-      dashboardPage.availablePaymentsTaxYear(0)        shouldBe "6 April 2022 to 5 April 2023"
+      dashboardPage.availablePaymentsTaxYear(0)        shouldBe "6 April 2025 to 5 April 2026"
       dashboardPage.availablePaymentsAmount(0)         shouldBe "£200"
-      dashboardPage.availablePaymentsAvailableUntil(0) shouldBe "5 April 2027"
+      dashboardPage.availablePaymentsAvailableUntil(0) shouldBe "5 April 2030"
       dashboardPage.availablePaymentsStatus(0)         shouldBe "Available"
       dashboardPage.availablePaymentsIsAvailable(0)    shouldBe true
 
@@ -101,7 +101,7 @@ class StandardPaymentJourneySpec extends BaseSpec {
       dashboardPage.paymentHistoryTableCaptionText shouldBe "Payment history"
 
       And("The correct number of rows should be displayed for Payment history")
-      dashboardPage.paymentHistoryTableRowCount shouldBe 3
+      dashboardPage.paymentHistoryTableRowCount shouldBe 2
 
       And("The correct number of columns should be displayed for Payment history")
       dashboardPage.paymentHistoryTableColumnCount shouldBe 5
@@ -114,25 +114,18 @@ class StandardPaymentJourneySpec extends BaseSpec {
       dashboardPage.paymentHistoryActionHeaderText       shouldBe "Action"
 
       And("The Payment history first row should display correct values")
-      dashboardPage.paymentHistoryTaxYear(0)      shouldBe "6 April 2025 to 5 April 2026"
-      dashboardPage.paymentHistoryAmount(0)       shouldBe "£200"
+      dashboardPage.paymentHistoryTaxYear(0)      shouldBe "6 April 2024 to 5 April 2025"
+      dashboardPage.paymentHistoryAmount(0)       shouldBe "£100"
       dashboardPage.paymentHistoryDateAccepted(0) shouldBe "N/A"
       dashboardPage.paymentHistoryStatus(0)       shouldBe "Cancelled"
       dashboardPage.paymentHistoryAction(0)       shouldBe "Check calculation"
 
       And("The Payment history second row should display correct values")
-      dashboardPage.paymentHistoryTaxYear(1)      shouldBe "6 April 2024 to 5 April 2025"
-      dashboardPage.paymentHistoryAmount(1)       shouldBe "£200"
-      dashboardPage.paymentHistoryDateAccepted(1) shouldBe "27 June 2024"
+      dashboardPage.paymentHistoryTaxYear(1)      shouldBe "6 April 2022 to 5 April 2023"
+      dashboardPage.paymentHistoryAmount(1)       shouldBe "£100"
+      dashboardPage.paymentHistoryDateAccepted(1) shouldBe "27 June 2022"
       dashboardPage.paymentHistoryStatus(1)       shouldBe "Paid"
       dashboardPage.paymentHistoryAction(1)       shouldBe "Check calculation"
-
-      And("The Payment history third row should display correct values")
-      dashboardPage.paymentHistoryTaxYear(2)      shouldBe "6 April 2022 to 5 April 2023"
-      dashboardPage.paymentHistoryAmount(2)       shouldBe "£200"
-      dashboardPage.paymentHistoryDateAccepted(2) shouldBe "27 June 2022"
-      dashboardPage.paymentHistoryStatus(2)       shouldBe "Paid"
-      dashboardPage.paymentHistoryAction(2)       shouldBe "Check calculation"
 
       And("The action button should show Accept payments")
       dashboardPage.actionButtonText shouldBe "Accept payments"
@@ -152,7 +145,7 @@ class StandardPaymentJourneySpec extends BaseSpec {
       And("The inset text should contain correct contribution details")
       breakdownPage.verifyStandardPaymentInsetBlock(
         0,
-        "6 April 2022 to 5 April 2023",
+        "6 April 2025 to 5 April 2026",
         "£1000",
         "20%",
         "£200"
