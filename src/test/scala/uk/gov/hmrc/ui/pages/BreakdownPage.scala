@@ -22,7 +22,7 @@ import org.scalatest.matchers.should.Matchers._
 
 object BreakdownPage extends BasePage {
 
-  private val path                   = "breakdown"
+  private val path                   = "payment-breakdown"
   // Page heading
   private val pageHeadingLocator: By =
     By.cssSelector("h1.govuk-heading-l")

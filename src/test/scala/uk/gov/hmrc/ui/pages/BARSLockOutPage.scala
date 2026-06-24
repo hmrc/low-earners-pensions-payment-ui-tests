@@ -31,7 +31,7 @@ object BARSLockOutPage extends BasePage {
   // Initialize your class logger
   private val logger = LoggerFactory.getLogger(getClass.getName)
 
-  override def checkJourneyUrl(url: String = "bars-lockout"): Unit =
+  override def checkJourneyUrl(url: String = "bank-details-lockout"): Unit =
     super.checkJourneyUrl(url)
 
   def pageHeadingText: String = getText(pageHeadingLocator).trim
