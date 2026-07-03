@@ -32,6 +32,8 @@ object Auth extends BasePage {
   private val confidenceLevelFieldLocator: By  = By.id("confidenceLevel")
   private val ninoFieldLocator: By             = By.id("nino")
   private val enrolmentKeyZeroFieldLocator: By = By.id("enrolment[0].name")
+  private val givenNameFieldLocator: By        = By.id("itmp.givenName")
+  private val familyNameFieldLocator: By       = By.id("itmp.familyName")
 
   // Initialize your class logger
   private val logger = LoggerFactory.getLogger(getClass.getName)
@@ -76,6 +78,8 @@ object Auth extends BasePage {
     selectByValue(confidenceLevelFieldLocator, confidenceLevelValue)
     sendKeys(ninoFieldLocator, ninoValue)
     sendKeys(enrolmentKeyZeroFieldLocator, "HMRC-PI")
+    sendKeys(givenNameFieldLocator, "TestGivenName")
+    sendKeys(familyNameFieldLocator, "TestFamilyName")
     click(submitLocator)
   }
 }
