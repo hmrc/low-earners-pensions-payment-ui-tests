@@ -63,7 +63,7 @@ class BackButtonJourneySpec extends BaseSpec {
 
       And("The new tab should have the correct title")
       startPage.assertTitle(
-        "Accept your low earner's pension payment - Accept your low earner's pension payment - site.govuk"
+        "Accept your low earner's pension payment - Accept your low earner's pension payment - GOV.UK"
       )
     }
 
@@ -90,7 +90,7 @@ class BackButtonJourneySpec extends BaseSpec {
 
       And("The new tab should have the correct title")
       dashboardPage.assertTitle(
-        "Your low earner's pension payments - Accept your low earner's pension payment - site.govuk"
+        "Your low earner's pension payments - Accept your low earner's pension payment - GOV.UK"
       )
     }
   }
