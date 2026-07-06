@@ -51,7 +51,7 @@ class StandardPaymentJourneySpec extends BaseSpec {
       dashboardPage.pageHeadingText shouldBe "Your low earner's pension payments"
 
       And("The Available Payments Inset Text should be correct")
-      dashboardPage.availablePaymentsInsetText shouldBe "Your payments are suspended. For more information, contact us (opens in new tab)"
+      dashboardPage.availablePaymentsInsetText shouldBe "Your payments are suspended. For more information, contact us (opens in new tab)."
 
       And("The Available Payments table caption should be correct")
       dashboardPage.availablePaymentsTableCaptionText shouldBe "Available payments"
@@ -92,7 +92,7 @@ class StandardPaymentJourneySpec extends BaseSpec {
       dashboardPage.availablePaymentsBankDetailsMessage shouldBe "To accept these payments, you need to provide us with your bank details."
 
       Then("The Payment History table Inset should be correct")
-      dashboardPage.paymentHistoryInsetText shouldBe "We cancelled 1 of your payments. For more information, contact us (opens in new tab)"
+      dashboardPage.paymentHistoryInsetText shouldBe "We cancelled 1 of your payments. For more information, contact us (opens in new tab)."
 
       And("The Payment History Cancelled Count Text should be correct")
       dashboardPage.cancelledCountText shouldBe "1"

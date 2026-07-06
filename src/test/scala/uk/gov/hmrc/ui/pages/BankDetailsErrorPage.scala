@@ -32,7 +32,7 @@ object BankDetailsErrorPage extends BasePage {
     By.xpath("//ul[contains(@class, 'govuk-list')]/li[contains(., 'no account')]")
   private val accountNameMismatchErrorLocator: By =
     By.xpath("//ul[contains(@class, 'govuk-list')]/li[contains(., 'name on the account')]")
-  private val contactHmrcLocator: By              = By.xpath("//p[contains(@class, 'govuk-body')][contains(., 'contact HMRC')]")
+  private val contactHmrcLocator: By              = By.xpath("//p[contains(@class, 'govuk-body')][contains(., 'contact us')]")
 
   // List Items (Error Reasons)
   def rollNumberErrorText: String          = getText(rollNumberErrorLocator).trim
@@ -58,6 +58,6 @@ object BankDetailsErrorPage extends BasePage {
     directCreditErrorText        shouldBe "the supplied account does not support direct credit"
     accountNotFoundErrorText     shouldBe "no account with the supplied details could be found"
     accountNameMismatchErrorText shouldBe "the name on the account did not match what was supplied"
-    contactHmrcText              shouldBe "If this issue persists you may have to contact HMRC"
+    contactHmrcText              shouldBe "If this issue persists you may have to contact us (opens in new tab)."
   }
 }
