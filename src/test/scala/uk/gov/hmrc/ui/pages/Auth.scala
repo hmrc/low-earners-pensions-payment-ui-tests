@@ -59,7 +59,7 @@ object Auth extends BasePage {
     submitLoginDetails("250", "AA123456D")
 
   def loginUsingAuthorityWizardWithCL200(): Unit =
-    submitLoginDetails("200", "AA000003D")
+    submitLoginDetails("200", "AA123456D")
 
   def loginUsingAuthorityWizardWithRandomNino(): Unit = {
     logger.info(s"Random NINO: $randomNino")

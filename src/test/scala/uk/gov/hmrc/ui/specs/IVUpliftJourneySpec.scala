@@ -44,19 +44,19 @@ class IVUpliftJourneySpec extends BaseSpec {
         "Accept your low earner's pension payment - Accept your low earner's pension payment - GOV.UK"
       )
     }
-  }
 
-  Scenario("Verify the Negative Uplift Journey") {
-    Given("A PAYE individual logs into the LEPP using Cl200 and valid NINO but fails Identity Verification check")
-    auth.goToAuthorityWizard()
-    auth.loginUsingAuthorityWizardWithCL200()
+    Scenario("Verify the Negative Uplift Journey") {
+      Given("A PAYE individual logs into the LEPP using Cl200 and valid NINO but fails Identity Verification check")
+      auth.goToAuthorityWizard()
+      auth.loginUsingAuthorityWizardWithCL200()
 
-    Then("The user should be on Identity Verification Stub Page")
-    ivStub.assertTitle("Identity Verification - Stubbed Journey configuration")
+      Then("The user should be on Identity Verification Stub Page")
+      ivStub.assertTitle("Identity Verification - Stubbed Journey configuration")
 
-    And("When the User select Failed IV Radio button he is navigated to Error Page")
-    ivStub.clickRadioButton("Precondition Failed")
-    ivStub.submitContinue()
-    errorPage.assertTitle("There's a problem - Accept your low earner's pension payment - GOV.UK")
+      And("When the User select Failed IV Radio button he is navigated to Error Page")
+      ivStub.clickRadioButton("Precondition Failed")
+      ivStub.submitContinue()
+      errorPage.assertTitle("There's a problem - Accept your low earner's pension payment - GOV.UK")
+    }
   }
 }
