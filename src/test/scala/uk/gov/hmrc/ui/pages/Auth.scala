@@ -77,7 +77,7 @@ object Auth extends BasePage {
     sendKeys(redirectUrlFieldLocator, redirectUrl)
     selectByValue(confidenceLevelFieldLocator, confidenceLevelValue)
     sendKeys(ninoFieldLocator, ninoValue)
-    sendKeys(enrolmentKeyZeroFieldLocator, "HMRC-PI")
+    sendKeys(enrolmentKeyZeroFieldLocator, "HMRC-PT")
     sendKeys(givenNameFieldLocator, "TestGivenName")
     sendKeys(familyNameFieldLocator, "TestFamilyName")
     click(submitLocator)
