@@ -113,7 +113,7 @@ object CheckYourAnswersPage extends BasePage {
     // Dynamic assertion for the optional roll number
     expectedRollNumber match {
       case Some(rollNum) =>
-        rollNumberKey   shouldBe Some("Building society roll number (if you have one)")
+        rollNumberKey   shouldBe Some("Building society roll number")
         rollNumberValue shouldBe Some(rollNum)
 
       case None =>
