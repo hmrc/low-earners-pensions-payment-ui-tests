@@ -17,12 +17,16 @@
 package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.By
+
 import scala.jdk.CollectionConverters.*
-import org.scalatest.matchers.should.Matchers._
+import org.scalatest.matchers.should.Matchers.*
 
 object BreakdownPage extends BasePage {
 
-  private val path                   = "payment-breakdown"
+  val path                       = "payment-breakdown"
+  val paidPaymentId: String      = "P-2022-1"
+  val cancelledPaymentId: String = "C-2024-1"
+
   // Page heading
   private val pageHeadingLocator: By =
     By.cssSelector("h1.govuk-heading-l")
@@ -53,6 +57,12 @@ object BreakdownPage extends BasePage {
   def eligibilityBodyText: String = getText(eligibilityBodyTextLocator)
 
   def bankDetailsText: String = getText(bankDetailsTextLocator)
+
+  def checkPaidJourneyUrl(): Unit =
+    currentUrl should include(s"$servicePath/$path?id=$paidPaymentId")
+
+  def checkCancelledJourneyUrl(): Unit =
+    currentUrl should include(s"$servicePath/$path?id=$cancelledPaymentId")
 
   // Get all inset blocks as a list
   def insetTextBlocks: List[String] =

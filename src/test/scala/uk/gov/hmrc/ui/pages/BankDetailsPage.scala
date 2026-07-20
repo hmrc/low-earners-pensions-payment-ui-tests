@@ -75,8 +75,6 @@ object BankDetailsPage extends BasePage {
 
   def pageHeading: String = getText(pageHeadingLocator)
 
-  def currentUrl: String = driver.getCurrentUrl
-
   def clearBuildingSocietyRollNumber: Unit =
     clearField(rollNumberLocater)
 

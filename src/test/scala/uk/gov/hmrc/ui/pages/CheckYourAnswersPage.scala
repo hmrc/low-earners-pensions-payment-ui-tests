@@ -90,8 +90,6 @@ object CheckYourAnswersPage extends BasePage {
   def clickChangeRollNumber(): Unit =
     click(changeRollNumberLocator)
 
-  def currentUrl: String = driver.getCurrentUrl
-
   // Inside CheckYourAnswersPage.scala
   def verifySummaryList(
     expectedName: String,
