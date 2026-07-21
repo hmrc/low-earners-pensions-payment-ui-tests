@@ -51,9 +51,10 @@ class CalculationLinkJourneySpec extends BaseSpec {
     ) {
       When("The user clicks the calculation link for the Paid status")
       dashboardPage.clickPaidCalculationLink()
+      dashboardPage.switchToNewTab()
 
       And("The user lands on the breakdown page")
-      breakdownPage.checkJourneyUrl()
+      breakdownPage.checkPaidJourneyUrl()
 
       Then("The page heading should show correct amount")
       breakdownPage.pageHeadingText shouldBe "You're eligible for a total of £200"
@@ -79,9 +80,10 @@ class CalculationLinkJourneySpec extends BaseSpec {
     ) {
       When("The user clicks the calculation link for the Cancelled status")
       dashboardPage.clickCancelledCalculationLink()
+      dashboardPage.switchToNewTab()
 
       And("The user lands on the breakdown page")
-      breakdownPage.checkJourneyUrl()
+      breakdownPage.checkCancelledJourneyUrl()
 
       Then("The page heading should show correct amount")
       breakdownPage.pageHeadingText shouldBe "You're eligible for a total of £200"

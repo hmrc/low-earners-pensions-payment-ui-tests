@@ -22,10 +22,8 @@ import org.slf4j.LoggerFactory
 
 object DashboardPage extends BasePage {
 
-  private val path                     = "payments"
-  private val breakdownLinkLocator: By =
-    By.xpath("//a[contains(@href, '/accept-your-low-earners-pension-payment/payment-breakdown')]")
-  private val pageHeadingLocator: By   = By.cssSelector("h1.govuk-heading-l")
+  private val path                   = "payments"
+  private val pageHeadingLocator: By = By.cssSelector("h1.govuk-heading-l")
 
   // Available Payments Table
   private val availablePaymentsInset: By                  = By.cssSelector("div.govuk-inset-text")
@@ -57,12 +55,13 @@ object DashboardPage extends BasePage {
   private val bannerTitleLocator: By = By.id("govuk-notification-banner-title")
   private val logger                 = LoggerFactory.getLogger(getClass.getName)
 
-  // Check calculation links by href pattern
-  private val paidCalculationLinkLocator: By =
-    By.cssSelector("a[href*='/accept-your-low-earners-pension-payment/payment-breakdown?id=P-2022-1']")
-
+  private val breakdownPathUrl: String            = s"$servicePath/${BreakdownPage.path}"
+  private val breakdownLinkLocator: By            =
+    By.cssSelector(s"a[href*='$breakdownPathUrl']")
+  private val paidCalculationLinkLocator: By      =
+    By.cssSelector(s"a[href*='$breakdownPathUrl?id=${BreakdownPage.paidPaymentId}']")
   private val cancelledCalculationLinkLocator: By =
-    By.cssSelector("a[href*='/accept-your-low-earners-pension-payment/payment-breakdown?id=C-2024-1']")
+    By.cssSelector(s"a[href*='$breakdownPathUrl?id=${BreakdownPage.cancelledPaymentId}']")
 
   def actionButtonText: String = getText(breakdownLinkLocator)
 

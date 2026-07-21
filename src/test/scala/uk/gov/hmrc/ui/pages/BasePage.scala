@@ -18,18 +18,26 @@ package uk.gov.hmrc.ui.pages
 
 import uk.gov.hmrc.selenium.component.PageObject
 import uk.gov.hmrc.selenium.webdriver.Driver
+
 import java.time.Duration
 import org.openqa.selenium.support.ui.{ExpectedConditions, FluentWait, Wait}
 import uk.gov.hmrc.configuration.TestEnvironment
 import org.openqa.selenium.By
 import org.openqa.selenium.WebDriver
-import scala.jdk.CollectionConverters._
+
+import java.net.URI
+import scala.jdk.CollectionConverters.*
 
 trait BasePage extends PageObject {
 
-  protected def driver: WebDriver  = Driver.instance
-  private val dashboardUrl: String =
+  protected def driver: WebDriver = Driver.instance
+  protected val baseUrl: String   =
     TestEnvironment.url("low-earners-pensions-payment-frontend")
+
+  protected val servicePath: String = new URI(baseUrl).getPath
+
+  def currentUrl: String   = driver.getCurrentUrl
+  def currentTitle: String = driver.getTitle
 
   private val pageNotWorkingLocator: By = By.linkText("Is this page not working properly? (opens in new tab)")
   private val backButtonLocator: By     = By.linkText("Back")
@@ -46,13 +54,16 @@ trait BasePage extends PageObject {
     fluentWait.until(ExpectedConditions.titleIs(expectedPageTitle))
 
   def checkJourneyUrl(page: String): Unit =
-    val url = s"$dashboardUrl/$page"
+    val url = s"$baseUrl/$page"
     fluentWait.until(ExpectedConditions.urlContains(url))
     getCurrentUrl.startsWith(url)
 
   def goToPage(path: String): Unit =
-    val url = s"$dashboardUrl/$path"
+    val url = s"$baseUrl/$path"
     get(url)
+
+  def reportPageNotWorkingProperly(): Unit =
+    click(pageNotWorkingLocator)
 
   // All rows from tbody
   def getTableRows(tableLocator: By): List[List[String]] =
@@ -85,45 +96,44 @@ trait BasePage extends PageObject {
       .asScala
       .nonEmpty
 
-  def clickLinkAndVerifyNewTab(locator: By): Unit =
-    val originalWindow = driver.getWindowHandle
-    driver.findElement(locator).click()
-
-    // Wait for new tab to open
-    fluentWait.until(ExpectedConditions.numberOfWindowsToBe(2))
-
-    // Switch to new tab
-    driver.getWindowHandles.asScala
-      .filterNot(_ == originalWindow)
-      .foreach(driver.switchTo().window)
-
-    // Switch back to original tab
-    driver.switchTo().window(originalWindow)
-
   def getWindowCount: Int = driver.getWindowHandles.size
 
-  def reportPageNotWorkingProperly(): Unit =
-    clickLinkAndVerifyNewTab(pageNotWorkingLocator)
-
-  def newTabUrl: String =
+  /** Switches to a newly opened tab, executes a block (e.g. get URL, check title, assert content), and safely switches
+    * focus back to the original window (optionally closing the new tab).
+    */
+  def switchToNewTabAndExecute[A](closeTab: Boolean = false)(block: => A): A = {
     val originalWindow = driver.getWindowHandle
     val newTab         = driver.getWindowHandles.asScala
-      .filterNot(_ == originalWindow)
-      .head
-    driver.switchTo().window(newTab)
-    val url            = driver.getCurrentUrl
-    driver.switchTo().window(originalWindow)
-    url
+      .find(_ != originalWindow)
+      .getOrElse(throw new NoSuchElementException("No new tab found!"))
 
-  def newTabTitle: String =
+    driver.switchTo().window(newTab)
+    try block // Executes driver.getCurrentUrl, driver.getTitle, or any assertion
+    finally {
+      if (closeTab) driver.close()
+      driver.switchTo().window(originalWindow)
+    }
+  }
+
+  /** Switches driver context to the newly opened tab and stays there.
+    */
+  def switchToNewTab(): Unit = {
     val originalWindow = driver.getWindowHandle
     val newTab         = driver.getWindowHandles.asScala
-      .filterNot(_ == originalWindow)
-      .head
+      .find(_ != originalWindow)
+      .getOrElse(throw new NoSuchElementException("No new tab handle found!"))
+
     driver.switchTo().window(newTab)
-    val title          = driver.getTitle
-    driver.switchTo().window(originalWindow)
-    title
+  }
+
+  /** Optional helper to switch back to the primary (first) window
+    */
+  def switchToMainWindow(): Unit = {
+    val firstWindow = driver.getWindowHandles.asScala.headOption
+      .getOrElse(throw new NoSuchElementException("No main window handle found!"))
+
+    driver.switchTo().window(firstWindow)
+  }
 
   def goBackToPreviousPage(): Unit =
     click(backButtonLocator)

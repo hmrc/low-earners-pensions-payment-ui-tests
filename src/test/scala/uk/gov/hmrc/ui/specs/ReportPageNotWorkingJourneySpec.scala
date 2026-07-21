@@ -49,10 +49,11 @@ class ReportPageNotWorkingJourneySpec extends BaseSpec {
       startPage.getWindowCount shouldBe 2
 
       And("The new tab should have the correct title")
-      startPage.newTabTitle shouldBe "Get help with a technical problem – Contact HMRC – GOV.UK"
+      startPage.switchToNewTab()
+      startPage.currentTitle shouldBe "Get help with a technical problem – Contact HMRC – GOV.UK"
 
       And("The new tab should have the correct URL")
-      startPage.newTabUrl should include("contact/report-technical-problem")
+      startPage.currentUrl should include("contact/report-technical-problem")
     }
 
     Scenario(
@@ -71,10 +72,11 @@ class ReportPageNotWorkingJourneySpec extends BaseSpec {
       dashboardPage.getWindowCount shouldBe 2
 
       And("The new tab should have the correct title")
-      dashboardPage.newTabTitle shouldBe "Get help with a technical problem – Contact HMRC – GOV.UK"
+      dashboardPage.switchToNewTab()
+      dashboardPage.currentTitle shouldBe "Get help with a technical problem – Contact HMRC – GOV.UK"
 
       And("The new tab should have the correct URL")
-      dashboardPage.newTabUrl should include("contact/report-technical-problem")
+      dashboardPage.currentUrl should include("contact/report-technical-problem")
     }
 
     Scenario(
@@ -99,10 +101,11 @@ class ReportPageNotWorkingJourneySpec extends BaseSpec {
       breakdownPage.getWindowCount shouldBe 2
 
       And("The new tab should have the correct title")
-      breakdownPage.newTabTitle shouldBe "Get help with a technical problem – Contact HMRC – GOV.UK"
+      breakdownPage.switchToNewTab()
+      breakdownPage.currentTitle shouldBe "Get help with a technical problem – Contact HMRC – GOV.UK"
 
       And("The new tab should have the correct URL")
-      breakdownPage.newTabUrl should include("contact/report-technical-problem")
+      breakdownPage.currentUrl should include("contact/report-technical-problem")
     }
 
     Scenario(
@@ -133,10 +136,11 @@ class ReportPageNotWorkingJourneySpec extends BaseSpec {
       bankDetailsPage.getWindowCount shouldBe 2
 
       And("The new tab should have the correct title")
-      bankDetailsPage.newTabTitle shouldBe "Get help with a technical problem – Contact HMRC – GOV.UK"
+      bankDetailsPage.switchToNewTab()
+      bankDetailsPage.currentTitle shouldBe "Get help with a technical problem – Contact HMRC – GOV.UK"
 
       And("The new tab should have the correct URL")
-      bankDetailsPage.newTabUrl should include("contact/report-technical-problem")
+      bankDetailsPage.currentUrl should include("contact/report-technical-problem")
     }
 
     Scenario(
@@ -177,10 +181,11 @@ class ReportPageNotWorkingJourneySpec extends BaseSpec {
       checkYourAnswersPage.getWindowCount shouldBe 2
 
       And("The new tab should have the correct title")
-      checkYourAnswersPage.newTabTitle shouldBe "Get help with a technical problem – Contact HMRC – GOV.UK"
+      checkYourAnswersPage.switchToNewTab()
+      checkYourAnswersPage.currentTitle shouldBe "Get help with a technical problem – Contact HMRC – GOV.UK"
 
       And("The new tab should have the correct URL")
-      checkYourAnswersPage.newTabUrl should include("contact/report-technical-problem")
+      checkYourAnswersPage.currentUrl should include("contact/report-technical-problem")
     }
 
     Scenario(
@@ -227,10 +232,11 @@ class ReportPageNotWorkingJourneySpec extends BaseSpec {
       confirmationPage.getWindowCount shouldBe 2
 
       And("The new tab should have the correct title")
-      confirmationPage.newTabTitle shouldBe "Get help with a technical problem – Contact HMRC – GOV.UK"
+      confirmationPage.switchToNewTab()
+      confirmationPage.currentTitle shouldBe "Get help with a technical problem – Contact HMRC – GOV.UK"
 
       And("The new tab should have the correct URL")
-      confirmationPage.newTabUrl should include("contact/report-technical-problem")
+      confirmationPage.currentUrl should include("contact/report-technical-problem")
     }
   }
 }

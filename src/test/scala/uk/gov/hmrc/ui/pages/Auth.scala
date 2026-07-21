@@ -38,9 +38,6 @@ object Auth extends BasePage {
   // Initialize your class logger
   private val logger = LoggerFactory.getLogger(getClass.getName)
 
-  private val redirectUrl: String =
-    TestEnvironment.url("low-earners-pensions-payment-frontend")
-
   def goToAuthorityWizard(): Unit =
     get(authUrl)
     fluentWait.until(ExpectedConditions.urlContains(authUrl))
@@ -74,7 +71,7 @@ object Auth extends BasePage {
 
   def submitLoginDetails(confidenceLevelValue: String, ninoValue: String): Unit = {
     getCurrentUrl should startWith(authUrl)
-    sendKeys(redirectUrlFieldLocator, redirectUrl)
+    sendKeys(redirectUrlFieldLocator, baseUrl)
     selectByValue(confidenceLevelFieldLocator, confidenceLevelValue)
     sendKeys(ninoFieldLocator, ninoValue)
     sendKeys(enrolmentKeyZeroFieldLocator, "HMRC-PT")
