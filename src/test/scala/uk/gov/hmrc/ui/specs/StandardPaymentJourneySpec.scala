@@ -83,7 +83,7 @@ class StandardPaymentJourneySpec extends BaseSpec {
       dashboardPage.availablePaymentsIsSuspended(1)    shouldBe true
 
       And("The Available Payments total payments text should be correct")
-      dashboardPage.availablePaymentsTotalPaymentsText shouldBe "You have a total of £200 in payments available to accept."
+      dashboardPage.availablePaymentsTotalPaymentsText shouldBe "You have a payment of £200 available to accept."
 
       And("The Available Payments amount should be £200")
       dashboardPage.availablePaymentsTotalPaymentsAmountText shouldBe "£200"
