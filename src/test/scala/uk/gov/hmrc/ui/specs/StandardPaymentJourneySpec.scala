@@ -89,7 +89,7 @@ class StandardPaymentJourneySpec extends BaseSpec {
       dashboardPage.availablePaymentsTotalPaymentsAmountText shouldBe "£200"
 
       And("The bank details message should be correct")
-      dashboardPage.availablePaymentsBankDetailsMessage shouldBe "To accept these payments, you need to provide us with your bank details."
+      dashboardPage.availablePaymentsBankDetailsMessage shouldBe "To accept this payment, you need to provide us with your bank details."
 
       Then("The Payment History table Inset should be correct")
       dashboardPage.paymentHistoryInsetText shouldBe "We cancelled 1 of your payments. For more information, contact us (opens in new tab)."
