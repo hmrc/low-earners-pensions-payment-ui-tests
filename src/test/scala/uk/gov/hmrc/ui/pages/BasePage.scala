@@ -72,7 +72,7 @@ trait BasePage extends PageObject {
       .asScala
       .map { row =>
         row
-          .findElements(By.cssSelector("th, td"))
+          .findElements(By.cssSelector("td, th"))
           .asScala
           .map(_.getText.trim)
           .toList
