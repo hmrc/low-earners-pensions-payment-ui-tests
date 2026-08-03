@@ -118,14 +118,14 @@ class StandardPaymentJourneySpec extends BaseSpec {
       dashboardPage.paymentHistoryAmount(0)       shouldBe "£100"
       dashboardPage.paymentHistoryDateAccepted(0) shouldBe "N/A"
       dashboardPage.paymentHistoryStatus(0)       shouldBe "Cancelled"
-      dashboardPage.paymentHistoryAction(0)       shouldBe "Check calculation"
+      dashboardPage.paymentHistoryAction(0)       shouldBe "Check calculation\n6 April 2024 to 5 April 2025"
 
       And("The Payment history second row should display correct values")
       dashboardPage.paymentHistoryTaxYear(1)      shouldBe "6 April 2022 to 5 April 2023"
       dashboardPage.paymentHistoryAmount(1)       shouldBe "£100"
       dashboardPage.paymentHistoryDateAccepted(1) shouldBe "27 June 2022"
       dashboardPage.paymentHistoryStatus(1)       shouldBe "Paid"
-      dashboardPage.paymentHistoryAction(1)       shouldBe "Check calculation"
+      dashboardPage.paymentHistoryAction(1)       shouldBe "Check calculation\n6 April 2022 to 5 April 2023"
 
       And("The action button should show Accept payments")
       dashboardPage.actionButtonText shouldBe "Accept payments"
