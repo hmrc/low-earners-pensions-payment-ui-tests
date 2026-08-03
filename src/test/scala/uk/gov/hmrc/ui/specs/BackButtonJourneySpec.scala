@@ -63,7 +63,7 @@ class BackButtonJourneySpec extends BaseSpec {
 
       And("The new tab should have the correct title")
       startPage.assertTitle(
-        "Accept your low earner's pension payment - Accept your low earner's pension payment - GOV.UK"
+        "Accept your low earner's pension payment - GOV.UK"
       )
     }
 

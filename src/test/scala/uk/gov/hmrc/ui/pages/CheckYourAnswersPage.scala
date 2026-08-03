@@ -47,6 +47,9 @@ object CheckYourAnswersPage extends BasePage {
   private val changeAccountNumberLocator: By = By.id("change-account-number")
   private val changeRollNumberLocator: By    = By.id("change-roll-number")
 
+  // Change Account details
+  private val changeBankDetailsLocator: By = By.id("bankDetails_changeAction")
+
   private val submitButton: By = By.id("submit")
 
   def submit(): Unit =
@@ -77,18 +80,9 @@ object CheckYourAnswersPage extends BasePage {
     if isRollNumberPresent then Some(driver.findElement(rollNumberValueLocator).getText.trim)
     else None
 
-  // Change link clicks
-  def clickChangeAccountName(): Unit =
-    click(changeAccountNameLocator)
-
-  def clickChangeSortCode(): Unit =
-    click(changeSortCodeLocator)
-
-  def clickChangeAccountNumber(): Unit =
-    click(changeAccountNumberLocator)
-
-  def clickChangeRollNumber(): Unit =
-    click(changeRollNumberLocator)
+    // Change bank details
+  def clickChangeBankDetails(): Unit =
+    click(changeBankDetailsLocator)
 
   // Inside CheckYourAnswersPage.scala
   def verifySummaryList(

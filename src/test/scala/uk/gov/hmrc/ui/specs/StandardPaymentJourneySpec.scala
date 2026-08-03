@@ -137,10 +137,10 @@ class StandardPaymentJourneySpec extends BaseSpec {
       breakdownPage.checkJourneyUrl()
 
       Then("The page heading should show correct amount")
-      breakdownPage.pageHeadingText shouldBe "You're eligible for a total of £200"
+      breakdownPage.pageHeadingText shouldBe "You're eligible for a £200 payment"
 
       And("The body text should be correct")
-      breakdownPage.eligibilityBodyText shouldBe "These payments are due to you because you did not get tax relief on some or all of your net pay pension contributions."
+      breakdownPage.eligibilityBodyText shouldBe "This payment is due to you because you did not get tax relief on some or all of your net pay pension contributions."
 
       And("The inset text should contain correct contribution details")
       breakdownPage.verifyStandardPaymentInsetBlock(

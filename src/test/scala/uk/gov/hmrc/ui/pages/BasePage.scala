@@ -82,10 +82,15 @@ trait BasePage extends PageObject {
   def getTableRowCount(tableLocator: By): Int =
     getTableRows(tableLocator).size
 
+  def getTableHeaders(tableLocator: By): List[String] =
+    driver
+      .findElements(tableLocator) // locator should point at the th elements directly
+      .asScala
+      .map(_.getText.trim)
+      .toList
+
   def getTableColumnCount(tableLocator: By): Int =
-    getTableRows(tableLocator).headOption
-      .map(_.size)
-      .getOrElse(0)
+    getTableRows(tableLocator).size
 
   def hasElementInRow(tableLocator: By, rowIndex: Int, elementLocator: By): Boolean =
     driver
