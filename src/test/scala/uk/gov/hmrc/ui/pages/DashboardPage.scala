@@ -28,6 +28,7 @@ object DashboardPage extends BasePage {
   // Available Payments Table
   private val availablePaymentsInset: By                  = By.cssSelector("div.govuk-inset-text")
   private val availablePaymentsTableCaption: By           = By.cssSelector("#dashboard_table_available_payments caption")
+  private val availablePaymentsColumns: By                = By.cssSelector("#dashboard_table_available_payments thead tr th")
   private val availablePaymentsRows: By                   = By.cssSelector("#dashboard_table_available_payments tbody tr")
   private val availablePaymentsTaxYearHeader: By          = By.id("dashboard_table_available_payments_header_taxYear")
   private val availablePaymentsAmountHeader: By           = By.id("dashboard_table_available_payments_header_amount")
@@ -45,6 +46,7 @@ object DashboardPage extends BasePage {
   private val paymentHistoryInsetLink: By = By.cssSelector("div.govuk-inset-text strong.govuk-\\!-font-weight-bold")
 
   private val paymentHistoryTableCaption: By       = By.cssSelector("#dashboard_table_payment_history caption")
+  private val paymentHistoryColumns: By            = By.cssSelector("#dashboard_table_payment_history thead tr th")
   private val paymentHistoryRows: By               = By.cssSelector("#dashboard_table_payment_history tbody tr")
   private val paymentHistoryTaxYearHeader: By      = By.id("dashboard_table_payment_history_header_taxYear")
   private val paymentHistoryAmountHeader: By       = By.id("dashboard_table_payment_history_header_amount")
@@ -86,7 +88,7 @@ object DashboardPage extends BasePage {
 
   def availablePaymentsTableRows: List[List[String]] = getTableRows(availablePaymentsRows)
   def availablePaymentsTableRowCount: Int            = getTableRowCount(availablePaymentsRows)
-  def availablePaymentsTableColumnCount: Int         = getTableColumnCount(availablePaymentsRows)
+  def availablePaymentsTableColumnCount: Int         = getTableColumnCount(availablePaymentsColumns)
 
   // Specific column value by row index
   def availablePaymentsTaxYear(rowIndex: Int): String        = availablePaymentsTableRows(rowIndex)(0)
@@ -112,9 +114,10 @@ object DashboardPage extends BasePage {
   def paymentHistoryStatusHeaderText: String       = getText(paymentHistoryStatusHeader).trim
   def paymentHistoryActionHeaderText: String       = getText(paymentHistoryActionHeader).trim
 
-  def paymentHistoryTableRows: List[List[String]] = getTableRows(paymentHistoryRows)
-  def paymentHistoryTableRowCount: Int            = getTableRowCount(paymentHistoryRows)
-  def paymentHistoryTableColumnCount: Int         = getTableColumnCount(paymentHistoryRows)
+  def paymentHistoryTableRows: List[List[String]]    = getTableRows(paymentHistoryRows)
+  def paymentHistoryTableRowCount: Int               = getTableRowCount(paymentHistoryRows)
+  def paymentHistoryTableColumns: List[List[String]] = getTableRows(paymentHistoryColumns)
+  def paymentHistoryTableColumnCount: Int            = getTableColumnCount(paymentHistoryColumns)
 
   // Specific column value by row index
   def paymentHistoryTaxYear(rowIndex: Int): String      = paymentHistoryTableRows(rowIndex)(0)

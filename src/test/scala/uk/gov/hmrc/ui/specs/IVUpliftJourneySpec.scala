@@ -41,7 +41,7 @@ class IVUpliftJourneySpec extends BaseSpec {
       And("When the User select Success Radio button he is navigated to Start Page")
       ivStub.submitContinue()
       startPage.assertTitle(
-        "Accept your low earner's pension payment - Accept your low earner's pension payment - GOV.UK"
+        "Accept your low earner's pension payment - GOV.UK"
       )
     }
 

@@ -68,12 +68,11 @@ class ChangeBankDetailsJourneySpec extends BaseSpec {
     Scenario(
       "Check Your Your Answers Page - Click Change Bank Account Name and modify Bank Account Name"
     ) {
-      When("The user clicks Change on the Name on the account row")
-      CheckYourAnswersPage.clickChangeAccountName()
+      When("The user clicks Change on the Check Your Answers Page")
+      CheckYourAnswersPage.clickChangeBankDetails()
 
       Then("The user should be taken to the bank details page")
       bankDetailsPage.currentUrl should include("change-bank-details")
-      bankDetailsPage.currentUrl should include("bankDetails.accountName")
 
       When("The user enter the new bank account name")
       bankDetailsPage.enterName("Casandra Wilkinson")
@@ -90,12 +89,11 @@ class ChangeBankDetailsJourneySpec extends BaseSpec {
     Scenario(
       "Check Your Your Answers Page - Click Change Bank Sort Code and modify Bank Sort Code"
     ) {
-      When("The user clicks Change on the Sort code row")
-      CheckYourAnswersPage.clickChangeSortCode()
+      When("The user clicks Change on the Check Your Answers Page")
+      CheckYourAnswersPage.clickChangeBankDetails()
 
       Then("The user should be taken to the bank details page")
       bankDetailsPage.currentUrl should include("change-bank-details")
-      bankDetailsPage.currentUrl should include("bankDetails.sortCode")
 
       When("The user enter the new bank sort code")
       bankDetailsPage.enterSortCode("40-51-25")
@@ -112,12 +110,11 @@ class ChangeBankDetailsJourneySpec extends BaseSpec {
     Scenario(
       "Check Your Your Answers Page - Click Change Account Number and modify Bank Account Number"
     ) {
-      When("The user clicks Change on the Account number row")
-      CheckYourAnswersPage.clickChangeAccountNumber()
+      When("The user clicks Change on the Check Your Answers Page")
+      CheckYourAnswersPage.clickChangeBankDetails()
 
       Then("The user should be taken to the bank details page")
       bankDetailsPage.currentUrl should include("change-bank-details")
-      bankDetailsPage.currentUrl should include("bankDetails.accountNumber")
 
       When("The user enter the new bank bank account number")
       bankDetailsPage.enterAccountNumber("54344677")
@@ -134,12 +131,11 @@ class ChangeBankDetailsJourneySpec extends BaseSpec {
     Scenario(
       "Check Your Your Answers Page - Click Building society roll number and modify Building society roll number"
     ) {
-      When("The user clicks Change on the Building society roll number (if you have one)")
-      CheckYourAnswersPage.clickChangeRollNumber()
+      When("The user clicks Change on the Check Your Answers Page")
+      CheckYourAnswersPage.clickChangeBankDetails()
 
       Then("The user should be taken to the bank details page")
       bankDetailsPage.currentUrl should include("change-bank-details")
-      bankDetailsPage.currentUrl should include("bankDetails.rollNumber")
 
       When("The user enter the new Building society roll number")
       bankDetailsPage.enterBuildingSocietyRollNumber("1011121314")
@@ -162,12 +158,11 @@ class ChangeBankDetailsJourneySpec extends BaseSpec {
     Scenario(
       "Check Your Your Answers Page - Click Building society roll number and remove Building society roll number"
     ) {
-      When("The user clicks Change on the Building society roll number (if you have one)")
-      CheckYourAnswersPage.clickChangeRollNumber()
+      When("The user clicks Change on the Check Your Answers Page")
+      CheckYourAnswersPage.clickChangeBankDetails()
 
       Then("The user should be taken to the bank details page")
       bankDetailsPage.currentUrl should include("change-bank-details")
-      bankDetailsPage.currentUrl should include("bankDetails.rollNumber")
 
       When("The user removes the Building society roll number")
       bankDetailsPage.clearBuildingSocietyRollNumber

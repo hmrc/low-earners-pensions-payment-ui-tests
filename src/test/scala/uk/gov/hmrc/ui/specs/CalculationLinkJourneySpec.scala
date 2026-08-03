@@ -56,10 +56,10 @@ class CalculationLinkJourneySpec extends BaseSpec {
       breakdownPage.checkPaidJourneyUrl()
 
       Then("The page heading should show correct amount")
-      breakdownPage.pageHeadingText shouldBe "You're eligible for a total of £200"
+      breakdownPage.pageHeadingText shouldBe "You were eligible for a £100 payment"
 
       And("The body text should be correct")
-      breakdownPage.eligibilityBodyText shouldBe "These payments are due to you because you did not get tax relief on some or all of your net pay pension contributions."
+      breakdownPage.eligibilityBodyText shouldBe "This payment was due to you because you did not get tax relief on some or all of your net pay pension contributions."
 
       And("The inset text should contain correct contribution details")
       breakdownPage.verifyStandardPaymentInsetBlock(
@@ -84,10 +84,10 @@ class CalculationLinkJourneySpec extends BaseSpec {
       breakdownPage.checkCancelledJourneyUrl()
 
       Then("The page heading should show correct amount")
-      breakdownPage.pageHeadingText shouldBe "You're eligible for a total of £200"
+      breakdownPage.pageHeadingText shouldBe "You were eligible for a £100 payment"
 
       And("The body text should be correct")
-      breakdownPage.eligibilityBodyText shouldBe "These payments are due to you because you did not get tax relief on some or all of your net pay pension contributions."
+      breakdownPage.eligibilityBodyText shouldBe "This payment was due to you because you did not get tax relief on some or all of your net pay pension contributions."
 
       And("The inset text should contain correct contribution details")
       breakdownPage.verifyStandardPaymentInsetBlock(
