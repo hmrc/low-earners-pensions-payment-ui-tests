@@ -52,7 +52,7 @@ object BreakdownPage extends BasePage {
   def pageHeadingText: String = getText(pageHeadingLocator)
 
   def eligibilityBodyText: String = getText(eligibilityBodyTextLocator)
-  
+
   def checkPaidJourneyUrl(): Unit =
     currentUrl should include(s"$servicePath/$path?id=$paidPaymentId")
 
