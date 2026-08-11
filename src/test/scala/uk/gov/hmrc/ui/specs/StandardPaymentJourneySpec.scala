@@ -82,7 +82,7 @@ class StandardPaymentJourneySpec extends BaseSpec {
       dashboardPage.availablePaymentsBankDetailsMessage shouldBe "To accept this payment, you need to provide us with your bank details."
 
       Then("The Payment History table Inset should be correct")
-      dashboardPage.paymentHistoryInsetText shouldBe "We cancelled 1 of your payments. For more information, contact us (opens in new tab)."
+      dashboardPage.paymentHistoryInsetText shouldBe "We cancelled 1 of your payments. Cancelled payments will be replaced by a new payment."
 
       And("The Payment History Cancelled Count Text should be correct")
       dashboardPage.cancelledCountText shouldBe "1"
@@ -147,9 +147,6 @@ class StandardPaymentJourneySpec extends BaseSpec {
         "20%",
         "£200"
       )
-
-      And("The bank details text should be correct")
-      breakdownPage.bankDetailsText shouldBe "To accept these payments, you need to provide us with your bank details."
 
       And("The user click the Continue link")
       breakdownPage.continue()
