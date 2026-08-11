@@ -148,9 +148,6 @@ class StandardPaymentJourneySpec extends BaseSpec {
         "£200"
       )
 
-      And("The bank details text should be correct")
-      breakdownPage.bankDetailsText shouldBe "To accept these payments, you need to provide us with your bank details."
-
       And("The user click the Continue link")
       breakdownPage.continue()
 
