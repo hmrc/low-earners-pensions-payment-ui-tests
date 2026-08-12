@@ -41,12 +41,6 @@ object CheckYourAnswersPage extends BasePage {
   private val rollNumberValueLocator: By    =
     By.cssSelector("div.govuk-summary-list__row:nth-child(4) dd.govuk-summary-list__value")
 
-  // Change links
-  private val changeAccountNameLocator: By   = By.id("change-account-name")
-  private val changeSortCodeLocator: By      = By.id("change-sort-code")
-  private val changeAccountNumberLocator: By = By.id("change-account-number")
-  private val changeRollNumberLocator: By    = By.id("change-roll-number")
-
   // Change Account details
   private val changeBankDetailsLocator: By = By.id("bankDetails_changeAction")
 

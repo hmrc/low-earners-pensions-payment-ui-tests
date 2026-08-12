@@ -35,9 +35,6 @@ object BreakdownPage extends BasePage {
   private val eligibilityBodyTextLocator: By =
     By.cssSelector("p.govuk-body:nth-of-type(1)")
 
-  private val bankDetailsTextLocator: By =
-    By.cssSelector("p.govuk-body:nth-of-type(3)")
-
   private val insetTextBlocksLocator: By =
     By.cssSelector("dl.govuk-summary-list")
 
@@ -55,8 +52,6 @@ object BreakdownPage extends BasePage {
   def pageHeadingText: String = getText(pageHeadingLocator)
 
   def eligibilityBodyText: String = getText(eligibilityBodyTextLocator)
-
-  def bankDetailsText: String = getText(bankDetailsTextLocator)
 
   def checkPaidJourneyUrl(): Unit =
     currentUrl should include(s"$servicePath/$path?id=$paidPaymentId")

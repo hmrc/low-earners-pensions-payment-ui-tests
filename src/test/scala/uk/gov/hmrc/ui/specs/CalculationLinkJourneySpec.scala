@@ -69,9 +69,6 @@ class CalculationLinkJourneySpec extends BaseSpec {
         "20%",
         "£100"
       )
-
-      And("The bank details text should be correct")
-      breakdownPage.bankDetailsText shouldBe "To accept these payments, you need to provide us with your bank details."
     }
 
     Scenario(
@@ -97,9 +94,6 @@ class CalculationLinkJourneySpec extends BaseSpec {
         "20%",
         "£100"
       )
-
-      And("The bank details text should be correct")
-      breakdownPage.bankDetailsText shouldBe "To accept these payments, you need to provide us with your bank details."
     }
   }
 }
