@@ -54,7 +54,7 @@ class BARSLockOutJourneySpec extends BaseSpec {
       dashboardPage.checkJourneyUrl()
 
       And("The action button should show Accept payments")
-      dashboardPage.actionButtonText shouldBe "Accept payments"
+      dashboardPage.actionButtonText shouldBe "Accept payment"
 
       And("The user click Accept Payments button")
       dashboardPage.clickActionButton()
@@ -150,7 +150,7 @@ class BARSLockOutJourneySpec extends BaseSpec {
       dashboardPage.verifyLockoutBanner()
 
       And("The action button should show Accept payments")
-      dashboardPage.actionButtonText shouldBe "View payments"
+      dashboardPage.actionButtonText shouldBe "View payment"
 
       And("The user click Accept Payments button")
       dashboardPage.clickActionButton()
@@ -190,7 +190,7 @@ class BARSLockOutJourneySpec extends BaseSpec {
       dashboardPage.verifyLockoutBanner()
 
       And("The action button should show Accept payments")
-      dashboardPage.actionButtonText shouldBe "View payments"
+      dashboardPage.actionButtonText shouldBe "View payment"
 
       And("The user click Accept Payments button")
       dashboardPage.clickActionButton()
@@ -226,7 +226,7 @@ class BARSLockOutJourneySpec extends BaseSpec {
       dashboardPage.checkJourneyUrl()
 
       And("The action button should show Accept payments")
-      dashboardPage.actionButtonText shouldBe "Accept payments"
+      dashboardPage.actionButtonText shouldBe "Accept payment"
 
       And("The user click Accept Payments button")
       dashboardPage.clickActionButton()

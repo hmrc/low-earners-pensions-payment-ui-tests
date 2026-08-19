@@ -125,7 +125,7 @@ class StandardPaymentJourneySpec extends BaseSpec {
       dashboardPage.paymentHistoryAction(2)       shouldBe "Check calculation\n6 April 2022 to 5 April 2023"
 
       And("The action button should show Accept payments")
-      dashboardPage.actionButtonText shouldBe "Accept payments"
+      dashboardPage.actionButtonText shouldBe "Accept payment"
 
       And("The user click Accept Payments button")
       dashboardPage.clickActionButton()
@@ -186,7 +186,7 @@ class StandardPaymentJourneySpec extends BaseSpec {
       dashboardPage.checkJourneyUrl()
 
       And("The action button should show Accept payments")
-      dashboardPage.actionButtonText shouldBe "Accept payments"
+      dashboardPage.actionButtonText shouldBe "Accept payment"
 
       And("The user click Accept Payments button")
       dashboardPage.clickActionButton()
