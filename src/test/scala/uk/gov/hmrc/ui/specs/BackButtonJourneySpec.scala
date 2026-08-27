@@ -17,6 +17,7 @@
 package uk.gov.hmrc.ui.specs
 
 import uk.gov.hmrc.ui.pages.*
+import uk.gov.hmrc.ui.pages.Auth.currentUrl
 
 class BackButtonJourneySpec extends BaseSpec {
   private val auth          = Auth
@@ -42,8 +43,8 @@ class BackButtonJourneySpec extends BaseSpec {
       When("The user clicks the back button")
       startPage.goBackToPreviousPage()
 
-      And("The new tab should have the correct title")
-      startPage.assertTitle("Authority Wizard")
+      And("The page navigates to the PTA account")
+      currentUrl.contains("personal-account") shouldBe true
     }
 
     Scenario(
