@@ -38,7 +38,7 @@ class StandardPaymentJourneySpec extends BaseSpec {
 
       Given("The user enters the auth details")
       auth.goToAuthorityWizard()
-      auth.loginUsingAuthorityWizard()
+      auth.loginForStandardSinglePayment()
 
       When("The user click the Continue button on Start Page")
       startPage.checkJourneyUrl()
@@ -82,7 +82,7 @@ class StandardPaymentJourneySpec extends BaseSpec {
       dashboardPage.availablePaymentsBankDetailsMessage shouldBe "To accept this payment, you need to provide us with your bank details."
 
       Then("The Payment History table Inset should be correct")
-      dashboardPage.paymentHistoryInsetText shouldBe "We cancelled 1 of your payments. Cancelled payments will be replaced by a new payment."
+      dashboardPage.cancelledInsetText shouldBe "We cancelled 1 of your payments. Cancelled payments will be replaced by a new payment."
 
       And("The Payment History Cancelled Count Text should be correct")
       dashboardPage.cancelledCountText shouldBe "1"
@@ -137,7 +137,9 @@ class StandardPaymentJourneySpec extends BaseSpec {
       breakdownPage.pageHeadingText shouldBe "You're eligible for a £200 payment"
 
       And("The body text should be correct")
-      breakdownPage.eligibilityBodyText shouldBe "This payment is due to you because you did not get tax relief on some or all of your net pay pension contributions."
+      breakdownPage.paragraphBodyText(
+        0
+      ) shouldBe "This payment is due to you because you did not get tax relief on some or all of your net pay pension contributions."
 
       And("The inset text should contain correct contribution details")
       breakdownPage.verifyStandardPaymentInsetBlock(
@@ -147,6 +149,11 @@ class StandardPaymentJourneySpec extends BaseSpec {
         "20%",
         "£200"
       )
+
+      And("The validation body text should be correct")
+      breakdownPage.paragraphBodyText(
+        1
+      ) shouldBe "If you think the amounts are wrong, you can contact us (opens in new tab)."
 
       And("The user click the Continue link")
       breakdownPage.continue()
@@ -174,7 +181,7 @@ class StandardPaymentJourneySpec extends BaseSpec {
     ) {
       Given("The user enters the auth details")
       auth.goToAuthorityWizard()
-      auth.loginUsingAuthorityWizard()
+      auth.loginForStandardSinglePayment()
 
       When("The user navigates to the Start Page")
       startPage.checkJourneyUrl()

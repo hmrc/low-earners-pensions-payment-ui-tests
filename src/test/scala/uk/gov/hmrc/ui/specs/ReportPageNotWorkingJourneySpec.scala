@@ -30,7 +30,7 @@ class ReportPageNotWorkingJourneySpec extends BaseSpec {
     super.beforeEach()
     Given("The user enters the auth details")
     auth.goToAuthorityWizard()
-    auth.loginUsingAuthorityWizard()
+    auth.loginForStandardSinglePayment()
 
     And("The user navigates to the Start Page")
     startPage.checkJourneyUrl()
