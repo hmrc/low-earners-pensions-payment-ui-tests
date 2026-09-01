@@ -252,7 +252,7 @@ class BARSLockOutJourneySpec extends BaseSpec {
       And("The user click the Submit button")
       checkYourAnswersPage.submit()
 
-      And("The user navigate to confirmation page")
+      And("The user navigate to bank details not verified user error page")
       bankDetailsErrorPage.checkJourneyUrl()
 
       Then("The Page Heading Text should be correct")

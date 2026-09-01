@@ -43,7 +43,7 @@ object BankDetailsErrorPage extends BasePage {
   // Footer Paragraph
   def contactHmrcText: String = getText(contactHmrcLocator).trim
 
-  override def checkJourneyUrl(url: String = "bank-details-not-verified-service"): Unit =
+  override def checkJourneyUrl(url: String = "bank-details-not-verified-user"): Unit =
     super.checkJourneyUrl(url)
 
   def pageHeadingText: String  = getText(pageHeadingLocator).trim
