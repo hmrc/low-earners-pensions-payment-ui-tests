@@ -33,7 +33,7 @@ class IVUpliftJourneySpec extends BaseSpec {
         "A PAYE individual logs into the LEPP using Cl200 and valid NINO and Identity Verification check is successful"
       )
       auth.goToAuthorityWizard()
-      auth.loginUsingAuthorityWizardWithCL200()
+      auth.loginForStandardSinglePaymentWithCL200()
 
       Then("The user should be on Identity Verification Stub Page")
       ivStub.assertTitle("Identity Verification - Stubbed Journey configuration")
@@ -48,7 +48,7 @@ class IVUpliftJourneySpec extends BaseSpec {
     Scenario("Verify the Negative Uplift Journey") {
       Given("A PAYE individual logs into the LEPP using Cl200 and valid NINO but fails Identity Verification check")
       auth.goToAuthorityWizard()
-      auth.loginUsingAuthorityWizardWithCL200()
+      auth.loginForStandardSinglePaymentWithCL200()
 
       Then("The user should be on Identity Verification Stub Page")
       ivStub.assertTitle("Identity Verification - Stubbed Journey configuration")

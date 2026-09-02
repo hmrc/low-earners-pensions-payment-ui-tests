@@ -32,8 +32,8 @@ object BreakdownPage extends BasePage {
     By.cssSelector("h1.govuk-heading-l")
 
   // Body paragraphs
-  private val eligibilityBodyTextLocator: By =
-    By.cssSelector("p.govuk-body:nth-of-type(1)")
+  private val bodyParagraphTexts: By =
+    By.cssSelector(".govuk-grid-column-two-thirds > p.govuk-body")
 
   private val insetTextBlocksLocator: By =
     By.cssSelector("dl.govuk-summary-list")
@@ -51,7 +51,7 @@ object BreakdownPage extends BasePage {
 
   def pageHeadingText: String = getText(pageHeadingLocator)
 
-  def eligibilityBodyText: String = getText(eligibilityBodyTextLocator)
+  def paragraphBodyText(index: Int): String = getText(bodyParagraphTexts, index)
 
   def checkPaidJourneyUrl(): Unit =
     currentUrl should include(s"$servicePath/$path?id=$paidPaymentId")
@@ -103,7 +103,7 @@ object BreakdownPage extends BasePage {
     taxYearHeadings(index) should include(s"For the tax year $taxYear")
     insetTextBlock(index)  should include(s"Your net pay pension contributions $contributions")
     insetTextBlock(index)  should include(s"Your relevant basic tax rate $taxRate")
-    insetTextBlock(index)  should include(s"Your new total top-up for the tax year $taxYear $newTotal")
-    insetTextBlock(index)  should include(s"Top-up already received $topUp")
+    insetTextBlock(index)  should include(s"Your new total amount $newTotal")
+    insetTextBlock(index)  should include(s"Amount already received $topUp")
     insetTextBlock(index)  should include(s"Additional amount due $additionalAmount")
 }

@@ -41,9 +41,9 @@ object DashboardPage extends BasePage {
   private val availablePaymentsTotalPaymentsAmount: By    = By.cssSelector("strong.govuk-\\!-font-weight-bold")
   private val availablePaymentsBankDetailsText: By        = By.cssSelector("p.govuk-body.govuk-\\!-margin-bottom-6")
 
-  // Available Payments Table
+  // Payment History Table
   private val paymentHistoryInset: By     = By.cssSelector("div.govuk-inset-text p:not(.govuk-body)")
-  private val paymentHistoryInsetLink: By = By.cssSelector("div.govuk-inset-text strong.govuk-\\!-font-weight-bold")
+  private val cancelledCountInsetLink: By = By.cssSelector("div.govuk-inset-text strong.govuk-\\!-font-weight-bold")
 
   private val paymentHistoryTableCaption: By       = By.cssSelector("#dashboard_table_payment_history caption")
   private val paymentHistoryColumns: By            = By.cssSelector("#dashboard_table_payment_history thead tr th")
@@ -126,8 +126,8 @@ object DashboardPage extends BasePage {
   def paymentHistoryStatus(rowIndex: Int): String       = paymentHistoryTableRows(rowIndex)(3)
   def paymentHistoryAction(rowIndex: Int): String       = paymentHistoryTableRows(rowIndex)(4)
 
-  def paymentHistoryInsetText: String = getText(paymentHistoryInset)
-  def cancelledCountText: String      = getText(paymentHistoryInsetLink)
+  def cancelledInsetText: String = getText(paymentHistoryInset)
+  def cancelledCountText: String = getText(cancelledCountInsetLink)
 
   def clickPaidCalculationLink(): Unit =
     click(paidCalculationLinkLocator)

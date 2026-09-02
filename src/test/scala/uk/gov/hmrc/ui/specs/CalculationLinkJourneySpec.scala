@@ -28,7 +28,7 @@ class CalculationLinkJourneySpec extends BaseSpec {
     super.beforeEach()
     Given("The user enters the auth details")
     auth.goToAuthorityWizard()
-    auth.loginUsingAuthorityWizard()
+    auth.loginForStandardSinglePayment()
 
     And("The user click the Continue button on Start Page")
     startPage.checkJourneyUrl()
@@ -59,7 +59,9 @@ class CalculationLinkJourneySpec extends BaseSpec {
       breakdownPage.pageHeadingText shouldBe "You were eligible for a £100 payment"
 
       And("The body text should be correct")
-      breakdownPage.eligibilityBodyText shouldBe "This payment was due to you because you did not get tax relief on some or all of your net pay pension contributions."
+      breakdownPage.paragraphBodyText(
+        0
+      ) shouldBe "This payment was due to you because you did not get tax relief on some or all of your net pay pension contributions."
 
       And("The inset text should contain correct contribution details")
       breakdownPage.verifyStandardPaymentInsetBlock(
@@ -84,7 +86,9 @@ class CalculationLinkJourneySpec extends BaseSpec {
       breakdownPage.pageHeadingText shouldBe "You were eligible for a £100 payment"
 
       And("The body text should be correct")
-      breakdownPage.eligibilityBodyText shouldBe "This payment was due to you because you did not get tax relief on some or all of your net pay pension contributions."
+      breakdownPage.paragraphBodyText(
+        0
+      ) shouldBe "This payment was due to you because you did not get tax relief on some or all of your net pay pension contributions."
 
       And("The inset text should contain correct contribution details")
       breakdownPage.verifyStandardPaymentInsetBlock(

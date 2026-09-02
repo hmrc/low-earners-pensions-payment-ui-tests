@@ -58,6 +58,15 @@ trait BasePage extends PageObject {
     fluentWait.until(ExpectedConditions.urlContains(url))
     getCurrentUrl.startsWith(url)
 
+  protected def getText(locator: By, index: Int): String =
+    driver
+      .findElements(locator)
+      .asScala
+      .map(_.getText.trim)
+      .toList
+      .lift(index)
+      .getOrElse(throw new NoSuchElementException(s"No paragraph found at index $index"))
+
   def goToPage(path: String): Unit =
     val url = s"$baseUrl/$path"
     get(url)

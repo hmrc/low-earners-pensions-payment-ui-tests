@@ -52,16 +52,21 @@ object Auth extends BasePage {
   def checkAuthUrl(): Unit =
     getCurrentUrl should startWith(authUrl)
 
-  def loginUsingAuthorityWizard(): Unit =
+  /*standard single payment journey*/
+  def loginForStandardSinglePayment(): Unit =
     submitLoginDetails("250", "AA123456D")
 
-  def loginUsingAuthorityWizardWithCL200(): Unit =
+  def loginForStandardSinglePaymentWithCL200(): Unit =
     submitLoginDetails("200", "AA123456D")
 
-  def loginUsingAuthorityWizardWithRandomNino(): Unit = {
+  def loginForStandardSinglePaymentWithRandomNino(): Unit = {
     logger.info(s"Random NINO: $randomNino")
     submitLoginDetails("250", randomNino)
   }
+
+  /*standard under payment journey*/
+  def loginForUnderpaymentOnly(): Unit =
+    submitLoginDetails("250", "AB899999A")
 
   def loginUsingAuthorityWizardWithNino(nino: String): Unit =
     logger.info(s"Random NINO: $nino")
