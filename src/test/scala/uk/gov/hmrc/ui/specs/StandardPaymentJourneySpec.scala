@@ -113,14 +113,14 @@ class StandardPaymentJourneySpec extends BaseSpec {
       And("The Payment history second row should display correct values")
       dashboardPage.paymentHistoryTaxYear(1)      shouldBe "6 April 2023 to 5 April 2024"
       dashboardPage.paymentHistoryAmount(1)       shouldBe "£100"
-      dashboardPage.paymentHistoryDateAccepted(1) shouldBe "27 June 2023"
+      dashboardPage.paymentHistoryDateAccepted(1) shouldBe "26 August 2026"
       dashboardPage.paymentHistoryStatus(1)       shouldBe "Paid"
       dashboardPage.paymentHistoryAction(1)       shouldBe "Check calculation\n6 April 2023 to 5 April 2024"
 
       And("The Payment history third row should display correct values")
       dashboardPage.paymentHistoryTaxYear(2)      shouldBe "6 April 2022 to 5 April 2023"
       dashboardPage.paymentHistoryAmount(2)       shouldBe "£100"
-      dashboardPage.paymentHistoryDateAccepted(2) shouldBe "27 June 2022"
+      dashboardPage.paymentHistoryDateAccepted(2) shouldBe "26 August 2026"
       dashboardPage.paymentHistoryStatus(2)       shouldBe "Paid"
       dashboardPage.paymentHistoryAction(2)       shouldBe "Check calculation\n6 April 2022 to 5 April 2023"
 
