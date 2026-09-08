@@ -19,6 +19,9 @@ package uk.gov.hmrc.ui.pages
 import org.openqa.selenium.By
 import org.scalatest.matchers.should.Matchers.shouldBe
 import org.slf4j.LoggerFactory
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 
 object DashboardPage extends BasePage {
 
@@ -53,6 +56,7 @@ object DashboardPage extends BasePage {
   private val paymentHistoryDateAcceptedHeader: By = By.id("dashboard_table_payment_history_header_dateAccepted")
   private val paymentHistoryStatusHeader: By       = By.id("dashboard_table_payment_history_header_status")
   private val paymentHistoryActionHeader: By       = By.id("dashboard_table_payment_history_header_action")
+  private final val MaxAllowedDaysDifference: Int  = 10
 
   private val bannerTitleLocator: By = By.id("govuk-notification-banner-title")
   private val logger                 = LoggerFactory.getLogger(getClass.getName)
@@ -140,5 +144,16 @@ object DashboardPage extends BasePage {
     val actualBannerTitle = driver.findElement(bannerTitleLocator).getText.trim
     logger.info(s"[BARS LOCKOUT] Banner Title found: '$actualBannerTitle'")
     actualBannerTitle shouldBe "Important"
+  }
+
+  // Inside DashboardPage or BasePage:
+  def isDateWithinTheTimeFrame(dateString: String): Boolean = {
+    val formatter  = DateTimeFormatter.ofPattern("d MMMM yyyy")
+    val parsedDate = LocalDate.parse(dateString.trim, formatter)
+    val today      = LocalDate.now()
+    val diffInDays = ChronoUnit.DAYS.between(parsedDate, today)
+
+    // Asserts date is not in the future and strictly less than MaxAllowedDaysDifference
+    diffInDays >= 0 && diffInDays < MaxAllowedDaysDifference
   }
 }
