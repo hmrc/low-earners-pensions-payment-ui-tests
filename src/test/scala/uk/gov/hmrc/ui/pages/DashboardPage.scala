@@ -56,7 +56,7 @@ object DashboardPage extends BasePage {
   private val paymentHistoryDateAcceptedHeader: By = By.id("dashboard_table_payment_history_header_dateAccepted")
   private val paymentHistoryStatusHeader: By       = By.id("dashboard_table_payment_history_header_status")
   private val paymentHistoryActionHeader: By       = By.id("dashboard_table_payment_history_header_action")
-  private final val MaxAllowedDaysDifference: Long = 10L
+  private final val MaxAllowedDaysDifference: Int = 10
 
   private val bannerTitleLocator: By = By.id("govuk-notification-banner-title")
   private val logger                 = LoggerFactory.getLogger(getClass.getName)
