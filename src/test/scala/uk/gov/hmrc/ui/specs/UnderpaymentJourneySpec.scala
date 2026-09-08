@@ -95,11 +95,11 @@ class UnderpaymentJourneySpec extends BaseSpec {
       dashboardPage.paymentHistoryActionHeaderText       shouldBe "Action"
 
       And("The Payment history first row should display correct values")
-      dashboardPage.paymentHistoryTaxYear(0)      shouldBe "6 April 2025 to 5 April 2026"
-      dashboardPage.paymentHistoryAmount(0)       shouldBe "£100"
-      dashboardPage.paymentHistoryDateAccepted(0) shouldBe "26 August 2026"
-      dashboardPage.paymentHistoryStatus(0)       shouldBe "Paid"
-      dashboardPage.paymentHistoryAction(0)       shouldBe "Check calculation\n6 April 2025 to 5 April 2026"
+      dashboardPage.paymentHistoryTaxYear(0)                                              shouldBe "6 April 2025 to 5 April 2026"
+      dashboardPage.paymentHistoryAmount(0)                                               shouldBe "£100"
+      dashboardPage.isDateWithinTheTimeFrame(dashboardPage.paymentHistoryDateAccepted(0)) shouldBe true
+      dashboardPage.paymentHistoryStatus(0)                                               shouldBe "Paid"
+      dashboardPage.paymentHistoryAction(0)                                               shouldBe "Check calculation\n6 April 2025 to 5 April 2026"
 
       And("The action button should show Accept payments")
       dashboardPage.actionButtonText shouldBe "Accept payment"
