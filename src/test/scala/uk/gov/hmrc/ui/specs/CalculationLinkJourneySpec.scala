@@ -56,7 +56,7 @@ class CalculationLinkJourneySpec extends BaseSpec {
       breakdownPage.checkPaidJourneyUrl()
 
       Then("The page heading should show correct amount")
-      breakdownPage.pageHeadingText shouldBe "You were eligible for a £100 payment"
+      breakdownPage.pageHeadingText shouldBe "Your £100 paid payment calculation"
 
       And("The body text should be correct")
       breakdownPage.paragraphBodyText(
@@ -83,12 +83,12 @@ class CalculationLinkJourneySpec extends BaseSpec {
       breakdownPage.checkCancelledJourneyUrl()
 
       Then("The page heading should show correct amount")
-      breakdownPage.pageHeadingText shouldBe "You were eligible for a £100 payment"
+      breakdownPage.pageHeadingText shouldBe "Your £100 cancelled payment calculation"
 
       And("The body text should be correct")
       breakdownPage.paragraphBodyText(
         0
-      ) shouldBe "This payment was due to you because you did not get tax relief on some or all of your net pay pension contributions."
+      ) shouldBe "Following a review of your entitlement, we have cancelled this payment. As a result, this payment will not be made."
 
       And("The inset text should contain correct contribution details")
       breakdownPage.verifyStandardPaymentInsetBlock(
