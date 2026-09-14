@@ -50,7 +50,7 @@ class ReportPageNotWorkingJourneySpec extends BaseSpec {
 
       And("The new tab should have the correct title")
       startPage.switchToNewTab()
-      startPage.currentTitle shouldBe "Get help with a technical problem – Contact HMRC – GOV.UK"
+      startPage.assertTitle("Get help with a technical problem – Contact HMRC – GOV.UK")
 
       And("The new tab should have the correct URL")
       startPage.currentUrl should include("contact/report-technical-problem")
@@ -73,7 +73,7 @@ class ReportPageNotWorkingJourneySpec extends BaseSpec {
 
       And("The new tab should have the correct title")
       dashboardPage.switchToNewTab()
-      dashboardPage.currentTitle shouldBe "Get help with a technical problem – Contact HMRC – GOV.UK"
+      dashboardPage.assertTitle("Get help with a technical problem – Contact HMRC – GOV.UK")
 
       And("The new tab should have the correct URL")
       dashboardPage.currentUrl should include("contact/report-technical-problem")
@@ -102,7 +102,7 @@ class ReportPageNotWorkingJourneySpec extends BaseSpec {
 
       And("The new tab should have the correct title")
       breakdownPage.switchToNewTab()
-      breakdownPage.currentTitle shouldBe "Get help with a technical problem – Contact HMRC – GOV.UK"
+      breakdownPage.assertTitle("Get help with a technical problem – Contact HMRC – GOV.UK")
 
       And("The new tab should have the correct URL")
       breakdownPage.currentUrl should include("contact/report-technical-problem")
@@ -137,7 +137,7 @@ class ReportPageNotWorkingJourneySpec extends BaseSpec {
 
       And("The new tab should have the correct title")
       bankDetailsPage.switchToNewTab()
-      bankDetailsPage.currentTitle shouldBe "Get help with a technical problem – Contact HMRC – GOV.UK"
+      bankDetailsPage.assertTitle("Get help with a technical problem – Contact HMRC – GOV.UK")
 
       And("The new tab should have the correct URL")
       bankDetailsPage.currentUrl should include("contact/report-technical-problem")
@@ -182,7 +182,7 @@ class ReportPageNotWorkingJourneySpec extends BaseSpec {
 
       And("The new tab should have the correct title")
       checkYourAnswersPage.switchToNewTab()
-      checkYourAnswersPage.currentTitle shouldBe "Get help with a technical problem – Contact HMRC – GOV.UK"
+      checkYourAnswersPage.assertTitle("Get help with a technical problem – Contact HMRC – GOV.UK")
 
       And("The new tab should have the correct URL")
       checkYourAnswersPage.currentUrl should include("contact/report-technical-problem")
@@ -233,7 +233,7 @@ class ReportPageNotWorkingJourneySpec extends BaseSpec {
 
       And("The new tab should have the correct title")
       confirmationPage.switchToNewTab()
-      confirmationPage.currentTitle shouldBe "Get help with a technical problem – Contact HMRC – GOV.UK"
+      confirmationPage.assertTitle("Get help with a technical problem – Contact HMRC – GOV.UK")
 
       And("The new tab should have the correct URL")
       confirmationPage.currentUrl should include("contact/report-technical-problem")

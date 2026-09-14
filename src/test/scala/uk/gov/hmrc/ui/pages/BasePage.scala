@@ -20,10 +20,12 @@ import uk.gov.hmrc.selenium.component.PageObject
 import uk.gov.hmrc.selenium.webdriver.Driver
 
 import java.time.Duration
-import org.openqa.selenium.support.ui.{ExpectedConditions, FluentWait, Wait}
+import org.openqa.selenium.support.ui.{ExpectedConditions, FluentWait, Wait, WebDriverWait}
 import uk.gov.hmrc.configuration.TestEnvironment
 import org.openqa.selenium.By
 import org.openqa.selenium.WebDriver
+import org.scalatest.matchers.must.Matchers.include
+import org.scalatest.matchers.should.Matchers.should
 
 import java.net.URI
 import scala.jdk.CollectionConverters.*
@@ -40,7 +42,7 @@ trait BasePage extends PageObject {
   def currentTitle: String = driver.getTitle
 
   private val pageNotWorkingLocator: By = By.linkText("Is this page not working properly? (opens in new tab)")
-  private val backButtonLocator: By     = By.linkText("Back")
+  private val backButtonLocator: By     = By.cssSelector(".govuk-back-link")
   private val signOutLocator: By        = By.linkText("Sign out")
 
   def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
@@ -147,6 +149,30 @@ trait BasePage extends PageObject {
       .getOrElse(throw new NoSuchElementException("No main window handle found!"))
 
     driver.switchTo().window(firstWindow)
+  }
+
+  def isLocalEnvironment: Boolean =
+    Option(System.getProperty("environment")).contains("local")
+
+  def getBackLinkHref: String = {
+    val wait = new WebDriverWait(driver, Duration.ofSeconds(5))
+    wait.until(ExpectedConditions.presenceOfElementLocated(backButtonLocator)).getAttribute("href")
+  }
+
+  def goToPTAPageandValidate(): Unit = {
+    val targetHref         = getBackLinkHref
+    val expectedUrlSnippet = "personal-account"
+
+    if (isLocalEnvironment) {
+      // Local Mode: Validate the link destination without performing the click that crashes Firefox
+      targetHref should include(expectedUrlSnippet)
+    } else {
+      // CI/Staging Mode: Perform the full click and wait for navigation
+      click(backButtonLocator)
+      val wait = new WebDriverWait(driver, Duration.ofSeconds(5))
+      wait.until((d: org.openqa.selenium.WebDriver) => d.getCurrentUrl.contains(expectedUrlSnippet))
+      currentUrl should include(expectedUrlSnippet)
+    }
   }
 
   def goBackToPreviousPage(): Unit =
