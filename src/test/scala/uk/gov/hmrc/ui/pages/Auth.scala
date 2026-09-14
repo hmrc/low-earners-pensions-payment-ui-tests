@@ -54,27 +54,27 @@ object Auth extends BasePage {
 
   /*standard single payment journey*/
   def loginForStandardSinglePayment(): Unit =
-    submitLoginDetails("250", "AA123456D")
+    loginForPaymentJourney("250", "AA123456D")
 
   def loginForStandardSinglePaymentWithCL200(): Unit =
-    submitLoginDetails("200", "AA123456D")
+    loginForPaymentJourney("200", "AA123456D")
 
   def loginForStandardSinglePaymentWithRandomNino(): Unit = {
     logger.info(s"Random NINO: $randomNino")
-    submitLoginDetails("250", randomNino)
+    loginForPaymentJourney("250", randomNino)
   }
 
-  /*standard under payment journey*/
+  /*under payment journey*/
   def loginForUnderpaymentOnly(): Unit =
-    submitLoginDetails("250", "AB899999A")
+    loginForPaymentJourney("250", "AB899999A")
 
   def loginUsingAuthorityWizardWithNino(nino: String): Unit =
     logger.info(s"Random NINO: $nino")
-    submitLoginDetails("250", nino)
+    loginForPaymentJourney("250", nino)
 
   def getRandomNino(): String = randomNino
 
-  def submitLoginDetails(confidenceLevelValue: String, ninoValue: String): Unit = {
+  def loginForPaymentJourney(confidenceLevelValue: String, ninoValue: String): Unit = {
     getCurrentUrl should startWith(authUrl)
     sendKeys(redirectUrlFieldLocator, baseUrl)
     selectByValue(confidenceLevelFieldLocator, confidenceLevelValue)

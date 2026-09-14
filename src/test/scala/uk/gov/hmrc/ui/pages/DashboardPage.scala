@@ -30,7 +30,7 @@ object DashboardPage extends BasePage {
 
   // Available Payments Table
   private val availablePaymentsInset: By                  = By.cssSelector("div.govuk-inset-text")
-  private val availablePaymentsTableCaption: By           = By.cssSelector("#dashboard_table_available_payments caption")
+  private val availablePaymentsTableCaption: By           = By.cssSelector("h2.govuk-heading-m:nth-of-type(1)")
   private val availablePaymentsColumns: By                = By.cssSelector("#dashboard_table_available_payments thead tr th")
   private val availablePaymentsRows: By                   = By.cssSelector("#dashboard_table_available_payments tbody tr")
   private val availablePaymentsTaxYearHeader: By          = By.id("dashboard_table_available_payments_header_taxYear")
@@ -45,10 +45,8 @@ object DashboardPage extends BasePage {
   private val availablePaymentsBankDetailsText: By        = By.cssSelector("p.govuk-body.govuk-\\!-margin-bottom-6")
 
   // Payment History Table
-  private val paymentHistoryInset: By     = By.cssSelector("div.govuk-inset-text p:not(.govuk-body)")
-  private val cancelledCountInsetLink: By = By.cssSelector("div.govuk-inset-text strong.govuk-\\!-font-weight-bold")
-
-  private val paymentHistoryTableCaption: By       = By.cssSelector("#dashboard_table_payment_history caption")
+  private val cancelledCountInsetLink: By          = By.cssSelector("div.govuk-inset-text strong.govuk-\\!-font-weight-bold")
+  private val paymentHistoryTableCaption: By       = By.cssSelector("h2.govuk-heading-m:nth-of-type(2)")
   private val paymentHistoryColumns: By            = By.cssSelector("#dashboard_table_payment_history thead tr th")
   private val paymentHistoryRows: By               = By.cssSelector("#dashboard_table_payment_history tbody tr")
   private val paymentHistoryTaxYearHeader: By      = By.id("dashboard_table_payment_history_header_taxYear")
@@ -61,13 +59,12 @@ object DashboardPage extends BasePage {
   private val bannerTitleLocator: By = By.id("govuk-notification-banner-title")
   private val logger                 = LoggerFactory.getLogger(getClass.getName)
 
-  private val breakdownPathUrl: String            = s"$servicePath/${BreakdownPage.path}"
-  private val breakdownLinkLocator: By            =
+  private val breakdownPathUrl: String = s"$servicePath/${BreakdownPage.path}"
+  private val breakdownLinkLocator: By =
     By.cssSelector(s"a[href*='$breakdownPathUrl']")
-  private val paidCalculationLinkLocator: By      =
-    By.cssSelector(s"a[href*='$breakdownPathUrl?id=${BreakdownPage.paidPaymentId}']")
-  private val cancelledCalculationLinkLocator: By =
-    By.cssSelector(s"a[href*='$breakdownPathUrl?id=${BreakdownPage.cancelledPaymentId}']")
+
+  private def checkCalculationLinkLocator(paymentId: String): By =
+    By.cssSelector(s"a[href*='$breakdownPathUrl?id=$paymentId']")
 
   def actionButtonText: String = getText(breakdownLinkLocator)
 
@@ -130,14 +127,26 @@ object DashboardPage extends BasePage {
   def paymentHistoryStatus(rowIndex: Int): String       = paymentHistoryTableRows(rowIndex)(3)
   def paymentHistoryAction(rowIndex: Int): String       = paymentHistoryTableRows(rowIndex)(4)
 
-  def cancelledInsetText: String = getText(paymentHistoryInset)
   def cancelledCountText: String = getText(cancelledCountInsetLink)
 
-  def clickPaidCalculationLink(): Unit =
-    click(paidCalculationLinkLocator)
+  private def insetTextContaining(snippet: String): By =
+    By.xpath(s"//div[contains(@class,'govuk-inset-text') and contains(normalize-space(.), '$snippet')]")
 
-  def clickCancelledCalculationLink(): Unit =
-    click(cancelledCalculationLinkLocator)
+  def cancelledInsetText: String =
+    getText(insetTextContaining("We cancelled"))
+
+  def paidStatusInsetText: String =
+    getText(insetTextContaining("Payments with the 'Paid' status"))
+
+  def suspendedStatusInsetText: String =
+    getText(insetTextContaining("suspended")) // Adjust snippet to match your suspended text
+
+  // Helper to safely check if a specific inset text block is visible
+  def isSuspendedInsetTextDisplayed: Boolean =
+    isElementPresent(insetTextContaining("suspended"))
+
+  def clickCheckCalculationLink(id: String): Unit =
+    click(checkCalculationLinkLocator(id))
 
   def verifyLockoutBanner(): Unit = {
     // 1. Verify the Banner Title is exactly "Important"

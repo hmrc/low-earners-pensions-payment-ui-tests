@@ -23,9 +23,7 @@ import org.scalatest.matchers.should.Matchers.*
 
 object BreakdownPage extends BasePage {
 
-  val path                       = "payment-breakdown"
-  val paidPaymentId: String      = "P-2022-1"
-  val cancelledPaymentId: String = "C-2024-1"
+  val path = "payment-breakdown"
 
   // Page heading
   private val pageHeadingLocator: By =
@@ -41,7 +39,8 @@ object BreakdownPage extends BasePage {
   private val insetTextHeadingsLocator: By =
     By.cssSelector("div.govuk-summary-card h2.govuk-summary-card__title")
 
-  private val continueButton: By = By.linkText("Continue")
+  private val continueButton: By         = By.linkText("Continue")
+  private val dashboardReturnLocator: By = By.id("barsLockFlag")
 
   def continue(): Unit =
     click(continueButton)
@@ -53,11 +52,8 @@ object BreakdownPage extends BasePage {
 
   def paragraphBodyText(index: Int): String = getText(bodyParagraphTexts, index)
 
-  def checkPaidJourneyUrl(): Unit =
-    currentUrl should include(s"$servicePath/$path?id=$paidPaymentId")
-
-  def checkCancelledJourneyUrl(): Unit =
-    currentUrl should include(s"$servicePath/$path?id=$cancelledPaymentId")
+  def checkCalculationourneyUrl(paymentId: String): Unit =
+    currentUrl should include(s"$servicePath/$path?id=$paymentId")
 
   // Get all inset blocks as a list
   def insetTextBlocks: List[String] =
@@ -106,4 +102,6 @@ object BreakdownPage extends BasePage {
     insetTextBlock(index)  should include(s"Your new total amount $newTotal")
     insetTextBlock(index)  should include(s"Amount already received $topUp")
     insetTextBlock(index)  should include(s"Additional amount due $additionalAmount")
+
+  def returnToYourPayments: Unit = click(dashboardReturnLocator)
 }

@@ -28,32 +28,62 @@ class CalculationLinkJourneySpec extends BaseSpec {
     super.beforeEach()
     Given("The user enters the auth details")
     auth.goToAuthorityWizard()
-    auth.loginForStandardSinglePayment()
+    auth.loginForPaymentJourney("250", "AA223456D")
 
-    And("The user click the Continue button on Start Page")
+    When("The user click the Continue button on Start Page")
     startPage.checkJourneyUrl()
-
-    And("The user click the Continue button on Dashboard page")
-    startPage.checkJourneyUrl()
-
-    And("The user click the Continue button on Start Page")
     startPage.continue()
 
-    And("The user navigates to the Dashboard Page")
+    Then("The user will be navigated to the Dashboard page")
     dashboardPage.checkJourneyUrl()
+
+    And("The Page Heading Text should be correct")
+    dashboardPage.pageHeadingText shouldBe "Your low earner's pension payments"
 
   Feature(
     "As a PAYE individual I need to check the calculation for different Payment History Status"
   ) {
 
     Scenario(
-      "Dashboard Page - Check Calculation for Paid Status"
+      "Dashboard Page - Standard Payment - Check Calculation for Paid Status"
     ) {
+      And("The Available Payments table caption should be correct")
+      dashboardPage.availablePaymentsTableCaptionText shouldBe "Available payments"
+
+      And("The Available Payments total payments text should be correct")
+      dashboardPage.availablePaymentsTotalPaymentsText shouldBe "You do not have any available payments."
+
+      Then("The Payment History table Inset should be correct")
+      dashboardPage.cancelledInsetText shouldBe "We cancelled 2 of your payments. Cancelled payments will be replaced by a new payment."
+
+      And("The Payment history table caption should be correct")
+      dashboardPage.paymentHistoryTableCaptionText shouldBe "Payment history"
+
+      And("The correct number of rows should be displayed for Payment history")
+      dashboardPage.paymentHistoryTableRowCount shouldBe 5
+
+      And("The correct number of columns should be displayed for Payment history")
+      dashboardPage.paymentHistoryTableColumnCount shouldBe 5
+
+      And("The Payment history table headers should be displayed")
+      dashboardPage.paymentHistoryTaxYearHeaderText      shouldBe "Tax year"
+      dashboardPage.paymentHistoryAmountHeaderText       shouldBe "Amount"
+      dashboardPage.paymentHistoryDateAcceptedHeaderText shouldBe "Date accepted"
+      dashboardPage.paymentHistoryStatusHeaderText       shouldBe "Status"
+      dashboardPage.paymentHistoryActionHeaderText       shouldBe "Action"
+
+      And("The Payment history first row should display correct values")
+      dashboardPage.paymentHistoryTaxYear(2)                                              shouldBe "6 April 2024 to 5 April 2025"
+      dashboardPage.paymentHistoryAmount(2)                                               shouldBe "£100"
+      dashboardPage.isDateWithinTheTimeFrame(dashboardPage.paymentHistoryDateAccepted(2)) shouldBe true
+      dashboardPage.paymentHistoryStatus(2)                                               shouldBe "Paid"
+      dashboardPage.paymentHistoryAction(2)                                               shouldBe "Check calculation\n6 April 2024 to 5 April 2025"
+
       When("The user clicks the calculation link for the Paid status")
-      dashboardPage.clickPaidCalculationLink()
+      dashboardPage.clickCheckCalculationLink("P-2024-1")
 
       And("The user lands on the breakdown page")
-      breakdownPage.checkPaidJourneyUrl()
+      breakdownPage.checkCalculationourneyUrl("P-2024-1")
 
       Then("The page heading should show correct amount")
       breakdownPage.pageHeadingText shouldBe "Your £100 paid payment calculation"
@@ -66,21 +96,81 @@ class CalculationLinkJourneySpec extends BaseSpec {
       And("The inset text should contain correct contribution details")
       breakdownPage.verifyStandardPaymentInsetBlock(
         0,
-        "6 April 2022 to 5 April 2023",
+        "6 April 2024 to 5 April 2025",
         "£500",
         "20%",
         "£100"
       )
+
+      And("The user click Return to your payments")
+      breakdownPage.returnToYourPayments
+
+      Then("The user will be navigated to the Dashboard page")
+      dashboardPage.checkJourneyUrl()
     }
 
     Scenario(
-      "Dashboard Page - Check Calculation for Cancelled Status"
+      "Dashboard Page - Under Payment - Check Calculation for Paid Status"
     ) {
-      When("The user clicks the calculation link for the Cancelled status")
-      dashboardPage.clickCancelledCalculationLink()
+      And("The Payment history first row should display correct values")
+      dashboardPage.paymentHistoryTaxYear(3)                                              shouldBe "6 April 2024 to 5 April 2025"
+      dashboardPage.paymentHistoryAmount(3)                                               shouldBe "£100"
+      dashboardPage.isDateWithinTheTimeFrame(dashboardPage.paymentHistoryDateAccepted(3)) shouldBe true
+      dashboardPage.paymentHistoryStatus(3)                                               shouldBe "Paid"
+      dashboardPage.paymentHistoryAction(3)                                               shouldBe "Check calculation\n6 April 2024 to 5 April 2025"
+
+      When("The user clicks the calculation link for the Under payment Paid status")
+      dashboardPage.clickCheckCalculationLink("P-2024-3")
 
       And("The user lands on the breakdown page")
-      breakdownPage.checkCancelledJourneyUrl()
+      breakdownPage.checkCalculationourneyUrl("P-2024-3")
+
+      Then("The page heading should show correct amount")
+      breakdownPage.pageHeadingText shouldBe "Your additional £100 paid payment calculation"
+
+      And("The body text should be correct")
+      breakdownPage.paragraphBodyText(
+        0
+      ) shouldBe "You were not paid enough in your previous payment for this tax year and we've recalculated the amount."
+
+      And("The body text should be correct")
+      breakdownPage.paragraphBodyText(
+        1
+      ) shouldBe "This is because we've received new information about how much you've earned."
+
+      And("The inset text should contain correct contribution details")
+      breakdownPage.verifyUnderPaymentInsetBlock(
+        0,
+        "6 April 2024 to 5 April 2025",
+        "£1000",
+        "20%",
+        "£200",
+        "£100",
+        "£100"
+      )
+
+      And("The user click Return to your payments")
+      breakdownPage.returnToYourPayments
+
+      Then("The user will be navigated to the Dashboard page")
+      dashboardPage.checkJourneyUrl()
+    }
+
+    Scenario(
+      "Dashboard Page - Standard Payment - Check Calculation for Cancelled Status"
+    ) {
+      And("The Payment history first row should display correct values")
+      dashboardPage.paymentHistoryTaxYear(1)      shouldBe "6 April 2023 to 5 April 2024"
+      dashboardPage.paymentHistoryAmount(1)       shouldBe "£100"
+      dashboardPage.paymentHistoryDateAccepted(1) shouldBe "N/A"
+      dashboardPage.paymentHistoryStatus(1)       shouldBe "Cancelled"
+      dashboardPage.paymentHistoryAction(1)       shouldBe "Check calculation\n6 April 2023 to 5 April 2024"
+
+      When("The user clicks the calculation link for the Cancelled status")
+      dashboardPage.clickCheckCalculationLink("C-2023-1")
+
+      And("The user lands on the breakdown page")
+      breakdownPage.checkCalculationourneyUrl("C-2023-1")
 
       Then("The page heading should show correct amount")
       breakdownPage.pageHeadingText shouldBe "Your £100 cancelled payment calculation"
@@ -93,11 +183,58 @@ class CalculationLinkJourneySpec extends BaseSpec {
       And("The inset text should contain correct contribution details")
       breakdownPage.verifyStandardPaymentInsetBlock(
         0,
-        "6 April 2024 to 5 April 2025",
+        "6 April 2023 to 5 April 2024",
         "£500",
         "20%",
         "£100"
       )
+
+      And("The user click Return to your payments")
+      breakdownPage.returnToYourPayments
+
+      Then("The user will be navigated to the Dashboard page")
+      dashboardPage.checkJourneyUrl()
+    }
+    Scenario(
+      "Dashboard Page - Under Payment - Check Calculation for Cancelled Status"
+    ) {
+      And("The Payment history first row should display correct values")
+      dashboardPage.paymentHistoryTaxYear(0)      shouldBe "6 April 2024 to 5 April 2025"
+      dashboardPage.paymentHistoryAmount(0)       shouldBe "£100"
+      dashboardPage.paymentHistoryDateAccepted(0) shouldBe "N/A"
+      dashboardPage.paymentHistoryStatus(0)       shouldBe "Cancelled"
+      dashboardPage.paymentHistoryAction(0)       shouldBe "Check calculation\n6 April 2024 to 5 April 2025"
+
+      When("The user clicks the calculation link for the Cancelled status")
+      dashboardPage.clickCheckCalculationLink("C-2024-2")
+
+      And("The user lands on the breakdown page")
+      breakdownPage.checkCalculationourneyUrl("C-2024-2")
+
+      Then("The page heading should show correct amount")
+      breakdownPage.pageHeadingText shouldBe "Your additional £100 cancelled payment calculation"
+
+      And("The body text should be correct")
+      breakdownPage.paragraphBodyText(
+        0
+      ) shouldBe "Following a review of your entitlement, we have cancelled this payment. As a result, this payment will not be made."
+
+      And("The inset text should contain correct contribution details")
+      breakdownPage.verifyUnderPaymentInsetBlock(
+        0,
+        "6 April 2024 to 5 April 2025",
+        "£1000",
+        "20%",
+        "£200",
+        "£100",
+        "£100"
+      )
+
+      And("The user click Return to your payments")
+      breakdownPage.returnToYourPayments
+
+      Then("The user will be navigated to the Dashboard page")
+      dashboardPage.checkJourneyUrl()
     }
   }
 }
