@@ -36,18 +36,18 @@ class UnderpaymentJourneySpec extends BaseSpec {
       "Underpayment Journey - Submit the bank account details and Navigate to confirmation page"
     ) {
 
-      Given("User enters the auth details")
+      Given("User enters the auth details for Under Payment Journey")
       auth.goToAuthorityWizard()
-      auth.loginForUnderpaymentOnly()
+      auth.loginForPaymentJourney("250", "AB899999A")
 
       When("The user click the Continue button on Start Page")
       startPage.checkJourneyUrl()
       startPage.continue()
 
-      When("The user click the Continue button on Dashboard page")
+      Then("The user will be navigated to the Dashboard page")
       dashboardPage.checkJourneyUrl()
 
-      Then("The Page Heading Text should be correct")
+      And("The Page Heading Text should be correct")
       dashboardPage.pageHeadingText shouldBe "Your low earner's pension payments"
 
       And("The Available Payments table caption should be correct")
