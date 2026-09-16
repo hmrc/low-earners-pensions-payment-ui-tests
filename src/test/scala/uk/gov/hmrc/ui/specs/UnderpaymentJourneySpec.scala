@@ -137,7 +137,7 @@ class UnderpaymentJourneySpec extends BaseSpec {
       And("The validation body text should be correct")
       breakdownPage.paragraphBodyText(
         2
-      ) shouldBe "If you think the amounts are wrong, you can contact us (opens in new tab)."
+      ) shouldBe "If you think the amounts are wrong, you can call us on 0300 322 9665."
 
       And("The user click the Continue link")
       breakdownPage.continue()
