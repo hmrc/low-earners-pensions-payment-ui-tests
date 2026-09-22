@@ -133,7 +133,7 @@ object DashboardPage extends BasePage {
     By.xpath(s"//div[contains(@class,'govuk-inset-text') and contains(normalize-space(.), '$snippet')]")
 
   def cancelledInsetText: String =
-    getText(insetTextContaining("We cancelled"))
+    getText(insetTextContaining("we have cancelled"))
 
   def paidStatusInsetText: String =
     getText(insetTextContaining("Payments with the 'Paid' status"))

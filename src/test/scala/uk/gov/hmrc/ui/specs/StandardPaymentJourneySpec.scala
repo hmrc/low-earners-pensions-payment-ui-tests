@@ -82,7 +82,7 @@ class StandardPaymentJourneySpec extends BaseSpec {
       dashboardPage.availablePaymentsBankDetailsMessage shouldBe "To accept this payment, you need to provide us with your bank details."
 
       Then("The Payment History table Inset should be correct")
-      dashboardPage.cancelledInsetText shouldBe "We cancelled 1 of your payments. Cancelled payments will be replaced by a new payment."
+      dashboardPage.cancelledInsetText shouldBe "Following a review of your entitlement, we have cancelled 1 of your payments. As a result, this payment will not be made."
 
       And("The Payment History Cancelled Count Text should be correct")
       dashboardPage.cancelledCountText shouldBe "1"
