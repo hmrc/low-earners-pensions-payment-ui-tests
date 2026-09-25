@@ -54,7 +54,7 @@ class CalculationLinkJourneySpec extends BaseSpec {
       dashboardPage.availablePaymentsTotalPaymentsText shouldBe "You do not have any available payments."
 
       Then("The Payment History table Inset should be correct")
-      dashboardPage.cancelledInsetText shouldBe "We cancelled 2 of your payments. Cancelled payments will be replaced by a new payment."
+      dashboardPage.cancelledInsetText shouldBe "Following a review of your entitlement, we have cancelled 2 of your payments. As a result, these payments will not be made."
 
       And("The Payment history table caption should be correct")
       dashboardPage.paymentHistoryTableCaptionText shouldBe "Payment history"
