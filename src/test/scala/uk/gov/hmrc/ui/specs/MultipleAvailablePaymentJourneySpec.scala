@@ -60,32 +60,31 @@ class MultipleAvailablePaymentJourneySpec extends BaseSpec {
       dashboardPage.availablePaymentsTableColumnCount shouldBe 4
 
       And("The Available Payments able headers should be displayed")
-      dashboardPage.availablePaymentsTaxYearHeaderText shouldBe "Tax year"
-      dashboardPage.availablePaymentsAmountHeaderText shouldBe "Amount"
+      dashboardPage.availablePaymentsTaxYearHeaderText        shouldBe "Tax year"
+      dashboardPage.availablePaymentsAmountHeaderText         shouldBe "Amount"
       dashboardPage.availablePaymentsAvailableUntilHeaderText shouldBe "Available until"
-      dashboardPage.availablePaymentsStatusHeaderText shouldBe "Status"
+      dashboardPage.availablePaymentsStatusHeaderText         shouldBe "Status"
 
       And("The Available Payments first row should display correct values")
-      dashboardPage.availablePaymentsTaxYear(0) shouldBe "6 April 2023 to 5 April 2024"
-      dashboardPage.availablePaymentsAmount(0) shouldBe "£200"
+      dashboardPage.availablePaymentsTaxYear(0)        shouldBe "6 April 2023 to 5 April 2024"
+      dashboardPage.availablePaymentsAmount(0)         shouldBe "£200"
       dashboardPage.availablePaymentsAvailableUntil(0) shouldBe "5 April 2028"
-      dashboardPage.availablePaymentsStatus(0) shouldBe "Available"
-      dashboardPage.availablePaymentsIsAvailable(0) shouldBe true
+      dashboardPage.availablePaymentsStatus(0)         shouldBe "Available"
+      dashboardPage.availablePaymentsIsAvailable(0)    shouldBe true
 
       And("The Available Payments second row should display correct values")
-      dashboardPage.availablePaymentsTaxYear(1) shouldBe "6 April 2024 to 5 April 2025"
-      dashboardPage.availablePaymentsAmount(1) shouldBe "£200"
+      dashboardPage.availablePaymentsTaxYear(1)        shouldBe "6 April 2024 to 5 April 2025"
+      dashboardPage.availablePaymentsAmount(1)         shouldBe "£200"
       dashboardPage.availablePaymentsAvailableUntil(1) shouldBe "5 April 2029"
-      dashboardPage.availablePaymentsStatus(1) shouldBe "Available"
-      dashboardPage.availablePaymentsIsAvailable(1) shouldBe true
+      dashboardPage.availablePaymentsStatus(1)         shouldBe "Available"
+      dashboardPage.availablePaymentsIsAvailable(1)    shouldBe true
 
       And("The Available Payments third row should display correct values")
-      dashboardPage.availablePaymentsTaxYear(2) shouldBe "6 April 2025 to 5 April 2026"
-      dashboardPage.availablePaymentsAmount(2) shouldBe "£200"
+      dashboardPage.availablePaymentsTaxYear(2)        shouldBe "6 April 2025 to 5 April 2026"
+      dashboardPage.availablePaymentsAmount(2)         shouldBe "£200"
       dashboardPage.availablePaymentsAvailableUntil(2) shouldBe "5 April 2030"
-      dashboardPage.availablePaymentsStatus(2) shouldBe "Available"
-      dashboardPage.availablePaymentsIsAvailable(2) shouldBe true
-
+      dashboardPage.availablePaymentsStatus(2)         shouldBe "Available"
+      dashboardPage.availablePaymentsIsAvailable(2)    shouldBe true
 
       And("The Available Payments total payments text should be correct")
       dashboardPage.availablePaymentsTotalPaymentsText shouldBe "You have a total of £600 in payments available to accept."
