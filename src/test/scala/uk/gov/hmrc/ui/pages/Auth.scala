@@ -68,6 +68,18 @@ object Auth extends BasePage {
   def loginForUnderpaymentOnly(): Unit =
     loginForPaymentJourney("250", "AB899999A")
 
+  /*Multiple Payment Journey*/
+  def loginForMultiplePaymentJourney(): Unit =
+    loginForPaymentJourney("250", "AA923456D")
+
+  /*No Available Payment Journey*/
+  def loginForNoAvailblePaymentsJourney(): Unit =
+    loginForPaymentJourney("250", "AA323456D")
+
+  /*InEligible Account Journey*/
+  def loginForInEligibleAccountJourney(): Unit =
+    loginForPaymentJourney("250", "ER404121D")
+
   def loginUsingAuthorityWizardWithNino(nino: String): Unit =
     logger.info(s"Random NINO: $nino")
     loginForPaymentJourney("250", nino)

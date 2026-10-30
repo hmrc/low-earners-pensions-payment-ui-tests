@@ -45,16 +45,19 @@ object DashboardPage extends BasePage {
   private val availablePaymentsBankDetailsText: By        = By.cssSelector("p.govuk-body.govuk-\\!-margin-bottom-6")
 
   // Payment History Table
-  private val cancelledCountInsetLink: By          = By.cssSelector("div.govuk-inset-text strong.govuk-\\!-font-weight-bold")
-  private val paymentHistoryTableCaption: By       = By.cssSelector("h2.govuk-heading-m:nth-of-type(2)")
-  private val paymentHistoryColumns: By            = By.cssSelector("#dashboard_table_payment_history thead tr th")
-  private val paymentHistoryRows: By               = By.cssSelector("#dashboard_table_payment_history tbody tr")
-  private val paymentHistoryTaxYearHeader: By      = By.id("dashboard_table_payment_history_header_taxYear")
-  private val paymentHistoryAmountHeader: By       = By.id("dashboard_table_payment_history_header_amount")
-  private val paymentHistoryDateAcceptedHeader: By = By.id("dashboard_table_payment_history_header_dateAccepted")
-  private val paymentHistoryStatusHeader: By       = By.id("dashboard_table_payment_history_header_status")
-  private val paymentHistoryActionHeader: By       = By.id("dashboard_table_payment_history_header_action")
-  private final val MaxAllowedDaysDifference: Int  = 10
+  private val cancelledCountInsetLink: By            = By.cssSelector("div.govuk-inset-text strong.govuk-\\!-font-weight-bold")
+  private val paymentHistoryTableCaption: By         = By.cssSelector("h2.govuk-heading-m:nth-of-type(2)")
+  private val paymentHistoryColumns: By              = By.cssSelector("#dashboard_table_payment_history thead tr th")
+  private val paymentHistoryRows: By                 = By.cssSelector("#dashboard_table_payment_history tbody tr")
+  private val paymentHistoryTaxYearHeader: By        = By.id("dashboard_table_payment_history_header_taxYear")
+  private val paymentHistoryAmountHeader: By         = By.id("dashboard_table_payment_history_header_amount")
+  private val paymentHistoryDateAcceptedHeader: By   = By.id("dashboard_table_payment_history_header_dateAccepted")
+  private val paymentHistoryStatusHeader: By         = By.id("dashboard_table_payment_history_header_status")
+  private val paymentHistoryActionHeader: By         = By.id("dashboard_table_payment_history_header_action")
+  private val paymentHistoryParagraphTextLocator: By =
+    By.xpath("//p[contains(@class, 'govuk-body')][contains(., 'previous payments')]")
+
+  private final val MaxAllowedDaysDifference: Int = 10
 
   private val bannerTitleLocator: By = By.id("govuk-notification-banner-title")
   private val logger                 = LoggerFactory.getLogger(getClass.getName)
@@ -114,6 +117,7 @@ object DashboardPage extends BasePage {
   def paymentHistoryDateAcceptedHeaderText: String = getText(paymentHistoryDateAcceptedHeader).trim
   def paymentHistoryStatusHeaderText: String       = getText(paymentHistoryStatusHeader).trim
   def paymentHistoryActionHeaderText: String       = getText(paymentHistoryActionHeader).trim
+  def paymentHistoryParagraphText: String          = getText(paymentHistoryParagraphTextLocator).trim
 
   def paymentHistoryTableRows: List[List[String]]    = getTableRows(paymentHistoryRows)
   def paymentHistoryTableRowCount: Int               = getTableRowCount(paymentHistoryRows)
