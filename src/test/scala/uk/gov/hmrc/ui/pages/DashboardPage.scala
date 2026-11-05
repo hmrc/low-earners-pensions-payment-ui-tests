@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
+import scala.jdk.CollectionConverters._
 
 object DashboardPage extends BasePage {
 
@@ -63,16 +64,15 @@ object DashboardPage extends BasePage {
   private val logger                 = LoggerFactory.getLogger(getClass.getName)
 
   private val breakdownPathUrl: String = s"$servicePath/${BreakdownPage.path}"
-  private val breakdownLinkLocator: By =
-    By.cssSelector(s"a[href*='$breakdownPathUrl']")
+  private val acceptButtonLocator: By  = By.cssSelector("#continue-button")
 
   private def checkCalculationLinkLocator(paymentId: String): By =
     By.cssSelector(s"a[href*='$breakdownPathUrl?id=$paymentId']")
 
-  def actionButtonText: String = getText(breakdownLinkLocator)
+  def actionButtonText: String = getText(acceptButtonLocator)
 
   def clickActionButton(): Unit =
-    click(breakdownLinkLocator)
+    click(acceptButtonLocator)
 
   def checkJourneyUrl(): Unit =
     super.checkJourneyUrl(path)
@@ -131,6 +131,10 @@ object DashboardPage extends BasePage {
   def paymentHistoryStatus(rowIndex: Int): String       = paymentHistoryTableRows(rowIndex)(3)
   def paymentHistoryAction(rowIndex: Int): String       = paymentHistoryTableRows(rowIndex)(4)
 
+  def isAcceptButtonDisplayed: Boolean =
+    // findElements returns a List; if empty, the element doesn't exist on the page
+    driver.findElements(acceptButtonLocator).asScala.nonEmpty
+
   def cancelledCountText: String = getText(cancelledCountInsetLink)
 
   private def insetTextContaining(snippet: String): By =
@@ -140,7 +144,7 @@ object DashboardPage extends BasePage {
     getText(insetTextContaining("we have cancelled"))
 
   def paidStatusInsetText: String =
-    getText(insetTextContaining("Payments with the 'Paid' status"))
+    getText(insetTextContaining("Payments with the"))
 
   def suspendedStatusInsetText: String =
     getText(insetTextContaining("suspended")) // Adjust snippet to match your suspended text
