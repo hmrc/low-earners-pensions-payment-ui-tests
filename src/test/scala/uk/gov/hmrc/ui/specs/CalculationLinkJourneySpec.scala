@@ -165,7 +165,7 @@ class CalculationLinkJourneySpec extends BaseSpec {
     Scenario(
       "Dashboard Page - Standard Payment - Check Calculation for Cancelled Status"
     ) {
-      And("The Payment history first row should display correct values")
+      And("The Payment history second row should display correct values")
       dashboardPage.paymentHistoryTaxYear(1)      shouldBe "6 April 2023 to 5 April 2024"
       dashboardPage.paymentHistoryAmount(1)       shouldBe "£100"
       dashboardPage.paymentHistoryDateAccepted(1) shouldBe "N/A"
