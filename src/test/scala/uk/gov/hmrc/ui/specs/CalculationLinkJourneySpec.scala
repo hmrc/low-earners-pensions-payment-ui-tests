@@ -45,7 +45,7 @@ class CalculationLinkJourneySpec extends BaseSpec {
   ) {
 
     Scenario(
-      "Dashboard Page - Standard Payment - Check Calculation for Paid Status"
+      "Dashboard Page - No Available Payment Journey - Check Calculation for Paid Status"
     ) {
       And("The Available Payments table caption should be correct")
       dashboardPage.availablePaymentsTableCaptionText shouldBe "Available payments"
@@ -53,8 +53,14 @@ class CalculationLinkJourneySpec extends BaseSpec {
       And("The Available Payments total payments text should be correct")
       dashboardPage.availablePaymentsTotalPaymentsText shouldBe "You do not have any available payments."
 
+      Then("The accept payment button should not be displayed")
+      dashboardPage.isAcceptButtonDisplayed shouldBe false
+
       Then("The Payment History table Inset should be correct")
       dashboardPage.cancelledInsetText shouldBe "Following a review of your entitlement, we have cancelled 2 of your payments. As a result, these payments will not be made."
+
+      Then("The Payment History table Paid Inset should be correct")
+      dashboardPage.paidStatusInsetText shouldBe "Payments with the 'Paid' status will be in the bank account you provided within 7 working days."
 
       And("The Payment history table caption should be correct")
       dashboardPage.paymentHistoryTableCaptionText shouldBe "Payment history"
@@ -72,7 +78,7 @@ class CalculationLinkJourneySpec extends BaseSpec {
       dashboardPage.paymentHistoryStatusHeaderText       shouldBe "Status"
       dashboardPage.paymentHistoryActionHeaderText       shouldBe "Action"
 
-      And("The Payment history first row should display correct values")
+      And("The Payment history third row should display correct values")
       dashboardPage.paymentHistoryTaxYear(2)                                              shouldBe "6 April 2024 to 5 April 2025"
       dashboardPage.paymentHistoryAmount(2)                                               shouldBe "£100"
       dashboardPage.isDateWithinTheTimeFrame(dashboardPage.paymentHistoryDateAccepted(2)) shouldBe true
@@ -159,7 +165,7 @@ class CalculationLinkJourneySpec extends BaseSpec {
     Scenario(
       "Dashboard Page - Standard Payment - Check Calculation for Cancelled Status"
     ) {
-      And("The Payment history first row should display correct values")
+      And("The Payment history second row should display correct values")
       dashboardPage.paymentHistoryTaxYear(1)      shouldBe "6 April 2023 to 5 April 2024"
       dashboardPage.paymentHistoryAmount(1)       shouldBe "£100"
       dashboardPage.paymentHistoryDateAccepted(1) shouldBe "N/A"
