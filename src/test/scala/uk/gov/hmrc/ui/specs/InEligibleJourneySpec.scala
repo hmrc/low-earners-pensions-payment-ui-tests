@@ -20,7 +20,7 @@ import uk.gov.hmrc.ui.pages.*
 
 class InEligibleJourneySpec extends BaseSpec {
 
-  private val auth = Auth
+  private val auth           = Auth
   private val inEligiblePage = InEligiblePage
 
   Feature(
@@ -42,7 +42,9 @@ class InEligibleJourneySpec extends BaseSpec {
       inEligiblePage.pageHeadingText shouldBe "You cannot use this service"
 
       And("The new tab should have the correct title")
-      inEligiblePage.assertTitle(inEligiblePage.pageHeadingText + " - Accept your low earner's pension payment - GOV.UK")
+      inEligiblePage.assertTitle(
+        inEligiblePage.pageHeadingText + " - Accept your low earner's pension payment - GOV.UK"
+      )
 
       And("The Page Text should be correct")
       inEligiblePage.paragraphBodyText shouldBe "You are not eligible for the low earner's pension payment."

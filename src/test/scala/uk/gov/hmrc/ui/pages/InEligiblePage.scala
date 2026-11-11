@@ -20,12 +20,11 @@ import org.openqa.selenium.By
 import org.scalatest.matchers.should.Matchers.convertToStringShouldWrapperForVerb
 import org.scalatest.matchers.should.Matchers.*
 
-
 object InEligiblePage extends BasePage {
 
-  private val path                  = "not-eligible"
-  private val pageHeadingLocator: By = By.cssSelector("h1.govuk-heading-xl")
-  private val paragraphBodyLocator: By  = By.cssSelector("p.govuk-body:nth-of-type(1)")
+  private val path                     = "not-eligible"
+  private val pageHeadingLocator: By   = By.cssSelector("h1.govuk-heading-xl")
+  private val paragraphBodyLocator: By = By.cssSelector("p.govuk-body:nth-of-type(1)")
 
   // 1st link: "Return to your personal tax account"
   private val returnToPtaLinkLocator: By =
@@ -38,12 +37,12 @@ object InEligiblePage extends BasePage {
   def checkJourneyUrl(): Unit =
     super.checkJourneyUrl(path)
 
-  def pageHeadingText: String = getText(pageHeadingLocator).trim
-  def paragraphBodyText: String = getText(paragraphBodyLocator).trim
-  def returnToPTAText: String = getText(returnToPtaLinkLocator).trim
+  def pageHeadingText: String            = getText(pageHeadingLocator).trim
+  def paragraphBodyText: String          = getText(paragraphBodyLocator).trim
+  def returnToPTAText: String            = getText(returnToPtaLinkLocator).trim
   def pageNotWorkingProperlyText: String = getText(reportTechnicalProblemLinkLocator).trim
 
-  def clickReturnToPtaLink(): Unit = click(returnToPtaLinkLocator)
+  def clickReturnToPtaLink(): Unit            = click(returnToPtaLinkLocator)
   def clickReportTechnicalProblemLink(): Unit = click(reportTechnicalProblemLinkLocator)
 
   def goToPTAPageFromInEligiblePageandValidate(): Unit = {
