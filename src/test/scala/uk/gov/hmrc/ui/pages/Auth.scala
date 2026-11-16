@@ -76,6 +76,9 @@ object Auth extends BasePage {
   def loginForInEligibleAccountJourney(): Unit =
     loginForPaymentJourney("250", "ER404121D")
 
+  def loginForSuspendedJourney(): Unit =
+    loginForPaymentJourney("250", "AA723456D")
+
   def loginUsingAuthorityWizardWithNino(nino: String): Unit =
     logger.info(s"Random NINO: $nino")
     loginForPaymentJourney("250", nino)

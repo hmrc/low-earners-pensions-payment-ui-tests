@@ -41,7 +41,8 @@ object DashboardPage extends BasePage {
   private val availablePaymentsStatusHeader: By           = By.id("dashboard_table_available_payments_header_status")
   private val availablePaymentsAvailableTag: By           = By.cssSelector("strong.govuk-tag--blue")
   private val availablePaymentsSuspendedTag: By           = By.cssSelector("strong.govuk-tag--yellow")
-  private val availablePaymentsTotalPaymentsParagraph: By = By.cssSelector("p.govuk-body")
+  private val availablePaymentsInsetTextLocator: By       = By.cssSelector("div.govuk-inset-text")
+  private val availablePaymentsTotalPaymentsParagraph: By = By.cssSelector("p.govuk-body:nth-of-type(1)")
   private val availablePaymentsTotalPaymentsAmount: By    = By.cssSelector("strong.govuk-\\!-font-weight-bold")
   private val availablePaymentsBankDetailsText: By        = By.cssSelector("p.govuk-body.govuk-\\!-margin-bottom-6")
 
@@ -106,6 +107,7 @@ object DashboardPage extends BasePage {
     hasElementInRow(availablePaymentsRows, rowIndex, availablePaymentsSuspendedTag)
 
   def availablePaymentsTotalPaymentsText: String       = getText(availablePaymentsTotalPaymentsParagraph)
+  def availablePaymentsInsetMessage: String            = getText(availablePaymentsInsetTextLocator)
   def availablePaymentsTotalPaymentsAmountText: String = getText(availablePaymentsTotalPaymentsAmount)
   def availablePaymentsBankDetailsMessage: String      = getText(availablePaymentsBankDetailsText)
 
