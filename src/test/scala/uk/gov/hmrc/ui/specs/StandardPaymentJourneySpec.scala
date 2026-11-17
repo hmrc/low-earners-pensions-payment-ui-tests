@@ -222,5 +222,76 @@ class StandardPaymentJourneySpec extends BaseSpec {
       And("The user navigate to confirmation page")
       confirmationPage.checkJourneyUrl()
     }
+    Scenario(
+      "Standard Payment Journey - Verify the account when an user is suspended"
+    ) {
+      Given("The user enters the auth details")
+      auth.goToAuthorityWizard()
+      auth.loginForSuspendedJourney()
+
+      When("The user navigates to the Start Page")
+      startPage.checkJourneyUrl()
+
+      When("The user click the Continue button on Start Page")
+      startPage.continue()
+
+      When("The user navigates to the Dashboard page")
+      dashboardPage.checkJourneyUrl()
+
+      And("The Available Payments table caption should be correct")
+      dashboardPage.availablePaymentsTableCaptionText shouldBe "Available payments"
+
+      And("The Available Payments total payments text should be correct")
+      dashboardPage.availablePaymentsInsetMessage shouldBe "Your payments are suspended. For more information, you can call us on 0300 322 9665."
+
+      Then("The accept payment button should not be displayed")
+      dashboardPage.isAcceptButtonDisplayed shouldBe false
+
+      And("The correct number of rows should be displayed for Available payments")
+      dashboardPage.availablePaymentsTableRowCount shouldBe 4
+
+      And("The correct number of columns should be displayed for Available payments")
+      dashboardPage.availablePaymentsTableColumnCount shouldBe 4
+
+      And("The Available Payments able headers should be displayed")
+      dashboardPage.availablePaymentsTaxYearHeaderText        shouldBe "Tax year"
+      dashboardPage.availablePaymentsAmountHeaderText         shouldBe "Amount"
+      dashboardPage.availablePaymentsAvailableUntilHeaderText shouldBe "Available until"
+      dashboardPage.availablePaymentsStatusHeaderText         shouldBe "Status"
+
+      And("The Available Payments second row should display correct values")
+      dashboardPage.availablePaymentsTaxYear(0)        shouldBe "6 April 2024 to 5 April 2025"
+      dashboardPage.availablePaymentsAmount(0)         shouldBe "£200"
+      dashboardPage.availablePaymentsAvailableUntil(0) shouldBe "5 April 2029"
+      dashboardPage.availablePaymentsStatus(0)         shouldBe "Suspended"
+      dashboardPage.availablePaymentsIsAvailable(0)    shouldBe false
+
+      And("The Available Payments first row should display correct values")
+      dashboardPage.availablePaymentsTaxYear(1)        shouldBe "6 April 2023 to 5 April 2024"
+      dashboardPage.availablePaymentsAmount(1)         shouldBe "£200"
+      dashboardPage.availablePaymentsAvailableUntil(1) shouldBe "5 April 2028"
+      dashboardPage.availablePaymentsStatus(1)         shouldBe "Suspended"
+      dashboardPage.availablePaymentsIsAvailable(1)    shouldBe false
+
+      And("The Available Payments third row should display correct values")
+      dashboardPage.availablePaymentsTaxYear(2)        shouldBe "6 April 2025 to 5 April 2026"
+      dashboardPage.availablePaymentsAmount(2)         shouldBe "£200"
+      dashboardPage.availablePaymentsAvailableUntil(2) shouldBe "5 April 2030"
+      dashboardPage.availablePaymentsStatus(2)         shouldBe "Suspended"
+      dashboardPage.availablePaymentsIsAvailable(2)    shouldBe false
+
+      And("The Available Payments second row should display correct values")
+      dashboardPage.availablePaymentsTaxYear(3)        shouldBe "6 April 2022 to 5 April 2023"
+      dashboardPage.availablePaymentsAmount(3)         shouldBe "£200"
+      dashboardPage.availablePaymentsAvailableUntil(3) shouldBe "5 April 2027"
+      dashboardPage.availablePaymentsStatus(3)         shouldBe "Suspended"
+      dashboardPage.availablePaymentsIsAvailable(3)    shouldBe false
+
+      And("The Payment history table caption should be correct")
+      dashboardPage.paymentHistoryTableCaptionText shouldBe "Payment history"
+
+      And("The Payment History paragraph text should be correct")
+      dashboardPage.paymentHistoryParagraphText shouldBe "You do not have any previous payments."
+    }
   }
 }
