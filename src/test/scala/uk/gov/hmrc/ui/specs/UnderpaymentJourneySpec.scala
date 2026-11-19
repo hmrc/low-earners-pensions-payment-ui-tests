@@ -20,13 +20,13 @@ import uk.gov.hmrc.ui.pages.{Auth, BankDetailsPage, BreakdownPage, CheckYourAnsw
 
 class UnderpaymentJourneySpec extends BaseSpec {
 
-  private val auth = Auth
-  private val startPage = StartPage
-  private val dashboardPage = DashboardPage
-  private val breakdownPage = BreakdownPage
-  private val bankDetailsPage = BankDetailsPage
+  private val auth                 = Auth
+  private val startPage            = StartPage
+  private val dashboardPage        = DashboardPage
+  private val breakdownPage        = BreakdownPage
+  private val bankDetailsPage      = BankDetailsPage
   private val checkYourAnswersPage = CheckYourAnswersPage
-  private val confirmationPage = ConfirmationPage
+  private val confirmationPage     = ConfirmationPage
 
   Feature(
     "As a PAYE Individual I need to claim the low income pension payment and view the status of payment for Underpayment journey"
@@ -60,17 +60,17 @@ class UnderpaymentJourneySpec extends BaseSpec {
       dashboardPage.availablePaymentsTableColumnCount shouldBe 4
 
       And("The Available Payments able headers should be displayed")
-      dashboardPage.availablePaymentsTaxYearHeaderText shouldBe "Tax year"
-      dashboardPage.availablePaymentsAmountHeaderText shouldBe "Amount"
+      dashboardPage.availablePaymentsTaxYearHeaderText        shouldBe "Tax year"
+      dashboardPage.availablePaymentsAmountHeaderText         shouldBe "Amount"
       dashboardPage.availablePaymentsAvailableUntilHeaderText shouldBe "Available until"
-      dashboardPage.availablePaymentsStatusHeaderText shouldBe "Status"
+      dashboardPage.availablePaymentsStatusHeaderText         shouldBe "Status"
 
       And("The Available Payments first row should display correct values")
-      dashboardPage.availablePaymentsTaxYear(0) shouldBe "6 April 2025 to 5 April 2026"
-      dashboardPage.availablePaymentsAmount(0) shouldBe "£50"
+      dashboardPage.availablePaymentsTaxYear(0)        shouldBe "6 April 2025 to 5 April 2026"
+      dashboardPage.availablePaymentsAmount(0)         shouldBe "£50"
       dashboardPage.availablePaymentsAvailableUntil(0) shouldBe "5 April 2030"
-      dashboardPage.availablePaymentsStatus(0) shouldBe "Available"
-      dashboardPage.availablePaymentsIsAvailable(0) shouldBe true
+      dashboardPage.availablePaymentsStatus(0)         shouldBe "Available"
+      dashboardPage.availablePaymentsIsAvailable(0)    shouldBe true
 
       And("The Available Payments total payments text should be correct")
       dashboardPage.availablePaymentsTotalPaymentsText shouldBe "You have a payment of £50 available to accept."
@@ -91,18 +91,18 @@ class UnderpaymentJourneySpec extends BaseSpec {
       dashboardPage.paymentHistoryTableColumnCount shouldBe 5
 
       And("The Payment history table headers should be displayed")
-      dashboardPage.paymentHistoryTaxYearHeaderText shouldBe "Tax year"
-      dashboardPage.paymentHistoryAmountHeaderText shouldBe "Amount"
+      dashboardPage.paymentHistoryTaxYearHeaderText      shouldBe "Tax year"
+      dashboardPage.paymentHistoryAmountHeaderText       shouldBe "Amount"
       dashboardPage.paymentHistoryDateAcceptedHeaderText shouldBe "Date accepted"
-      dashboardPage.paymentHistoryStatusHeaderText shouldBe "Status"
-      dashboardPage.paymentHistoryActionHeaderText shouldBe "Action"
+      dashboardPage.paymentHistoryStatusHeaderText       shouldBe "Status"
+      dashboardPage.paymentHistoryActionHeaderText       shouldBe "Action"
 
       And("The Payment history first row should display correct values")
-      dashboardPage.paymentHistoryTaxYear(0) shouldBe "6 April 2025 to 5 April 2026"
-      dashboardPage.paymentHistoryAmount(0) shouldBe "£100"
+      dashboardPage.paymentHistoryTaxYear(0)                                              shouldBe "6 April 2025 to 5 April 2026"
+      dashboardPage.paymentHistoryAmount(0)                                               shouldBe "£100"
       dashboardPage.isDateWithinTheTimeFrame(dashboardPage.paymentHistoryDateAccepted(0)) shouldBe true
-      dashboardPage.paymentHistoryStatus(0) shouldBe "Paid"
-      dashboardPage.paymentHistoryAction(0) shouldBe "Check calculation\n6 April 2025 to 5 April 2026"
+      dashboardPage.paymentHistoryStatus(0)                                               shouldBe "Paid"
+      dashboardPage.paymentHistoryAction(0)                                               shouldBe "Check calculation\n6 April 2025 to 5 April 2026"
 
       When("The user clicks the calculation link for the Paid status")
       dashboardPage.clickCheckCalculationLink("P-2025-2")
@@ -192,123 +192,124 @@ class UnderpaymentJourneySpec extends BaseSpec {
       And("The user navigate to confirmation page")
       confirmationPage.checkJourneyUrl()
     }
-  
-  Scenario(
-    "Underpayment Journey - Validate the Check calculation Text"
-  ) {
 
-    Given("User enters the auth details for Under Payment Journey")
-    auth.goToAuthorityWizard()
-    auth.loginForPaymentJourney("250", "AA823456D")
+    Scenario(
+      "Underpayment Journey - Validate the Check calculation Text"
+    ) {
 
-    When("The user click the Continue button on Start Page")
-    startPage.checkJourneyUrl()
-    startPage.continue()
+      Given("User enters the auth details for Under Payment Journey")
+      auth.goToAuthorityWizard()
+      auth.loginForPaymentJourney("250", "AA823456D")
 
-    Then("The user will be navigated to the Dashboard page")
-    dashboardPage.checkJourneyUrl()
+      When("The user click the Continue button on Start Page")
+      startPage.checkJourneyUrl()
+      startPage.continue()
 
-    And("The Page Heading Text should be correct")
-    dashboardPage.pageHeadingText shouldBe "Your low earner's pension payments"
+      Then("The user will be navigated to the Dashboard page")
+      dashboardPage.checkJourneyUrl()
 
-    And("The Available Payments table caption should be correct")
-    dashboardPage.availablePaymentsTableCaptionText shouldBe "Available payments"
+      And("The Page Heading Text should be correct")
+      dashboardPage.pageHeadingText shouldBe "Your low earner's pension payments"
 
-    And("The correct number of rows should be displayed for Available payments")
-    dashboardPage.availablePaymentsTableRowCount shouldBe 2
+      And("The Available Payments table caption should be correct")
+      dashboardPage.availablePaymentsTableCaptionText shouldBe "Available payments"
 
-    And("The correct number of columns should be displayed for Available payments")
-    dashboardPage.availablePaymentsTableColumnCount shouldBe 4
+      And("The correct number of rows should be displayed for Available payments")
+      dashboardPage.availablePaymentsTableRowCount shouldBe 2
 
-    And("The Available Payments able headers should be displayed")
-    dashboardPage.availablePaymentsTaxYearHeaderText shouldBe "Tax year"
-    dashboardPage.availablePaymentsAmountHeaderText shouldBe "Amount"
-    dashboardPage.availablePaymentsAvailableUntilHeaderText shouldBe "Available until"
-    dashboardPage.availablePaymentsStatusHeaderText shouldBe "Status"
+      And("The correct number of columns should be displayed for Available payments")
+      dashboardPage.availablePaymentsTableColumnCount shouldBe 4
 
-    And("The Available Payments first row should display correct values")
-    dashboardPage.availablePaymentsTaxYear(0) shouldBe "6 April 2022 to 5 April 2023"
-    dashboardPage.availablePaymentsAmount(0) shouldBe "£50"
-    dashboardPage.availablePaymentsAvailableUntil(0) shouldBe "5 April 2027"
-    dashboardPage.availablePaymentsStatus(0) shouldBe "Available"
-    dashboardPage.availablePaymentsIsAvailable(0) shouldBe true
+      And("The Available Payments able headers should be displayed")
+      dashboardPage.availablePaymentsTaxYearHeaderText        shouldBe "Tax year"
+      dashboardPage.availablePaymentsAmountHeaderText         shouldBe "Amount"
+      dashboardPage.availablePaymentsAvailableUntilHeaderText shouldBe "Available until"
+      dashboardPage.availablePaymentsStatusHeaderText         shouldBe "Status"
 
-    And("The Available Payments second row should display correct values")
-    dashboardPage.availablePaymentsTaxYear(1) shouldBe "6 April 2025 to 5 April 2026"
-    dashboardPage.availablePaymentsAmount(1) shouldBe "£200"
-    dashboardPage.availablePaymentsAvailableUntil(1) shouldBe "5 April 2030"
-    dashboardPage.availablePaymentsStatus(1) shouldBe "Available"
-    dashboardPage.availablePaymentsIsAvailable(1) shouldBe true
+      And("The Available Payments first row should display correct values")
+      dashboardPage.availablePaymentsTaxYear(0)        shouldBe "6 April 2022 to 5 April 2023"
+      dashboardPage.availablePaymentsAmount(0)         shouldBe "£50"
+      dashboardPage.availablePaymentsAvailableUntil(0) shouldBe "5 April 2027"
+      dashboardPage.availablePaymentsStatus(0)         shouldBe "Available"
+      dashboardPage.availablePaymentsIsAvailable(0)    shouldBe true
 
-    And("The Available Payments total payments text should be correct")
-    dashboardPage.availablePaymentsTotalPaymentsText shouldBe "You have a total of £250 in payments available to accept."
+      And("The Available Payments second row should display correct values")
+      dashboardPage.availablePaymentsTaxYear(1)        shouldBe "6 April 2025 to 5 April 2026"
+      dashboardPage.availablePaymentsAmount(1)         shouldBe "£200"
+      dashboardPage.availablePaymentsAvailableUntil(1) shouldBe "5 April 2030"
+      dashboardPage.availablePaymentsStatus(1)         shouldBe "Available"
+      dashboardPage.availablePaymentsIsAvailable(1)    shouldBe true
 
-    And("The bank details message should be correct")
-    dashboardPage.availablePaymentsBankDetailsMessage shouldBe "To accept these payments, you need to provide us with your bank details."
+      And("The Available Payments total payments text should be correct")
+      dashboardPage.availablePaymentsTotalPaymentsText shouldBe "You have a total of £250 in payments available to accept."
 
-    And("The action button should show Accept payments")
-    dashboardPage.actionButtonText shouldBe "Accept payments"
+      And("The bank details message should be correct")
+      dashboardPage.availablePaymentsBankDetailsMessage shouldBe "To accept these payments, you need to provide us with your bank details."
 
-    And("The Payment history table caption should be correct")
-    dashboardPage.paymentHistoryTableCaptionText shouldBe "Payment history"
+      And("The action button should show Accept payments")
+      dashboardPage.actionButtonText shouldBe "Accept payments"
 
-    Then("The Payment History table Paid Inset should be correct")
-    dashboardPage.paidStatusInsetText shouldBe "Payments with the 'Paid' status will be in the bank account you provided within 7 working days."
+      And("The Payment history table caption should be correct")
+      dashboardPage.paymentHistoryTableCaptionText shouldBe "Payment history"
 
-    And("The correct number of rows should be displayed for Payment history")
-    dashboardPage.paymentHistoryTableRowCount shouldBe 3
+      Then("The Payment History table Paid Inset should be correct")
+      dashboardPage.paidStatusInsetText shouldBe "Payments with the 'Paid' status will be in the bank account you provided within 7 working days."
 
-    And("The correct number of columns should be displayed for Payment history")
-    dashboardPage.paymentHistoryTableColumnCount shouldBe 5
+      And("The correct number of rows should be displayed for Payment history")
+      dashboardPage.paymentHistoryTableRowCount shouldBe 3
 
-    And("The Payment history table headers should be displayed")
-    dashboardPage.paymentHistoryTaxYearHeaderText shouldBe "Tax year"
-    dashboardPage.paymentHistoryAmountHeaderText shouldBe "Amount"
-    dashboardPage.paymentHistoryDateAcceptedHeaderText shouldBe "Date accepted"
-    dashboardPage.paymentHistoryStatusHeaderText shouldBe "Status"
-    dashboardPage.paymentHistoryActionHeaderText shouldBe "Action"
+      And("The correct number of columns should be displayed for Payment history")
+      dashboardPage.paymentHistoryTableColumnCount shouldBe 5
 
-    And("The Payment history second row should display correct values")
-    dashboardPage.paymentHistoryTaxYear(1) shouldBe "6 April 2023 to 5 April 2024"
-    dashboardPage.paymentHistoryAmount(1) shouldBe "£100"
-    dashboardPage.isDateWithinTheTimeFrame(dashboardPage.paymentHistoryDateAccepted(1)) shouldBe true
-    dashboardPage.paymentHistoryStatus(1) shouldBe "Paid"
-    dashboardPage.paymentHistoryAction(1) shouldBe "Check calculation\n6 April 2023 to 5 April 2024"
+      And("The Payment history table headers should be displayed")
+      dashboardPage.paymentHistoryTaxYearHeaderText      shouldBe "Tax year"
+      dashboardPage.paymentHistoryAmountHeaderText       shouldBe "Amount"
+      dashboardPage.paymentHistoryDateAcceptedHeaderText shouldBe "Date accepted"
+      dashboardPage.paymentHistoryStatusHeaderText       shouldBe "Status"
+      dashboardPage.paymentHistoryActionHeaderText       shouldBe "Action"
 
-    When("The user clicks the calculation link for the Paid status")
-    dashboardPage.clickCheckCalculationLink("P-2023-1")
+      And("The Payment history second row should display correct values")
+      dashboardPage.paymentHistoryTaxYear(1)                                              shouldBe "6 April 2023 to 5 April 2024"
+      dashboardPage.paymentHistoryAmount(1)                                               shouldBe "£100"
+      dashboardPage.isDateWithinTheTimeFrame(dashboardPage.paymentHistoryDateAccepted(1)) shouldBe true
+      dashboardPage.paymentHistoryStatus(1)                                               shouldBe "Paid"
+      dashboardPage.paymentHistoryAction(1)                                               shouldBe "Check calculation\n6 April 2023 to 5 April 2024"
 
-    And("The user lands on the breakdown page")
-    breakdownPage.checkCalculationourneyUrl("P-2023-1")
+      When("The user clicks the calculation link for the Paid status")
+      dashboardPage.clickCheckCalculationLink("P-2023-1")
 
-    Then("The page heading should show correct amount")
-    breakdownPage.pageHeadingText shouldBe "Your additional £100 paid payment calculation"
+      And("The user lands on the breakdown page")
+      breakdownPage.checkCalculationourneyUrl("P-2023-1")
 
-    And("The body first text should be correct")
-    breakdownPage.paragraphBodyText(
-      0
-    ) shouldBe "You were not paid enough in your previous payment for this tax year and we've recalculated the amount."
+      Then("The page heading should show correct amount")
+      breakdownPage.pageHeadingText shouldBe "Your additional £100 paid payment calculation"
 
-    And("The body second text should be correct")
-    breakdownPage.paragraphBodyText(
-      1
-    ) shouldBe "This is because we've received new information about how much you've earned."
+      And("The body first text should be correct")
+      breakdownPage.paragraphBodyText(
+        0
+      ) shouldBe "You were not paid enough in your previous payment for this tax year and we've recalculated the amount."
 
-    And("The inset text should contain correct contribution details")
-    breakdownPage.verifyUnderPaymentInsetBlock(
-      0,
-      "6 April 2023 to 5 April 2024",
-      "£1000",
-      "20%",
-      "£200",
-      "£100",
-      "£100"
-    )
+      And("The body second text should be correct")
+      breakdownPage.paragraphBodyText(
+        1
+      ) shouldBe "This is because we've received new information about how much you've earned."
 
-    And("The user click Return to your payments")
-    breakdownPage.returnToYourPayments
+      And("The inset text should contain correct contribution details")
+      breakdownPage.verifyUnderPaymentInsetBlock(
+        0,
+        "6 April 2023 to 5 April 2024",
+        "£1000",
+        "20%",
+        "£200",
+        "£100",
+        "£100"
+      )
 
-    Then("The user will be navigated to the Dashboard page")
-    dashboardPage.checkJourneyUrl()
-  }} 
+      And("The user click Return to your payments")
+      breakdownPage.returnToYourPayments
+
+      Then("The user will be navigated to the Dashboard page")
+      dashboardPage.checkJourneyUrl()
+    }
+  }
 }
