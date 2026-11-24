@@ -259,14 +259,14 @@ class StandardPaymentJourneySpec extends BaseSpec {
       dashboardPage.availablePaymentsAvailableUntilHeaderText shouldBe "Available until"
       dashboardPage.availablePaymentsStatusHeaderText         shouldBe "Status"
 
-      And("The Available Payments second row should display correct values")
+      And("The Available Payments first row should display correct values")
       dashboardPage.availablePaymentsTaxYear(0)        shouldBe "6 April 2024 to 5 April 2025"
       dashboardPage.availablePaymentsAmount(0)         shouldBe "£200"
       dashboardPage.availablePaymentsAvailableUntil(0) shouldBe "5 April 2029"
       dashboardPage.availablePaymentsStatus(0)         shouldBe "Suspended"
       dashboardPage.availablePaymentsIsAvailable(0)    shouldBe false
 
-      And("The Available Payments first row should display correct values")
+      And("The Available Payments second row should display correct values")
       dashboardPage.availablePaymentsTaxYear(1)        shouldBe "6 April 2023 to 5 April 2024"
       dashboardPage.availablePaymentsAmount(1)         shouldBe "£200"
       dashboardPage.availablePaymentsAvailableUntil(1) shouldBe "5 April 2028"

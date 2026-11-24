@@ -154,13 +154,13 @@ trait BasePage extends PageObject {
   def isLocalEnvironment: Boolean =
     Option(System.getProperty("environment")).contains("local")
 
-  def getBackLinkHref: String = {
+  def getLinkHref(locator: By): String = {
     val wait = new WebDriverWait(driver, Duration.ofSeconds(5))
-    wait.until(ExpectedConditions.presenceOfElementLocated(backButtonLocator)).getAttribute("href")
+    wait.until(ExpectedConditions.presenceOfElementLocated(locator)).getAttribute("href")
   }
 
   def goToPTAPageandValidate(): Unit = {
-    val targetHref         = getBackLinkHref
+    val targetHref         = getLinkHref(backButtonLocator)
     val expectedUrlSnippet = "personal-account"
 
     if (isLocalEnvironment) {

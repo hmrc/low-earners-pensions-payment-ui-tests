@@ -69,8 +69,8 @@ object Auth extends BasePage {
     loginForPaymentJourney("250", "AB899999A")
 
   /*Multiple Payment Journey*/
-  def loginForMultiplePaymentJourney(): Unit =
-    loginForPaymentJourney("250", "AA923456D")
+  def loginForMultiplePaymentJourney(nino: String): Unit =
+    loginForPaymentJourney("250", nino)
 
   /*InEligible Account Journey*/
   def loginForInEligibleAccountJourney(): Unit =
