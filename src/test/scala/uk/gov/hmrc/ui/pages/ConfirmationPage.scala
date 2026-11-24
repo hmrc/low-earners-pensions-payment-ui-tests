@@ -43,18 +43,16 @@ object ConfirmationPage extends BasePage {
   private val failedTableRowsLocator: By     = By.cssSelector("#confirmation_table_available_payments tbody tr")
   private val successfulTableRowsLocator: By = By.cssSelector("#confirmation_table_accepted_payments tbody tr")
 
-  private val submittedTextLocator: By              =
+  private val submittedTextLocator: By        =
     By.xpath("//p[contains(@class,'govuk-body') and contains(normalize-space(.), 'Submitted on ')]")
-  private val printThisPageLinkLocator: By          =
+  private val printThisPageLinkLocator: By    =
     By.cssSelector("a[data-module='hmrc-print-link']")
-  private val viewYourPaymentsLinkLocator: By       =
+  private val viewYourPaymentsLinkLocator: By =
     By.cssSelector("a.govuk-link[href*='/accept-your-low-earners-pension-payment/payments']")
-  private val feedbackLinkLocator: By               =
+  private val feedbackLinkLocator: By         =
     By.xpath(
       "//a[contains(@class,'govuk-link') and contains(normalize-space(.), 'Tell us what you think of this service')]"
     )
-  private val reportTechnicalProblemLinkLocator: By =
-    By.cssSelector("a.hmrc-report-technical-issue[href*='contact/report-technical-problem']")
 
   // Getter methods
   def pageHeadingText: String               = getText(pageHeadingLocator).trim
@@ -95,10 +93,6 @@ object ConfirmationPage extends BasePage {
   def feedbackLinkText: String = getText(feedbackLinkLocator).trim
 
   def feedbackLinkHref: String = getLinkHref(feedbackLinkLocator)
-
-  def reportTechnicalProblemText: String = getText(reportTechnicalProblemLinkLocator).trim
-
-  def reportTechnicalProblemHref: String = getLinkHref(reportTechnicalProblemLinkLocator)
 
   def verifySubmittedDateTimeFormat(actualSubmitted: String): Assertion =
     actualSubmitted match {

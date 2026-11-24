@@ -28,6 +28,7 @@ class MultipleAvailablePaymentJourneySpec extends BaseSpec {
   private val bankDetailsPage      = BankDetailsPage
   private val checkYourAnswersPage = CheckYourAnswersPage
   private val confirmationPage     = ConfirmationPage
+  private val errorPage            = ErrorPage
 
   Feature(
     "As a PAYE individual I need to claim the low income pension payment and view the status of payment for Multiple Payment Journey"
@@ -177,7 +178,6 @@ class MultipleAvailablePaymentJourneySpec extends BaseSpec {
         "We've received your bank details - Accept your low earner's pension payment - GOV.UK"
       )
     }
-
     Scenario(
       "Multiple Payments - Journey with 1 success and three failures"
     ) {
@@ -333,9 +333,6 @@ class MultipleAvailablePaymentJourneySpec extends BaseSpec {
       And("The user navigate to confirmation page")
       confirmationPage.checkJourneyUrl()
 
-      And("The user navigate to confirmation page")
-      confirmationPage.checkJourneyUrl()
-
       And("The Confirmation page should have the correct title")
       confirmationPage.assertTitle(
         "Some of your payments failed to process due to a system error - Accept your low earner's pension payment - GOV.UK"
@@ -401,11 +398,109 @@ class MultipleAvailablePaymentJourneySpec extends BaseSpec {
       confirmationPage.feedbackLinkHref should not be empty
 
       And("The report technical problem link exists")
-      confirmationPage.reportTechnicalProblemText should include("Is this page not working properly?")
+      confirmationPage.reportTechnicalProblemText should include(
+        "Is this page not working properly? (opens in new tab)"
+      )
       confirmationPage.reportTechnicalProblemHref should include("contact/report-technical-problem")
 
       And("the submission date and time should be displayed in the expected format")
       confirmationPage.verifySubmittedDateTimeFormat(confirmationPage.submittedText)
+    }
+    Scenario(
+      "Multiple Payments - 500 - Problem with service on the Confirmation page & report page not working"
+    ) {
+      Given("The user enters the auth details")
+      auth.goToAuthorityWizard()
+      auth.loginForMultiplePaymentJourney("ER250321D")
+
+      When("The user click the Continue button on Start Page")
+      startPage.checkJourneyUrl()
+      startPage.continue()
+
+      When("The user click the Continue button on Dashboard page")
+      dashboardPage.checkJourneyUrl()
+
+      Then("The Page Heading Text should be correct")
+      dashboardPage.pageHeadingText shouldBe "Your low earner's pension payments"
+
+      And("The Available Payments table caption should be correct")
+      dashboardPage.availablePaymentsTableCaptionText shouldBe "Available payments"
+
+      And("The correct number of rows should be displayed for Available payments")
+      dashboardPage.availablePaymentsTableRowCount shouldBe 4
+
+      And("The correct number of columns should be displayed for Available payments")
+      dashboardPage.availablePaymentsTableColumnCount shouldBe 4
+
+      And("The Available Payments total payments text should be correct")
+      dashboardPage.availablePaymentsTotalPaymentsText shouldBe "You have a total of £800 in payments available to accept."
+
+      And("The Payment history table caption should be correct")
+      dashboardPage.paymentHistoryTableCaptionText shouldBe "Payment history"
+
+      And("The Payment History paragraph text should be correct")
+      dashboardPage.paymentHistoryParagraphText shouldBe "You do not have any previous payments."
+
+      And("The action button should show Accept payments")
+      dashboardPage.actionButtonText shouldBe "Accept payments"
+
+      And("The user click Accept Payments button")
+      dashboardPage.clickActionButton()
+
+      And("The user lands on the breakdown page")
+      breakdownPage.checkJourneyUrl()
+
+      Then("The page heading should show correct amount")
+      breakdownPage.pageHeadingText shouldBe "You're eligible for a total of £800"
+
+      And("The user click the Continue link")
+      breakdownPage.continue()
+
+      And("The user navigates to the Bank details page")
+      bankDetailsPage.checkJourneyUrl()
+
+      And("The user fill in the bank details and click continue")
+      bankDetailsPage.submitBankDetails("Melvin Loper", "20-71-06", "44311677", Some("0123456789"))
+
+      And("The user navigates to the Check Your Answers Page")
+      checkYourAnswersPage.checkJourneyUrl()
+
+      Then("The summary list keys & values should be correct")
+      checkYourAnswersPage.verifySummaryList("Melvin Loper", "20-71-06", "44311677", Some("0123456789"))
+
+      And("The user click the Submit button")
+      checkYourAnswersPage.submit()
+
+      And("The user navigate to Error page")
+      errorPage.checkJourneyUrl()
+
+      And("The Error page should have the correct title")
+      errorPage.assertTitle(
+        "Sorry, there is a problem with the service - Accept your low earner's pension payment - GOV.UK"
+      )
+
+      And("The Error page should have the correct title")
+      errorPage.pageHeadingText shouldBe "Sorry, there is a problem with the service"
+
+      And("The Error page Body Paragraph Text should correct")
+      errorPage.bodyParagraphText shouldBe "You can try again later."
+
+      And("The report technical problem link exists")
+      errorPage.reportTechnicalProblemText should include("Is this page not working properly? (opens in new tab)")
+      errorPage.reportTechnicalProblemHref should include("contact/report-technical-problem")
+
+      When("The user reports page not working properly")
+      errorPage.reportPageNotWorkingProperly()
+
+      Then("A new tab should open")
+      errorPage.getWindowCount shouldBe 2
+
+      And("The new tab should have the correct title")
+      errorPage.switchToNewTab()
+      errorPage.assertTitle("Get help with a technical problem – Contact HMRC – GOV.UK")
+
+      And("The new tab should have the correct URL")
+      errorPage.currentUrl should include("contact/report-technical-problem")
     }
   }
 }

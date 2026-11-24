@@ -17,7 +17,6 @@
 package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.By
-import org.scalatest.matchers.should.Matchers.convertToStringShouldWrapperForVerb
 import org.scalatest.matchers.should.Matchers.*
 
 object InEligiblePage extends BasePage {
@@ -45,9 +44,7 @@ object InEligiblePage extends BasePage {
   def clickReturnToPtaLink(): Unit            = click(returnToPtaLinkLocator)
   def clickReportTechnicalProblemLink(): Unit = click(reportTechnicalProblemLinkLocator)
 
-  def goToPTAPageFromInEligiblePageandValidate(): Unit = {
-    val expectedUrlSnippet = "personal-account"
-
+  def goToPTAPageFromInEligiblePageandValidate(): Unit =
     if (isLocalEnvironment) {
       // Local Mode: Validate the link destination without performing the click that crashes Firefox
       driver.getCurrentUrl should include("personal-account")
@@ -55,5 +52,4 @@ object InEligiblePage extends BasePage {
       // CI/Staging Mode: Perform the full click and wait for navigation
       driver.getCurrentUrl should include("paperless/optin")
     }
-  }
 }
