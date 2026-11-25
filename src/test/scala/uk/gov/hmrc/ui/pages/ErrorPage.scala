@@ -16,4 +16,16 @@
 
 package uk.gov.hmrc.ui.pages
 
-object ErrorPage extends BasePage {}
+import org.openqa.selenium.By
+
+object ErrorPage extends BasePage {
+
+  private val pageHeadingLocator: By    = By.cssSelector("main h1")
+  private val bodyParagraphsLocator: By = By.cssSelector("p.govuk-body")
+
+  def pageHeadingText: String   = getText(pageHeadingLocator).trim
+  def bodyParagraphText: String = getText(bodyParagraphsLocator).trim
+
+  override def checkJourneyUrl(url: String = "problem-with-service"): Unit =
+    super.checkJourneyUrl(url)
+}

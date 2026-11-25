@@ -41,9 +41,13 @@ trait BasePage extends PageObject {
   def currentUrl: String   = driver.getCurrentUrl
   def currentTitle: String = driver.getTitle
 
-  private val pageNotWorkingLocator: By = By.linkText("Is this page not working properly? (opens in new tab)")
-  private val backButtonLocator: By     = By.cssSelector(".govuk-back-link")
-  private val signOutLocator: By        = By.linkText("Sign out")
+  private val backButtonLocator: By                 = By.cssSelector(".govuk-back-link")
+  private val signOutLocator: By                    = By.linkText("Sign out")
+  private val reportTechnicalProblemLinkLocator: By =
+    By.cssSelector("a.hmrc-report-technical-issue[href*='contact/report-technical-problem']")
+
+  def reportTechnicalProblemText: String = getText(reportTechnicalProblemLinkLocator).trim
+  def reportTechnicalProblemHref: String = getLinkHref(reportTechnicalProblemLinkLocator)
 
   def fluentWait: Wait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
     .withTimeout(Duration.ofSeconds(3))
@@ -74,7 +78,7 @@ trait BasePage extends PageObject {
     get(url)
 
   def reportPageNotWorkingProperly(): Unit =
-    click(pageNotWorkingLocator)
+    click(reportTechnicalProblemLinkLocator)
 
   // All rows from tbody
   def getTableRows(tableLocator: By): List[List[String]] =
