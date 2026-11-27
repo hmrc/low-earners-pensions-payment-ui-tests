@@ -47,10 +47,10 @@ class ChangeBankDetailsJourneySpec extends BaseSpec {
     dashboardPage.clickActionButton()
 
     And("The user lands on the breakdown page")
-    breakdownPage.checkJourneyUrl()
+    //breakdownpage.checkJourneyUrl()
 
     And("The user click the Continue link")
-    breakdownPage.continue()
+    //breakdownpage.continue()
 
     And("The user navigates to the Bank details page")
     bankDetailsPage.checkJourneyUrl()

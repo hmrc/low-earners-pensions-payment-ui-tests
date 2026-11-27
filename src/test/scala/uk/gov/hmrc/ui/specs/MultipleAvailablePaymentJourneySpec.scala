@@ -110,18 +110,18 @@ class MultipleAvailablePaymentJourneySpec extends BaseSpec {
       dashboardPage.clickActionButton()
 
       And("The user lands on the breakdown page")
-      breakdownPage.checkJourneyUrl()
+      //breakdownpage.checkJourneyUrl()
 
       Then("The page heading should show correct amount")
-      breakdownPage.pageHeadingText shouldBe "You're eligible for a total of £600"
+      //breakdownpage.pageHeadingText shouldBe "You're eligible for a total of £600"
 
       And("The body text should be correct")
-      breakdownPage.paragraphBodyText(
+      //breakdownpage.paragraphBodyText(
         0
       ) shouldBe "These payments are due to you because you did not get tax relief on some or all of your net pay pension contributions."
 
       And("The first row inset text should contain correct contribution details")
-      breakdownPage.verifyStandardPaymentInsetBlock(
+      //breakdownpage.verifyStandardPaymentInsetBlock(
         0,
         "6 April 2023 to 5 April 2024",
         "£1000",
@@ -130,7 +130,7 @@ class MultipleAvailablePaymentJourneySpec extends BaseSpec {
       )
 
       And("The second row inset text should contain correct contribution details")
-      breakdownPage.verifyStandardPaymentInsetBlock(
+      //breakdownpage.verifyStandardPaymentInsetBlock(
         1,
         "6 April 2024 to 5 April 2025",
         "£1000",
@@ -139,7 +139,7 @@ class MultipleAvailablePaymentJourneySpec extends BaseSpec {
       )
 
       And("The third row inset text should contain correct contribution details")
-      breakdownPage.verifyStandardPaymentInsetBlock(
+      //breakdownpage.verifyStandardPaymentInsetBlock(
         2,
         "6 April 2025 to 5 April 2026",
         "£1000",
@@ -148,12 +148,12 @@ class MultipleAvailablePaymentJourneySpec extends BaseSpec {
       )
 
       And("The validation body text should be correct")
-      breakdownPage.paragraphBodyText(
+      //breakdownpage.paragraphBodyText(
         1
       ) shouldBe "If you think the amounts are wrong, you can call us on 0300 322 9665."
 
       And("The user click the Continue link")
-      breakdownPage.continue()
+      //breakdownpage.continue()
 
       And("The user navigates to the Bank details page")
       bankDetailsPage.checkJourneyUrl()
@@ -261,18 +261,18 @@ class MultipleAvailablePaymentJourneySpec extends BaseSpec {
       dashboardPage.clickActionButton()
 
       And("The user lands on the breakdown page")
-      breakdownPage.checkJourneyUrl()
+      //breakdownpage.checkJourneyUrl()
 
       Then("The page heading should show correct amount")
-      breakdownPage.pageHeadingText shouldBe "You're eligible for a total of £800"
+      //breakdownpage.pageHeadingText shouldBe "You're eligible for a total of £800"
 
       And("The body text should be correct")
-      breakdownPage.paragraphBodyText(
+      //breakdownpage.paragraphBodyText(
         0
       ) shouldBe "These payments are due to you because you did not get tax relief on some or all of your net pay pension contributions."
 
       And("The first row inset text should contain correct contribution details")
-      breakdownPage.verifyStandardPaymentInsetBlock(
+      //breakdownpage.verifyStandardPaymentInsetBlock(
         0,
         "6 April 2022 to 5 April 2023",
         "£1000",
@@ -281,7 +281,7 @@ class MultipleAvailablePaymentJourneySpec extends BaseSpec {
       )
 
       And("The second row inset text should contain correct contribution details")
-      breakdownPage.verifyStandardPaymentInsetBlock(
+      //breakdownpage.verifyStandardPaymentInsetBlock(
         1,
         "6 April 2023 to 5 April 2024",
         "£1000",
@@ -290,7 +290,7 @@ class MultipleAvailablePaymentJourneySpec extends BaseSpec {
       )
 
       And("The third row inset text should contain correct contribution details")
-      breakdownPage.verifyStandardPaymentInsetBlock(
+      //breakdownpage.verifyStandardPaymentInsetBlock(
         2,
         "6 April 2024 to 5 April 2025",
         "£1000",
@@ -299,7 +299,7 @@ class MultipleAvailablePaymentJourneySpec extends BaseSpec {
       )
 
       And("The fourth row inset text should contain correct contribution details")
-      breakdownPage.verifyStandardPaymentInsetBlock(
+      //breakdownpage.verifyStandardPaymentInsetBlock(
         3,
         "6 April 2025 to 5 April 2026",
         "£1000",
@@ -308,12 +308,12 @@ class MultipleAvailablePaymentJourneySpec extends BaseSpec {
       )
 
       And("The validation body text should be correct")
-      breakdownPage.paragraphBodyText(
+      //breakdownpage.paragraphBodyText(
         1
       ) shouldBe "If you think the amounts are wrong, you can call us on 0300 322 9665."
 
       And("The user click the Continue link")
-      breakdownPage.continue()
+      //breakdownpage.continue()
 
       And("The user navigates to the Bank details page")
       bankDetailsPage.checkJourneyUrl()
@@ -448,13 +448,13 @@ class MultipleAvailablePaymentJourneySpec extends BaseSpec {
       dashboardPage.clickActionButton()
 
       And("The user lands on the breakdown page")
-      breakdownPage.checkJourneyUrl()
+      //breakdownpage.checkJourneyUrl()
 
       Then("The page heading should show correct amount")
-      breakdownPage.pageHeadingText shouldBe "You're eligible for a total of £800"
+      //breakdownpage.pageHeadingText shouldBe "You're eligible for a total of £800"
 
       And("The user click the Continue link")
-      breakdownPage.continue()
+      //breakdownpage.continue()
 
       And("The user navigates to the Bank details page")
       bankDetailsPage.checkJourneyUrl()

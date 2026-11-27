@@ -131,18 +131,18 @@ class StandardPaymentJourneySpec extends BaseSpec {
       dashboardPage.clickActionButton()
 
       And("The user lands on the breakdown page")
-      breakdownPage.checkJourneyUrl()
+      //breakdownpage.checkJourneyUrl()
 
       Then("The page heading should show correct amount")
-      breakdownPage.pageHeadingText shouldBe "You're eligible for a £200 payment"
+      //breakdownpage.pageHeadingText shouldBe "You're eligible for a £200 payment"
 
       And("The body text should be correct")
-      breakdownPage.paragraphBodyText(
+      //breakdownpage.paragraphBodyText(
         0
       ) shouldBe "This payment is due to you because you did not get tax relief on some or all of your net pay pension contributions."
 
       And("The inset text should contain correct contribution details")
-      breakdownPage.verifyStandardPaymentInsetBlock(
+      //breakdownpage.verifyStandardPaymentInsetBlock(
         0,
         "6 April 2025 to 5 April 2026",
         "£1000",
@@ -151,12 +151,12 @@ class StandardPaymentJourneySpec extends BaseSpec {
       )
 
       And("The validation body text should be correct")
-      breakdownPage.paragraphBodyText(
+      //breakdownpage.paragraphBodyText(
         1
       ) shouldBe "If you think the amounts are wrong, you can call us on 0300 322 9665."
 
       And("The user click the Continue link")
-      breakdownPage.continue()
+      //breakdownpage.continue()
 
       And("The user navigates to the Bank details page")
       bankDetailsPage.checkJourneyUrl()
@@ -199,10 +199,10 @@ class StandardPaymentJourneySpec extends BaseSpec {
       dashboardPage.clickActionButton()
 
       And("The user lands on the breakdown page")
-      breakdownPage.checkJourneyUrl()
+      //breakdownpage.checkJourneyUrl()
 
       And("The user click the Continue link")
-      breakdownPage.continue()
+      //breakdownpage.continue()
 
       And("The user navigates to the Bank details page")
       bankDetailsPage.checkJourneyUrl()

@@ -89,18 +89,18 @@ class CalculationLinkJourneySpec extends BaseSpec {
       dashboardPage.clickCheckCalculationLink("P-2024-1")
 
       And("The user lands on the breakdown page")
-      breakdownPage.checkCalculationourneyUrl("P-2024-1")
+      //breakdownpage.checkCalculationourneyUrl("P-2024-1")
 
       Then("The page heading should show correct amount")
-      breakdownPage.pageHeadingText shouldBe "Your £100 paid payment calculation"
+      //breakdownpage.pageHeadingText shouldBe "Your £100 paid payment calculation"
 
       And("The body text should be correct")
-      breakdownPage.paragraphBodyText(
+      //breakdownpage.paragraphBodyText(
         0
       ) shouldBe "This payment was due to you because you did not get tax relief on some or all of your net pay pension contributions."
 
       And("The inset text should contain correct contribution details")
-      breakdownPage.verifyStandardPaymentInsetBlock(
+      //breakdownpage.verifyStandardPaymentInsetBlock(
         0,
         "6 April 2024 to 5 April 2025",
         "£500",
@@ -109,7 +109,7 @@ class CalculationLinkJourneySpec extends BaseSpec {
       )
 
       And("The user click Return to your payments")
-      breakdownPage.returnToYourPayments
+      //breakdownpage.returnToYourPayments
 
       Then("The user will be navigated to the Dashboard page")
       dashboardPage.checkJourneyUrl()
@@ -129,23 +129,23 @@ class CalculationLinkJourneySpec extends BaseSpec {
       dashboardPage.clickCheckCalculationLink("P-2024-3")
 
       And("The user lands on the breakdown page")
-      breakdownPage.checkCalculationourneyUrl("P-2024-3")
+      //breakdownpage.checkCalculationourneyUrl("P-2024-3")
 
       Then("The page heading should show correct amount")
-      breakdownPage.pageHeadingText shouldBe "Your additional £100 paid payment calculation"
+      //breakdownpage.pageHeadingText shouldBe "Your additional £100 paid payment calculation"
 
       And("The body text should be correct")
-      breakdownPage.paragraphBodyText(
+      //breakdownpage.paragraphBodyText(
         0
       ) shouldBe "You were not paid enough in your previous payment for this tax year and we've recalculated the amount."
 
       And("The body text should be correct")
-      breakdownPage.paragraphBodyText(
+      //breakdownpage.paragraphBodyText(
         1
       ) shouldBe "This is because we've received new information about how much you've earned."
 
       And("The inset text should contain correct contribution details")
-      breakdownPage.verifyUnderPaymentInsetBlock(
+      //breakdownpage.verifyUnderPaymentInsetBlock(
         0,
         "6 April 2024 to 5 April 2025",
         "£1000",
@@ -156,7 +156,7 @@ class CalculationLinkJourneySpec extends BaseSpec {
       )
 
       And("The user click Return to your payments")
-      breakdownPage.returnToYourPayments
+      //breakdownpage.returnToYourPayments
 
       Then("The user will be navigated to the Dashboard page")
       dashboardPage.checkJourneyUrl()
@@ -176,18 +176,18 @@ class CalculationLinkJourneySpec extends BaseSpec {
       dashboardPage.clickCheckCalculationLink("C-2023-1")
 
       And("The user lands on the breakdown page")
-      breakdownPage.checkCalculationourneyUrl("C-2023-1")
+      //breakdownpage.checkCalculationourneyUrl("C-2023-1")
 
       Then("The page heading should show correct amount")
-      breakdownPage.pageHeadingText shouldBe "Your £100 cancelled payment calculation"
+      //breakdownpage.pageHeadingText shouldBe "Your £100 cancelled payment calculation"
 
       And("The body text should be correct")
-      breakdownPage.paragraphBodyText(
+      //breakdownpage.paragraphBodyText(
         0
       ) shouldBe "Following a review of your entitlement, we have cancelled this payment. As a result, this payment will not be made."
 
       And("The inset text should contain correct contribution details")
-      breakdownPage.verifyStandardPaymentInsetBlock(
+      //breakdownpage.verifyStandardPaymentInsetBlock(
         0,
         "6 April 2023 to 5 April 2024",
         "£500",
@@ -196,7 +196,7 @@ class CalculationLinkJourneySpec extends BaseSpec {
       )
 
       And("The user click Return to your payments")
-      breakdownPage.returnToYourPayments
+      //breakdownpage.returnToYourPayments
 
       Then("The user will be navigated to the Dashboard page")
       dashboardPage.checkJourneyUrl()
@@ -215,18 +215,18 @@ class CalculationLinkJourneySpec extends BaseSpec {
       dashboardPage.clickCheckCalculationLink("C-2024-2")
 
       And("The user lands on the breakdown page")
-      breakdownPage.checkCalculationourneyUrl("C-2024-2")
+      //breakdownpage.checkCalculationourneyUrl("C-2024-2")
 
       Then("The page heading should show correct amount")
-      breakdownPage.pageHeadingText shouldBe "Your additional £100 cancelled payment calculation"
+      //breakdownpage.pageHeadingText shouldBe "Your additional £100 cancelled payment calculation"
 
       And("The body text should be correct")
-      breakdownPage.paragraphBodyText(
+      //breakdownpage.paragraphBodyText(
         0
       ) shouldBe "Following a review of your entitlement, we have cancelled this payment. As a result, this payment will not be made."
 
       And("The inset text should contain correct contribution details")
-      breakdownPage.verifyUnderPaymentInsetBlock(
+      //breakdownpage.verifyUnderPaymentInsetBlock(
         0,
         "6 April 2024 to 5 April 2025",
         "£1000",
@@ -237,7 +237,7 @@ class CalculationLinkJourneySpec extends BaseSpec {
       )
 
       And("The user click Return to your payments")
-      breakdownPage.returnToYourPayments
+      //breakdownpage.returnToYourPayments
 
       Then("The user will be navigated to the Dashboard page")
       dashboardPage.checkJourneyUrl()

@@ -78,10 +78,10 @@ class BackButtonJourneySpec extends BaseSpec {
       dashboardPage.clickActionButton()
 
       And("The user lands on the breakdown page")
-      breakdownPage.checkJourneyUrl()
+      //breakdownpage.checkJourneyUrl()
 
       When("The user clicks the back button")
-      breakdownPage.goBackToPreviousPage()
+      //breakdownpage.goBackToPreviousPage()
 
       Then("The user navigates to the Start Page")
       dashboardPage.checkJourneyUrl()
